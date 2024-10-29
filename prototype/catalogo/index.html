@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Document</title>
+    <script src="./index.js" type="module"></script>
+</head>
+<body>
+    <header>
+        <section class="navbar">
+            <div class="navbar-container">
+                <div class="logo-container">
+                    <div class="logo">
+                        <img height="auto" src="/images/logo_uvigo_black.png" class="logo-uvigo inverted">
+                    </div>
+                </div>
+                <div class="nav-sections">
+                    <ul class="list-sections">
+                        <li><a href="#">Quienes somos</a></li>
+                        <li><a href="#">Pruebas y programas</a></li>
+                        <li><a href="#">Investigación</a></li>
+                        <li><a href="#">Divulgación</a></li>
+                        <li><a href="#">Formación</a></li>
+                        <li><a href="#">Catálogo</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                    <button class="menu-button" id="button-menu">
+                        <img src="/images/burguer_icon.svg" width="30px" class="burguer-icon inverted"/>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </header>
+
+    <main>
+        <h2 class="title-main-content">Búsqueda de catálogos</h2>
+        <section class="filter-container">
+            <form class="form-filter">
+                <div class="row">
+                    <div class="row-filter">
+                        <h4>
+                            Filtrar por
+                        </h4>
+                        <div>
+                            <select name="bucar">
+                                <option selected="selected" value="sigla">Siglas</option>
+                                <option value="nombre">Nombre</option>
+                                <option value="original">Autor original</option>
+                                <option value="adaptacion">Autor adaptación</option>
+                            </select>
+                            <input name="cadena" type="text" size="20" id="cadenaBuscar" class="campoBusqueda form-control"
+                                placeholder="Escriba aquí...">
+                        </div>
+                    </div>
+                    <div class="row-filter">
+                        <h4>
+                            Área
+                        </h4>
+                        <div>
+                            <select name="area" id="selectArea" class="campoBusqueda selectpicker">
+                                <option selected="selected">- Todas -</option>
+                                <option value="6">Acontecimientos adversos</option>
+                                <option value="11">Cribado</option>
+                                <option value="1">Diagnóstico</option>
+                                <option value="5">Evaluación de servicios</option>
+                                <option value="4">Evaluación neuropsicológica</option>
+                                <option value="3">Factores de riesgo y protectores</option>
+                                <option value="2">Funcionamiento y calidad de vida</option>
+                                <option value="7">Impacto familiar y social</option>
+                                <option value="9">Otros</option>
+                                <option value="8">Sintomatología</option>
+                                <option value="10">Varios</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="row-filter">
+                        <h4>
+                            Población - Edad
+                        </h4>
+                        <div>
+                            <select>
+                                <option selected="selected">- Todas -</option>
+                                <option value="edat_nens">Niños</option>
+                                <option value="edat_adoles">Adolescentes</option>
+                                <option value="edat_adults">Adultos</option>
+                                <option value="edat_ancians">Ancianos</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row-filter">
+                        <h4>
+                            Trastorno
+                        </h4>
+                        <div>
+                            <select>
+                                <option selected="selected">- Todas -</option>
+                                <option value="10">Alimentarios y de la ingestión de alimentos</option>
+                                <option value="5">Ansiedad</option>
+                                <option value="3">Bipolar</option>
+                                <option value="4">Depresivos</option>
+                                <option value="1">Desarrollo neurológico</option>
+                                <option value="13">Disfunciones sexuales</option>
+                                <option value="8">Disociativos</option>
+                                <option value="11">Excreción</option>
+                                <option value="23">Infantil-adolescente</option>
+                                <option value="17">Neurocognitivos</option>
+                                <option value="6">Obsesivo-compulsivo</option>
+                                <option value="21">Otros trastornos mentales</option>
+                                <option value="19">Parafílicos</option>
+                                <option value="18">Personalidad</option>
+                                <option value="16">Relacionados con sustancias</option>
+                                <option value="9">Síntomas somáticos</option>
+                                <option value="12">Sueño-vigilia</option>
+                                <option value="22">Varios grupos</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+        <section class="catalog-content">
+            <table class="table-catalog-content">
+                <thead>
+                    <tr>
+                        <th>Siglas</th>
+                        <th>Nombre</th>
+                        <th>Acceso</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ABC</td>
+                        <td>Titulo genérico para el proyecto 1</td>
+                        <td>
+                            <a href="recurso/index.html?item=1">
+                                <img src="/images/file_icon.svg" width="15px" class="icon-file"/>
+                                Ver
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>DEF</td>
+                        <td>Titulo genérico para el proyecto 2</td>
+                        <td>
+                            <a href="recurso/index.html?item=2">
+                                <img src="/images/file_icon.svg" width="15px" class="icon-file"/>
+                                Ver
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>GHI</td>
+                        <td>Titulo genérico para el proyecto 3</td>
+                        <td>
+                            <a href="recurso/index.html?item=3">
+                                <img src="/images/file_icon.svg" width="15px" class="icon-file"/>
+                                Ver
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>JKL</td>
+                        <td>Titulo genérico para el proyecto 4</td>
+                        <td>
+                            <a href="recurso/index.html?item=4">
+                                <img src="/images/file_icon.svg" width="15px" class="icon-file"/>
+                                Ver
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>MNO</td>
+                        <td>Titulo genérico para el proyecto 5</td>
+                        <td>
+                            <a href="recurso/index.html?item=5">
+                                <img src="/images/file_icon.svg" width="15px" class="icon-file"/>
+                                Ver
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>PQR</td>
+                        <td>Titulo genérico para el proyecto 6</td>
+                        <td>
+                            <a href="recurso/index.html?item=6">
+                                <img src="/images/file_icon.svg" width="15px" class="icon-file"/>
+                                Ver
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>STU</td>
+                        <td>Titulo genérico para el proyecto 7</td>
+                        <td>
+                            <a href="recurso/index.html?item=7">
+                                <img src="/images/file_icon.svg" width="15px" class="icon-file"/>
+                                Ver
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>XYZ</td>
+                        <td>Titulo genérico para el proyecto 8</td>
+                        <td>
+                            <a href="recurso/index.html?item=8">
+                                <img src="/images/file_icon.svg" width="15px" class="icon-file"/>
+                                Ver
+                            </a>
+                        </td>
+                    </tr>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <section class="group-footer-container">
+            <div class="footer-items">
+                <article class="">
+                    <div class="footer-item">
+                        <img width="210"
+                            src="/images/logo_grupo.png"
+                            alt="Departamento de Psicoloxía Evolutiva e Comunicación">
+                    </div>
+                </article>
+                <article class="">
+                    <div class="footer-item">
+                        <div class="footer-column">
+                            <p style="margin: 0;">
+                                <a href="https://goo.gl/maps/kaSss5S4GJB2" target="_blank" rel="noopener noreferrer"
+                                    style="display: flex; align-items: center; column-gap: 5px;"
+                                    class="footer-link">
+                                    <img src="/images/location_icon.svg" width="25px" class="footer-icon"/>
+                                    <span>Edificio de Facultades</span>
+                                </a>
+                            </p>
+                            <p class="mb-3" style="margin: 0 0 0 35px;">
+                                As Lagoas, s/n<br>
+                                32004 Ourense
+                            </p>
+                            <p style="margin-bottom: 0; display: flex; align-items: center; column-gap: 5px;"> 
+                                <img src="/images/phone_icon.svg" width="25px" class="footer-icon"/>
+                                <span>Área de apoio</span>
+                            </p>
+                            <p style="margin: 0 0 0 35px;">+34 988 368 902</p>
+                        </div>
+                    </div>
+                </article>
+                <article class="">
+                    <div class="footer-item">
+                        <p style="display: flex; align-content: center; column-gap: 5px;">
+                            <img src="/images/arrow_right_icon.svg" width="15px" class="footer-icon"/>
+                            <a href="./contacto/index.html" class="footer-link">Contacto</a>
+                        </p>
+                        <p style="display: flex; align-content: center; column-gap: 5px;">
+                            <img src="/images/arrow_right_icon.svg" width="15px" class="footer-icon"/>
+                            <a href="https://secretaria.uvigo.gal/uv/web/qsp/" target="_blank"
+                                rel="noopener noreferrer" class="footer-link">Caixa de queixas, suxestións e parabéns</a>
+                        </p>
+                    </div>
+                </article>
+            </div>
+            <article class="legal-advise">
+                <ul class="legal-advise-list">
+                    <li class="legal-advise-list-item">
+                        <a href="https://www.uvigo.gal/accesibilidade"
+                            class="nav-link">Accesibilidade</a>
+                    </li>
+                    <li class="legal-advise-list-item">
+                        <a href="https://www.uvigo.gal/aviso-legal"
+                            class="nav-link">Aviso Legal</a>
+                    </li>
+                    <li class="legal-advise-list-item">
+                        <a href="https://www.uvigo.gal/proteccion-datos"
+                            class="nav-link">Protección de datos</a>
+                    </li>
+                </ul>
+            </article>
+        
+        </section>
+        <section class="uvigo-footer-container">
+            <div id="reorder-footer">
+                <div class="preview-uvigo-footer">
+                    <div>
+                        <a href="http://uvigo.gal" target="_blank">
+                            <img src="/images/logo_uvigo_black.png"
+                            alt="Universidade de Vigo" width="250px" class="inverted">
+                        </a>
+                    </div>
+                    <div>
+                        <button id="button-preview-uvigo-footer">
+                            <img src="/images/arrow_right_icon.svg" width="15px" class="inverted" id="footer-icon-expanded-info"/>
+                            <span id="footer-text-button-preview">Ver más</span>
+                        </button>
+                    </div>
+                </div>
+        
+                <div class="expanded-footer mt-5" id="footer-expanded-uvigo-info">
+                    <div class="footer-uvigo-row first-footer-uvigo-row">
+                        <article class="">
+                            <p>
+                                <img src="/images/phone_icon.svg" width="25px" class="inverted"/>
+                                <strong>Información</strong>
+                            </p>
+                            <p>+34 986 812 000</p>
+                            <p>
+                                <a href="mailto:informacion@uvigo.es">informacion@uvigo.es</a>
+                            </p>
+                        </article>
+        
+                        <article class="">
+                            <p>
+                                <img src="/images/location_icon.svg" width="25px" class="inverted"/>
+                                <a
+                                    href="https://www.uvigo.gal/campus/ourense-campus-auga" target="_blank">
+                                    <strong>Campus de Ourense</strong>
+                                </a>
+                            </p>
+                            <p>+34 988 387 102</p>
+                            <p>
+                                <img src="/images/arrow_right_icon.svg" width="15px" class="inverted"/>
+                                <a
+                                    href="https://www.uvigo.gal/campus/ourense-campus-auga" target="_blank">
+                                    Campus da Auga</a>
+                            </p>
+                        </article>
+        
+                        <article class="">
+                            <p>
+                                <img src="/images/location_icon.svg" width="25px" class="inverted"/>
+                                <a
+                                    href="https://www.uvigo.gal/campus/pontevedra-campus-crea"
+                                    target="_blank">
+                                    <strong>Campus de Pontevedra</strong>
+                                </a>
+                            </p>
+                            <p>+34 986 802 080</p>
+                            <p>
+                                <img src="/images/arrow_right_icon.svg" width="15px" class="inverted"/>
+                                <a
+                                    href="https://www.uvigo.gal/campus/pontevedra-campus-crea" target="_blank">
+                                    Campus CREA</a>
+                            </p>
+                        </article>
+        
+                        <article class="">
+                            <p>
+                                <img src="/images/location_icon.svg" width="25px" class="inverted"/>
+                                <a
+                                    href="https://www.uvigo.gal/campus/vigo-campus-vigo-tecnoloxico"
+                                    target="_blank">
+                                    <strong>Campus de Vigo</strong>
+                                </a>
+                            </p>
+                            <p>+34 986 812 000</p>
+                            <p>
+                                <img src="/images/arrow_right_icon.svg" width="15px" class="inverted"/>
+                                <a
+                                    href="https://www.uvigo.gal/campus/vigo-campus-vigo-tecnoloxico" target="_blank">
+                                    Vigo Tecnolóxico</a>
+                            </p>
+                        </article>
+                    </div>
+        
+                    <div class="footer-uvigo-row">
+                        <article class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                                <p>
+                                    <img src="/images/arrow_right_icon.svg" width="15px" class="inverted"/>
+                                    <a
+                                        href="https://www.uvigo.gal/contacto" target="_blank">
+                                        <strong>Contacto</strong>
+                                    </a>
+                                </p>
+                        </article>
+        
+                        <article class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                                <p>
+                                    <img src="/images/arrow_right_icon.svg" width="15px" class="inverted"/>
+                                    <a
+                                        href="https://secretaria.uvigo.gal/uv/web/qsp/" target="_blank">
+                                        <strong>Caja de quejas, sugerencias y felicitaciones</strong>
+                                    </a>
+                                </p>
+                        </article>
+        
+                        <article class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                                <p>
+                                    <img src="/images/arrow_right_icon.svg" width="15px" class="inverted"/>
+                                    <a
+                                        href="https://www.uvigo.gal/universidade/informacion-institucional/outras-webs-universidade-vigo"
+                                        target="_blank">
+                                        <strong>Otras webs institucionales</strong>
+                                    </a>
+                                </p>
+                        </article>
+        
+                        <article class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                            <p style="margin-left: 20px; display: flex; column-gap: 20px; ">
+                                <a href="https://www.facebook.com/uvigo" target="_blank">
+                                    <img src="/images/facebook_icon.svg" width="25px" class="inverted"/>
+                                </a>
+    
+                                <a href="https://twitter.com/uvigo" target="_blank">
+                                    <img src="/images/twitter_icon.svg" width="25px" class="inverted"/>
+                                </a>
+    
+                                <a href="https://www.instagram.com/universidadedevigo/" target="_blank">
+                                    <img src="/images/instagram_icon.svg" width="25px" class="inverted"/>
+                                </a>
+    
+                                <a href="https://www.youtube.com/@uvigo7787" target="_blank">
+                                    <img src="/images/youtube_icon.svg" width="25px" class="inverted"/>
+                                </a>
+                            </p>
+                        </article>
+                    </div>
+        
+                    <div class="footer-uvigo-row">
+                        <article class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                            <p>
+                                <a href="http://campusdomar.gal/"
+                                    target="_blank">
+                                    <strong>Campus del Mar</strong>
+                                </a>
+                            </p>
+                        </article>
+        
+                        <article class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                            <p>
+                                <img src="/images/arrow_right_icon.svg" width="15px" class="inverted"/>
+                                <a
+                                    href="https://transparencia.uvigo.es/"
+                                    target="_blank">
+                                    <strong>Transparencia</strong>
+                                </a>
+                            </p>
+                        </article>
+        
+                        <article class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                                <p>
+                                    <img src="/images/arrow_right_icon.svg" width="15px" class="inverted"/>
+                                    <a
+                                        href="https://www.uvigo.gal/campus/vantaxes/emerxencias"
+                                        target="_blank">
+                                        <strong>Emergencias</strong>
+                                    </a>
+                                </p>
+                        </article>
+        
+                        <article class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                            <p>
+                                <img src="/images/arrow_right_icon.svg" width="15px" class="inverted"/>
+                                <a
+                                    href="https://www.uvigo.gal/universidade/comunicacion/redes-sociais"
+                                    target="_blank">
+                                    <strong>Muro social</strong>
+                                </a>
+                            </p>
+                        </article>
+                    </div>
+        
+                    <div style="padding-bottom: 20px;">
+                        <article class="legal-advise">
+                            <ul class="legal-advise-list">
+                                <li class="legal-advise-list-item uvigo-footer-item">
+                                    <a href="https://www.uvigo.gal/accesibilidade"
+                                        class="nav-link">Accesibilidade</a>
+                                </li>
+                                <li class="legal-advise-list-item uvigo-footer-item">
+                                    <a href="https://www.uvigo.gal/aviso-legal"
+                                        class="nav-link">Aviso Legal</a>
+                                </li>
+                                <li class="legal-advise-list-item uvigo-footer-item">
+                                    <a href="https://www.uvigo.gal/proteccion-datos"
+                                        class="nav-link">Protección de datos</a>
+                                </li>
+                            </ul>
+                        </article>
+                    </div>
+        
+                </div>
+        
+            </div>
+        </section>
+       </footer>
+    
+</body>
+</html>
