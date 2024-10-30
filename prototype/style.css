@@ -99,7 +99,7 @@ main{
     height: 35vh;
     position: relative;
     color: white;
-    padding: 5vh 10vw;
+    padding: 5vh 35vw 5vh 10vw;
     box-sizing: border-box;
 }
 
@@ -335,6 +335,10 @@ main{
     .footer-uvigo-row{
         grid-template-columns: repeat(2, 1fr);
         row-gap: 25px;
+    }
+
+    .title-section{
+        padding: 5vh 10vw;
     }
 }
 
