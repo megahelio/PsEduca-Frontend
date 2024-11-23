@@ -1,3 +1,12 @@
+@font-face {
+    font-family: 'roboto';
+    src: url('./fonts/roboto-regular.woff2') format('woff2'),
+         url('./fonts/roboto-regular.woff') format('woff'),
+         url('./fonts/roboto-regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 :root{
     --primary-color: #073349;
     --secondary-color: #8f8f8f;
@@ -7,35 +16,43 @@
 body, h1, h2, h3{
     margin: 0;
     padding: 0;
-    font-family: Verdana, Arial;
+}
+
+*{
+    font-family: 'roboto', Verdana, Arial;
 }
 
 .inverted{
     filter: invert(1);
 }
 
+.rotate-90-deg{
+    transform: rotate(90deg);
+}
+
 header{
-    background-color: var(--primary-color);
     height: 100px;
     color: var(--white-color);
     width: 100%;
+    padding-top: 20px;
+    background-color: var(--primary-color);
 }
 
-.navbar{
+.full-header{
     width: 80%;
     margin: 0 auto;
-}
-
-.navbar-container{
     display: grid;
-    grid-template-columns: 200px 1fr;
-    column-gap: 80px;
+    grid-template-columns: 250px 1fr;
+    grid-template-rows: 30px 70px;
+    grid-column-gap: 20px;
+    grid-row-gap: 0px;
 }
 
 .logo-container{
+    grid-area: 1 / 1 / 3 / 2;
     display: grid;
     place-content: center;
-    height: 100px;
+    height: 80px;
 }
 
 .logo-uvigo{
@@ -43,14 +60,77 @@ header{
     width: 100%;
 }
 
+.top-header{
+    grid-area: 1 / 2 / 2 / 3;
+    text-underline-offset: 3px;
+}
+
+.top-header-left{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    column-gap: 30px;
+    font-size: 11px;
+}
+
+.log-in{
+    
+    & > a{
+        display: flex;
+        align-items: center;
+        column-gap: 5px;
+        color: white;
+        text-decoration: none;
+        text-transform: uppercase;
+        
+        & > img{
+            width: 20px;
+        }
+
+        & > span{
+            width: fit-content;
+        }
+    }
+
+    & > a:hover{
+        text-decoration: underline;
+    }
+}
+
+.language-selector{
+    white-space: nowrap;
+
+    & > button{
+        background-color: transparent;
+        border: none;
+        color: var(--white-color);
+        cursor: pointer;
+        padding: 0;
+    }
+
+    & > button:hover{
+        text-decoration: underline;
+    }
+
+    & > button[class*='language-selected']{
+        text-decoration: underline;
+    } 
+}
+
+.navbar{
+    grid-area: 2 / 2 / 3 / 3;
+    width: 100%;
+    height: 70px;
+}
+
 .list-sections{
     list-style: none;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    column-gap: 10px;
-    height: 100%;
+    column-gap: 5px;
     margin: 0;
+    height: 100%;
     z-index: 99;
 }
 
@@ -58,6 +138,10 @@ header{
     font-size: 15px;
     width: fit-content;
     text-align: center;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
 }
 
 .list-sections>li>a{
@@ -71,19 +155,80 @@ header{
 
 .menu-button{
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 60px;
+    right: 10%;
     display: none;
     background-color: transparent;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+
+    & > img{
+        width: 100%;
+    }
 }
 
 .menu-button:hover{
-    background-color: rgba(255, 255, 255, 0.204);
+    cursor: pointer;
+}
+
+.list-item-with-image{
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+    
+    & > img{
+        transition: all 0.2s;
+    }
+}
+
+.list-item-with-children{
+    position: relative;
+    display: flex;
+
+    & > ul{
+        display: none;
+        list-style: none;
+        padding: 10px 0;
+        flex-direction: column;
+        row-gap: 15px;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: #e2e2e2;
+        width: 120%;
+        z-index: 99;
+    }
+
+    & > ul > li{
+        width: 100%;
+        padding: 0;
+    }
+
+    & >ul a{
+        width: 100%;
+        text-decoration: none;
+        color: black;
+    }
+
+    & >ul a:hover{
+        color: #073349; 
+        text-decoration: underline;
+    }
+}
+
+.list-item-with-children:hover{
+
+    & > a > img{
+        transform: rotate(-90deg);
+    }
+    
+    & > ul{
+        display: flex;
+    }
 }
 
 .active{
@@ -91,7 +236,7 @@ header{
 }
 
 .group-footer-container{
-    background-color: #d2d2d2;
+    background-color: #e2e2e2;
     color: var(--white-color);
     padding: 20px 0 10px 0;
     color: #041d2a;
@@ -151,11 +296,6 @@ header{
     text-decoration: underline;
 }
 
-.icon_pin_alt:before {
-    font-family: ElegantIcons;
-    content: "\E01D"
-}
-
 .uvigo-footer-container{
     background-color: var(--primary-color);
     color: white;
@@ -181,7 +321,7 @@ header{
     background: transparent;
     color: inherit;
     display: flex;
-    align-content: center;
+    align-items: center;
     column-gap: 5px;
     font-size: medium;
 }
@@ -218,7 +358,7 @@ header{
 
 .footer-uvigo-row > article > p{
     display: flex;
-    align-content: center;
+    align-items: center;
     column-gap: 5px;
 }
 
@@ -234,50 +374,133 @@ header{
     color: white !important;
 }
 
-@media screen and (max-width: 1180px){
-    .navbar-container{
-        column-gap: 10px;
-    }
+.footer-uvigo-logo{
+    width: 250px;
+}
 
+/* Inicio del CSS de la página */
+
+/* Fin del CSS de la página */
+
+@media screen and (max-width: 1180px){
+    .full-header{
+        grid-template-columns: 200px 1fr;
+        column-gap: 0;
+    }
     .footer-uvigo-row{
         grid-template-columns: repeat(2, 1fr);
         row-gap: 25px;
     }
+
+    /* Inicio del CSS de la página */
+
+
+
+    /* Fin del CSS de la página */
 }
 
 @media screen and (max-width: 1050px){
-    .logo-uvigo{
-        width: 250px;
-    }
-    .navbar-container{
-        grid-template-columns: 1fr;
+    .full-header{
+        width: 85%;
+        grid-template-columns: 200px 1fr;
+        column-gap: 0;
     }
 
     .list-sections{
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 0;
         display: none;
         flex-direction: column;
         justify-content: flex-start;
-        row-gap: 50px;
-        height: 100vh;
+        row-gap: 20px;
+        width: 200px;
+        height: 100vmax;
         background-color: var(--secondary-color);
-        padding: 50px 10px;
+        padding: 20px 10px;
         box-sizing: border-box;
+
+        & > li{
+            height: max-content;
+            width: 90%;
+            text-align: left;
+            align-items: flex-start;
+            border: 1px solid rgba(255, 255, 255, 0.714);
+            border-radius: 5px;
+            padding: 10px;
+        }
+    }
+
+    .list-item-with-children{
+        flex-direction: column;
+
+        & > ul{
+            padding-top: 20px;
+            position: initial !important;
+            background-color: transparent;
+            width: 100%;
+            color: white;
+        }
+
+        & > ul > li{
+            text-align: left;
+            padding: 0 20px;
+        }
+
+        & > ul > li > a{
+            color: white;
+            width: 100%;
+        }
+
+        & > ul > li > a:hover{
+            color: white;
+            width: 100%;
+        }
+    }
+
+    .list-item-with-children:hover{
+
+        & > a > img{
+            transform: rotate(90deg);
+        }
+        
+        & > ul{
+            display: none;
+        }
     }
 
     .menu-button{
         display: block;
     }
+
+    /* Inicio del CSS de la página */
+
+
+    /* Fin del CSS de la página */
 }
 
 @media screen and (max-width: 600px){
-    .group-footer-container{
-        background-color: white;
+    .top-header-left{
+        margin-left: -5px;
+        font-size: 0.5em;
+        column-gap: 10px;
+    }
+
+    .language-selector{
+        & > button{
+            font-size: 11px;
+        }
     }
 
     .footer-uvigo-row{
         grid-template-columns: 1fr;
     }
+
+    .footer-uvigo-logo{
+        width: 150px;
+    }
+
+    /* Inicio del CSS de la página */
+    
+    /* Fin del CSS de la página */
 }
