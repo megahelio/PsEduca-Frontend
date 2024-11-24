@@ -1,7 +1,5 @@
-import { getPageLanguage, setPageLanguage } from "./lang/i18n.js";
-
-/* sessionStorage.setItem('token', 'token');
-sessionStorage.setItem('ROL', 'ADMIN_GLOBAL'); */
+import { getPageLanguage, setPageLanguage } from "../lang/i18n.js";
+import { logIn } from "../queries/logIn.js";
 
 const $ = (elem) => document.querySelector(elem);
 const $$ = (elem) => document.querySelectorAll(elem);
@@ -22,7 +20,7 @@ if(sessionStorage.getItem('token') && sessionStorage.getItem('ROL')){
         <li class="list-item-with-children" id="list-item-with-children">
             <a href="javascript:void(0)" class="list-item-with-image">
                 <span data-i18n="header.navbar.intranet">Intranet</span>
-                <img src="./images/arrow_right_icon.svg" width="15px" class="rotate-90-deg inverted"/>
+                <img src="/images/arrow_right_icon.svg" width="15px" class="rotate-90-deg inverted"/>
             </a>
             <ul class="sublist" id="sublist">
                 ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="#" data-i18n="header.navbar.userManagement">Gestión usuarios</a></li>' : ''}
@@ -125,5 +123,31 @@ $$buttonsLanguage.forEach((button) => {
 
     if (button.getAttribute('data-language') === getPageLanguage()) {
         button.classList.add('language-selected');
+    }
+});
+
+const $loginForm = $('#login-form');
+
+$loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const username = $('#username').value;
+    const password = $('#password').value;
+
+    const response = logIn({username, password});
+    if (response.token) {
+        sessionStorage.setItem('token', response.token);
+        sessionStorage.setItem('ROL', response.ROL);
+        location.replace('../');
+    }else{
+        $('#error-message-username').textContent = response.username;
+        $('#error-message-password').textContent = response.password;
+
+        $$('.error-message').forEach((el) => {
+            if (el.textContent) {
+                el.classList.add('active');
+            }else{
+                el.classList.remove('active');
+            }
+        });
     }
 });

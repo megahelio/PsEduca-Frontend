@@ -1,8 +1,5 @@
 import { getPageLanguage, setPageLanguage } from "../../lang/i18n.js";
 
-sessionStorage.setItem('token', 'token');
-sessionStorage.setItem('ROL', 'ADMIN_GLOBAL');
-
 const $ = (elem) => document.querySelector(elem);
 const $$ = (elem) => document.querySelectorAll(elem);
 

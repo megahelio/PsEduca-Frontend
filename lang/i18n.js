@@ -58,6 +58,12 @@ const locales = {
       presentationTitle: "Presentación",
       membersTitle: "Miembros",
       linkInfoMember: "Más información",
+    },
+    login: {
+      title: "Iniciar sesión",
+      username: "Nombre de usuario",
+      password: "Contraseña",
+      submit: "Iniciar sesión",
     }
   },
   // EN
@@ -117,6 +123,12 @@ const locales = {
       presentationTitle: "Presentation",
       membersTitle: "Members",
       linkInfoMember: "More information",
+    },
+    login: {
+      title: "Log in",
+      username: "Username",
+      password: "Password",
+      submit: "Log in",
     }
   },
 
@@ -177,7 +189,25 @@ const locales = {
       presentationTitle: "Presentación",
       membersTitle: "Membros",
       linkInfoMember: "Máis información",
+    },
+    login: {
+      title: "Iniciar sesión",
+      username: "Nome de usuario",
+      password: "Contrasinal",
+      submit: "Iniciar sesión",
     }
+  },
+};
+
+export const ERROR_MESSAGES = {
+  es: {
+    'ERR-1': 'Mensaje de error 1',
+  },
+  en: {
+    'ERR-1': 'Error message 1',
+  },
+  gl: {
+    'ERR-1': 'Mensaxe de erro 1',
   },
 };
 
@@ -251,4 +281,3 @@ export function setPageLanguage(language) {
 export function getPageLanguage() {
   return sessionStorage.getItem('language') ?? defaultLanguage;
 }
-
