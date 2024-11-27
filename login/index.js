@@ -1,5 +1,5 @@
 import { getPageLanguage, setPageLanguage } from "../lang/i18n.js";
-import { logIn } from "../queries/logIn.js";
+import { logIn } from "../queries/users.js";
 
 const $ = (elem) => document.querySelector(elem);
 const $$ = (elem) => document.querySelectorAll(elem);
@@ -128,12 +128,12 @@ $$buttonsLanguage.forEach((button) => {
 
 const $loginForm = $('#login-form');
 
-$loginForm.addEventListener('submit', (e) => {
+$loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const username = $('#username').value;
     const password = $('#password').value;
 
-    const response = logIn({username, password});
+    const response = await logIn({username, password});
     if (response.token) {
         sessionStorage.setItem('token', response.token);
         sessionStorage.setItem('ROL', response.ROL);
@@ -141,6 +141,7 @@ $loginForm.addEventListener('submit', (e) => {
     }else{
         $('#error-message-username').textContent = response.username;
         $('#error-message-password').textContent = response.password;
+        $('#error-message-login').textContent = response.error;
 
         $$('.error-message').forEach((el) => {
             if (el.textContent) {
