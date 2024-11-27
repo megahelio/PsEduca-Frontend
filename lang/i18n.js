@@ -64,6 +64,42 @@ const locales = {
       username: "Nombre de usuario",
       password: "Contraseña",
       submit: "Iniciar sesión",
+    }, 
+    usersManagement: {
+      title: "Usuarios",
+      name: "Nombre",
+      username: "Usuario",
+      role: "Rol",
+      access: "Acceso",
+      password: "Contraseña",
+      confirmPassword: "Confirmar contraseña",
+      save: "Guardar",
+      delete: "Eliminar",
+      titleDetail: "Información de usuario",
+    },
+    location: {
+      title: "Localización",
+      facultyOuName: "Facultad de Educación y Trabajo Social",
+      facultyOuLocation: "Campus As Lagoas, s/n 32004 Ourense",
+      facultyPoName: "Facultad de Ciencias de la Educación y del Deporte",
+      facultyPoLocation: "Campus A Xunqueira, s/n 36005 Pontevedra",
+    },
+    contactPage: {
+      title: "Contacto",
+      name: "Nombre",
+      email: "Correo electrónico",
+      subject: "Asunto",
+      message: "Mensaje",
+      send: "Enviar",
+    },
+    membersManagement: {
+      title: "Miembros",
+      name: "Nombre",
+      email: "Correo electrónico",
+      description: "Descripción",
+      link: "Link aportaciones",
+      image: "Imagen",
+      access: "Acceso",
     }
   },
   // EN
@@ -129,6 +165,42 @@ const locales = {
       username: "Username",
       password: "Password",
       submit: "Log in",
+    },
+    usersManagement: {
+      title: "Users",
+      name: "Name",
+      username: "Username",
+      role: "Role",
+      access: "Access",
+      password: "Password",
+      confirmPassword: "Confirm password",
+      save: "Save",
+      delete: "Delete",
+      titleDetail: "User detail",
+    },
+    location: {
+      title: "Location",
+      facultyOuName: "Faculty of Education and Social Work",
+      facultyOuLocation: "Campus As Lagoas, s/n 32004 Ourense",
+      facultyPoName: "Faculty of Education and Sport Sciences",
+      facultyPoLocation: "Campus A Xunqueira, s/n 36005 Pontevedra",
+    },
+    contactPage: {
+      title: "Contact",
+      name: "Name",
+      email: "Email",
+      subject: "Subject",
+      message: "Message",
+      send: "Send",
+    },
+    membersManagement: {
+      title: "Members",
+      name: "Name",
+      email: "Email",
+      description: "Description",
+      link: "Contributions link",
+      image: "Image",
+      access: "Access",
     }
   },
 
@@ -195,19 +267,43 @@ const locales = {
       username: "Nome de usuario",
       password: "Contrasinal",
       submit: "Iniciar sesión",
+    },
+    usersManagement: {
+      title: "Usuarios",
+      name: "Nome",
+      username: "Usuario",
+      role: "Rol",
+      access: "Acceso",
+      password: "Contrasinal",
+      confirmPassword: "Confirmar contrasinal",
+      save: "Gardar",
+      delete: "Eliminar",
+      titleDetail: "Información de usuario",
+    },
+    location: {
+      title: "Localización",
+      facultyOuName: "Facultade de Educación e Traballo Social",
+      facultyOuLocation: "Campus As Lagoas, s/n 32004 Ourense",
+      facultyPoName: "Facultade de Ciencias da Educación e do Deporte",
+      facultyPoLocation: "Campus A Xunqueira, s/n 36005 Pontevedra",
+    },
+    contactPage: {
+      title: "Contacto",
+      name: "Nome",
+      email: "Correo electrónico",
+      subject: "Asunto",
+      message: "Mensaxe",
+      send: "Enviar",
+    },
+    membersManagement: {
+      title: "Membros",
+      name: "Nome",
+      email: "Correo electrónico",
+      description: "Descrición",
+      link: "Link aportacións",
+      image: "Imaxe",
+      access: "Acceso",
     }
-  },
-};
-
-export const ERROR_MESSAGES = {
-  es: {
-    'ERR-1': 'Mensaje de error 1',
-  },
-  en: {
-    'ERR-1': 'Error message 1',
-  },
-  gl: {
-    'ERR-1': 'Mensaxe de erro 1',
   },
 };
 
