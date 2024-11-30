@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test PsEduca</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test de validación de formularios</h1>
+
+    <h2>Validación de Contacto</h2>
+    <table id="table-test-contact">
+        <tr>
+            <th>Test</th>
+            <th>Resultado esperado</th>
+            <th>Resultado obtenido</th>
+        </tr>
+    </table>
+
+    <h2>Validación de Inicio de Sesión</h2>
+    <table id="table-test-login">
+        <tr>
+            <th>Test</th>
+            <th>Resultado esperado</th>
+            <th>Resultado obtenido</th>
+        </tr>
+    </table>
+
+    <h2>Validación de Usuario</h2>
+    <table id="table-test-user">
+        <tr>
+            <th>Test</th>
+            <th>Resultado esperado</th>
+            <th>Resultado obtenido</th>
+        </tr>
+    </table>
+</body>
+<script type="module">
+    let table = document.getElementById('table-test-contact');
+
+    // Función para agregar una fila a la tabla
+    function addRow(test, expected, result) {
+        const row = table.insertRow(-1);
+        const cell1 = row.insertCell(0);
+        const cell2 = row.insertCell(1);
+        const cell3 = row.insertCell(2);
+        cell1.innerHTML = test;
+        cell2.innerHTML = expected;
+        cell3.innerHTML = result;
+
+        if (expected === result) {
+            cell3.style.backgroundColor = '#00AF0055';
+        } else {
+            cell3.style.backgroundColor = 'red';
+        }
+    }
+
+    // Función para comparar los resultados
+    function testValidation(test, expected, result) {
+        if (expected === result) {
+            addRow(test, expected, result);
+        } else {
+            addRow(test, expected, result);
+        }
+    }
+
+    // CONTACT VALIDATION
+    import { validateEmail } from '../validators/contact.js';
+
+    const emptyName = validateEmail({name: '', email: 'email@email.com', subject: 'Test subject', message: 'Message test'});
+    testValidation('Nombre vacío', true, Boolean(emptyName.all));
+
+    const shortName = validateEmail({name: 'a', email: 'email@email.com', subject: 'Test subject', message: 'Message test'});
+    testValidation('Nombre muy corto (< 4)', true, Boolean(shortName.name));
+
+    const longName = validateEmail({name: `Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+        Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
+        penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+        Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.`, email: 'email@email.com', subject: 'Test subject', message: 'Message test'});
+    testValidation('Nombre muy largo (> 254)', true, Boolean(longName.name));
+
+    const badCharactersName = validateEmail({name: 'Name123@', email: 'email@email.com', subject: 'Test subject', message: 'Message test'});
+    testValidation('Nombre con caracteres no permitidos (p.e: @)', true, Boolean(badCharactersName.name));
+
+    const validName = validateEmail({name: 'Name', email: 'email@email.com', subject: 'Test subject', message: 'Message test'});
+    testValidation('Nombre válido', false, Boolean(validName.name));
+
+    const emptyEmail = validateEmail({name: 'Name', email: '', subject: 'Test subject', message: 'Message test'});
+    testValidation('Email vacío', true, Boolean(emptyEmail.all));
+
+    const invalidEmail = validateEmail({name: 'Name', email: 'email.com', subject: 'Test subject', message: 'Message test'});
+    testValidation('Email inválido (p.e: email.com)', true, Boolean(invalidEmail.email));
+
+    const validEmail = validateEmail({name: 'Name', email: 'email@email.com', subject: 'Test subject', message: 'Message test'});
+    testValidation('Email válido', false, Boolean(validEmail.email));
+
+    const emptySubject = validateEmail({name: 'Name', email: 'email@email.com', subject: '', message: 'Message test'});
+    testValidation('Asunto vacío', true, Boolean(emptySubject.all));
+
+    const shortSubject = validateEmail({name: 'Name', email: 'email@email.com', subject: 'a', message: 'Message test'});
+    testValidation('Asunto muy corto (< 4)', true, Boolean(shortSubject.subject));
+
+    const longSubject = validateEmail({name: 'Name', email: 'email@email.com', subject: `Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+        Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque`, message: 'Message test'});
+    testValidation('Asunto muy largo (> 50)', true, Boolean(longSubject.subject));
+
+    const validSubject = validateEmail({name: 'Name', email: 'email@email.com', subject: 'Test subject', message: 'Message test'});
+    testValidation('Asunto válido', false, Boolean(validSubject.subject));
+
+    const emptyMessage = validateEmail({name: 'Name', email: 'email@email.com', subject: 'Test subject', message: ''});
+    testValidation('Mensaje vacío', true, Boolean(emptyMessage.all));
+
+    const shortMessage = validateEmail({name: 'Name', email: 'email@email.com', subject: 'Test subject', message: 'a'});
+    testValidation('Mensaje muy corto (< 10)', true, Boolean(shortMessage.message));
+
+    const longMessage = validateEmail({name: 'Name', email: 'email@email.com', subject: 'Test subject', message: `Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris. Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. Praesent adipiscing. Phasellus ullamcorper ipsum rutrum nunc. Nunc nonummy metus. Vestibulum volutpat pretium libero. Cras id dui. Aenean ut eros et nisl sagittis vestibulum. Nullam nulla eros, ultricies sit amet, nonummy id, imperdiet feugiat, pede. Sed lectus. Donec mollis hendrerit risus. Phasellus nec sem in justo pellentesque facilisis. Etiam imperdiet imperdiet orci. Nunc nec neque. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Maecenas malesuada. Praesent congue erat at massa. Sed cursus turpis vitae tortor. Donec posuere vulputate arcu. Phasellus accumsan cursus velit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis porttitor congue, elit erat euismod orci, ac placerat dolor lectus quis orci. Phasellus consectetuer vestibulum elit. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Vestibulum fringilla pede sit amet augue. In turpis. Pellentesque posuere. Praesent turpis. Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor sagittis lacus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis. Nullam sagittis. Suspendisse pulvinar, augue ac venenatis condimentum, sem libero volutpat nibh, nec pellentesque velit pede quis nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce id purus. Ut varius tincidunt libero. Phasellus dolor. Maecenas vestibulum mollis diam. Pellentesque ut neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In dui magna, posuere eget, vestibulum et, tempor auctor, justo. In ac felis quis tortor malesuada pretium. Pellentesque auctor neque nec urna. Proin sapien ipsum, porta a, auctor quis, euismod ut, mi. Aenean viverra rhoncus pede. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut non enim eleifend felis pretium feugiat. Vivamus quis mi. Phasellus a est. Phasellus magna. In hac habitasse platea dictumst. Curabitur at lacus ac velit ornare lobortis. Curabitur a felis in nunc fringilla tristique. Morbi mattis ullamcorper velit. Phasellus gravida semper nisi. Nullam vel sem. Pellentesque libero tortor, tincidunt et, tincidunt eget, semper nec, quam. Sed hendrerit. Morbi ac felis. Nunc egestas, augue at pellentesque laoreet, felis eros vehicula leo, at malesuada velit leo quis pede. Donec interdum, metus et hendrerit aliquet, dolor diam sagittis ligula, eget egestas libero turpis vel mi. Nunc nulla. Fusce risus nisl, viverra et, tempor et, pretium in, sapien. Donec venenatis vulputate lorem. Morbi nec metus. Phasellus blandit leo ut odio. Maecenas ullamcorper, dui et placerat feugiat, eros pede varius nisi, condimentum viverra felis nunc et lorem. Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. In auctor lobortis lacus. Quisque libero metus, condimentum nec, tempor a, commodo mollis, magna. Vestibulum ullamcorper mauris at ligula. Fu`});
+    testValidation('Mensaje muy largo (> 5000)', true, Boolean(longMessage.message));
+
+    const validMessage = validateEmail({name: 'Name', email: 'email@email.com', subject: 'Test subject', message: 'Message test'});
+    testValidation('Mensaje válido', false, Boolean(validMessage.message));
+
+
+    // LOG IN VALIDATION
+    import { validateLogin } from '../validators/user.js';
+
+    table = document.getElementById('table-test-login');
+
+    const emptyUsername = validateLogin({username: '', password: 'password'});
+    testValidation('Usuario vacío', true, Boolean(emptyUsername.all));
+
+    const shortUsername = validateLogin({username: 'a', password: 'password'});
+    testValidation('Usuario muy corto (< 4)', true, Boolean(shortUsername.username));
+
+    const longUsername = validateLogin({username: `Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+        Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque`, password: 'password'});
+    testValidation('Usuario muy largo (> 254)', true, Boolean(longUsername.username));
+
+    const validUsername = validateLogin({username: 'Username', password: 'password'});
+    testValidation('Usuario válido', false, Boolean(validUsername.username));
+
+    const emptyPassword = validateLogin({username: 'Username', password: ''});
+    testValidation('Contraseña vacía', true, Boolean(emptyPassword.all));
+
+    const shortPassword = validateLogin({username: 'Username', password: 'a'});
+    testValidation('Contraseña muy corta (< 8)', true, Boolean(shortPassword.password));
+
+    const longPassword = validateLogin({username: 'Username', password: `Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+        Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque`});
+    testValidation('Contraseña muy larga (> 254)', true, Boolean(longPassword.password));
+
+    const validPassword = validateLogin({username: 'Username', password: 'password'});
+    testValidation('Contraseña válida', false, Boolean(validPassword.password));
+
+    import { validateUser } from '../validators/user.js';
+
+    table = document.getElementById('table-test-user');
+
+    let isUpdate = false;
+    const emptyUserName = validateUser({username: '', fullname: 'Test Johnson', password: 'testPassword', confirmPassword: 'testPassword'}, isUpdate);
+    testValidation('Nombre vacío', true, Boolean(emptyUserName.all));
+
+    const shortUserName = validateUser({username: 'a', fullname: 'Test Johnson', password: 'testPassword', confirmPassword: 'testPassword'}, isUpdate);
+    testValidation('Nombre muy corto (< 4)', true, Boolean(shortUserName.username));
+
+    const longUserName = validateUser({username: `Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+        Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque`, fullname: 'Test Johnson', password: 'testPassword', confirmPassword: 'testPassword'}, isUpdate);
+    testValidation('Nombre muy largo (> 254)', true, Boolean(longUserName.username));
+
+    const validUserName = validateUser({username: 'Test', fullname: 'Test Johnson', password: 'testPassword', confirmPassword: 'testPassword'}, isUpdate);
+    testValidation('Nombre válido', false, Boolean(validUserName.username));
+
+    const emptyFullName = validateUser({username: 'Test', fullname: '', password: 'testPassword', confirmPassword: 'testPassword'}, isUpdate);
+    testValidation('Nombre completo vacío', true, Boolean(emptyFullName.all));
+
+    const shortFullName = validateUser({username: 'Test', fullname: 'a', password: 'testPassword', confirmPassword: 'testPassword'}, isUpdate);
+    testValidation('Nombre completo muy corto (< 4)', true, Boolean(shortFullName.name));
+
+    const longFullName = validateUser({username: 'Test', fullname: `Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+        Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque`, password: 'testPassword', confirmPassword: 'testPassword'}, isUpdate);
+    testValidation('Nombre completo muy largo (> 254)', true, Boolean(longFullName.name));
+
+    const validFullName = validateUser({username: 'Test', fullname: 'Test Johnson', password: 'testPassword', confirmPassword: 'testPassword'}, isUpdate);
+    testValidation('Nombre completo válido', false, Boolean(validFullName.name));
+
+    const shortPasswordUser = validateUser({username: 'Test', fullname: 'Test Johnson', password: 'a', confirmPassword: 'testPassword'}, isUpdate);
+    testValidation('Contraseña muy corta (< 8)', true, Boolean(shortPasswordUser.password));
+
+    const longPasswordUser = validateUser({username: 'Test', fullname: 'Test Johnson', password: `Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+        Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque`, confirmPassword: 'testPassword'}, isUpdate);
+    testValidation('Contraseña muy larga (> 254)', true, Boolean(longPasswordUser.password));
+
+    const validPasswordUser = validateUser({username: 'Test', fullname: 'Test Johnson', password: 'testPassword', confirmPassword: 'testPassword'}, isUpdate);
+    testValidation('Contraseña válida', false, Boolean(validPasswordUser.password));
+
+    const differentPasswords = validateUser({username: 'Test', fullname: 'Test Johnson', password: 'testPassword', confirmPassword: 'testPassword2'}, isUpdate);
+    testValidation('Contraseñas diferentes', true, Boolean(differentPasswords['confirm-password']));
+
+    isUpdate = true;
+    const emptyId = validateUser({id: '', username: 'Test', fullname: 'Test Johnson', password: 'testPassword', confirmPassword: 'testPassword'}, isUpdate);
+    testValidation('ID vacío', true, Boolean(emptyId.all));
+
+    const validNaNId = validateUser({id: '#', username: 'Test', fullname: 'Test Johnson', password: 'testPassword', confirmPassword: 'testPassword'}, isUpdate);
+    testValidation('ID no numérico', true, Boolean(validNaNId.all));
+
+    const validId = validateUser({id: '1', username: 'Test', fullname: 'Test Johnson', password: 'testPassword', confirmPassword: 'testPassword'}, isUpdate);
+    testValidation('ID válido', false, Boolean(validId.all));
+
+</script>
+</html>

@@ -50,15 +50,19 @@ export function validateLoginResponse(response){
 
 export function validateUser({id, username, fullname, password, confirmPassword}, isUpdate = false){
     const ERRORS = {};
-    console.log(id, username, fullname, password, confirmPassword);
+
+    if(!username || !fullname){
+        const error = ERROR_MESSAGES[pageLanguage].COMPLETE_ALL_FIELDS;
+        ERRORS[error.field] = error.message;
+    }
 
     // USERNAME
     if(username.length < 4){
         const error = ERROR_MESSAGES[pageLanguage].NOMBRE_USUARIO_MINIMO_F_KO;
         ERRORS[error.field] = error.message;
     } else if(username.length > 254){
-            const error = ERROR_MESSAGES[pageLanguage].NOMBRE_USUARIO_MAXIMO_F_KO;
-            ERRORS[error.field] = error.message;
+        const error = ERROR_MESSAGES[pageLanguage].NOMBRE_USUARIO_MAXIMO_F_KO;
+        ERRORS[error.field] = error.message;
     } else if(!username.match(/^[a-zA-Z0-9_-]+$/)){
         const error = ERROR_MESSAGES[pageLanguage].NOMBRE_USUARIO_CARACTERES_F_KO;
         ERRORS[error.field] = error.message;
@@ -78,7 +82,6 @@ export function validateUser({id, username, fullname, password, confirmPassword}
 
     // PASSWORD
     if(!isUpdate){
-        console.log('isUpdate', isUpdate);
         if(password.length < 4){
             const error = ERROR_MESSAGES[pageLanguage].CONTRASENHA_MINIMO_F_KO;
             ERRORS[error.field] = error.message;
@@ -87,6 +90,19 @@ export function validateUser({id, username, fullname, password, confirmPassword}
             ERRORS[error.field] = error.message;
         } else if(!password.match(/^[a-zA-Z0-9_\-\$@()+=.]+$/)){
             const error = ERROR_MESSAGES[pageLanguage].CONTRASENHA_CARACTERES_F_KO;
+            ERRORS[error.field] = error.message;
+        }
+    }
+
+    if(isUpdate){
+        if(!id){
+            const error = ERROR_MESSAGES[pageLanguage].ID_INVALIDO_F_KO;
+            ERRORS[error.field] = error.message;
+        } else if(isNaN(id)){
+            const error = ERROR_MESSAGES[pageLanguage].ID_INVALIDO_F_KO;
+            ERRORS[error.field] = error.message;
+        } else if(parseInt(id) < 1){
+            const error = ERROR_MESSAGES[pageLanguage].ID_MINIMO_F_KO;
             ERRORS[error.field] = error.message;
         }
     }
