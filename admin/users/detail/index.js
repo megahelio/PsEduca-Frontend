@@ -184,7 +184,6 @@ $form.addEventListener('submit', async (e) => {
     const confirmPassword = $('#confirm-password').value;
 
     const ERRORS = validateUser({id, fullname, username, role, password, confirmPassword}, id !== '');
-    console.log(ERRORS);
     if (Object.keys(ERRORS).length > 0) {
         Object.keys(ERRORS).forEach((key) => {
             const $errorMessage = $(`#error-message-${key}`);
@@ -206,7 +205,6 @@ $form.addEventListener('submit', async (e) => {
         return;
     }
 
-    console.log(response);
     Object.keys(response).forEach((key) => {
         const $errorMessage = $(`#error-message-${key}`);
         $errorMessage.textContent = response[key];
@@ -217,7 +215,6 @@ $form.addEventListener('submit', async (e) => {
 const $deleteUserButton = $('#delete-user-button');
 $deleteUserButton.onclick = async (e) => {
     const id = $('#id').value;
-    console.log(id);
 
     const response = await deleteUser(id);
     if(Object.keys(response).length === 0){
