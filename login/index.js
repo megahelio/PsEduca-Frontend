@@ -20,7 +20,7 @@ if(sessionStorage.getItem('token') && sessionStorage.getItem('ROL')){
         <li class="list-item-with-children" id="list-item-with-children">
             <a href="javascript:void(0)" class="list-item-with-image">
                 <span data-i18n="header.navbar.intranet">Intranet</span>
-                <img src="/images/arrow_right_icon.svg" width="15px" class="rotate-90-deg inverted"/>
+                <img src="../images/arrow_right_icon.svg" width="15px" class="rotate-90-deg inverted"/>
             </a>
             <ul class="sublist" id="sublist">
                 ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="#" data-i18n="header.navbar.userManagement">Gestión usuarios</a></li>' : ''}
@@ -134,14 +134,19 @@ $loginForm.addEventListener('submit', async (e) => {
     const password = $('#password').value;
 
     const response = await logIn({username, password});
+
+    setErrorMessage('username', '');
+    setErrorMessage('password', '');
+    setErrorMessage('all', '');
+
     if (response.token) {
         sessionStorage.setItem('token', response.token);
         sessionStorage.setItem('ROL', response.ROL);
-        location.replace('../');
+        location.replace('../index.html');
     }else{
-        $('#error-message-username').textContent = response.username;
-        $('#error-message-password').textContent = response.password;
-        $('#error-message-login').textContent = response.error;
+        Object.keys(response).forEach((field) => {
+            setErrorMessage(field, response[field]);
+        });
 
         $$('.error-message').forEach((el) => {
             if (el.textContent) {
@@ -152,3 +157,8 @@ $loginForm.addEventListener('submit', async (e) => {
         });
     }
 });
+
+function setErrorMessage(field, message){
+    const $errorMessage = $(`#error-message-${field}`);
+    $errorMessage.textContent = message;
+}

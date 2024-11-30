@@ -20,7 +20,7 @@ if(sessionStorage.getItem('token') && sessionStorage.getItem('ROL')){
         <li class="list-item-with-children" id="list-item-with-children">
             <a href="javascript:void(0)" class="list-item-with-image">
                 <span data-i18n="header.navbar.intranet">Intranet</span>
-                <img src="/images/arrow_right_icon.svg" width="15px" class="rotate-90-deg inverted"/>
+                <img src="../images/arrow_right_icon.svg" width="15px" class="rotate-90-deg inverted"/>
             </a>
             <ul class="sublist" id="sublist">
                 ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../admin/users/index.html" data-i18n="header.navbar.userManagement">Gestión usuarios</a></li>' : ''}
@@ -139,15 +139,24 @@ $contactForm.addEventListener('submit', async (e) => {
     const $submit = $('#submit-contact-button');
     $submit.disabled = true;
 
-    const $errorMessage = $('#error-message-contact');
-    $errorMessage.textContent = '';
+    setErrorMessage('all', '');
+    setErrorMessage('name', '');
+    setErrorMessage('email', '');
+    setErrorMessage('subject', '');
+    setErrorMessage('message', '');
 
     const response = await sendEmail({ name, email, subject, message });
 
-    if (response.error) {
-        $errorMessage.textContent = response.error;
-        return;
+    if (Object.keys(response).length > 0) {
+        Object.keys(response).forEach((field) => {
+            setErrorMessage(field, response[field]);
+        });
     }
 
     $submit.disabled = false;
 });
+
+function setErrorMessage(field, message){
+    const $errorMessage = $(`#error-message-${field}`);
+    $errorMessage.textContent = message;
+}

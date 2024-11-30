@@ -76,6 +76,7 @@ const locales = {
       save: "Guardar",
       delete: "Eliminar",
       titleDetail: "Información de usuario",
+      createUser: "Crear usuario",
     },
     location: {
       title: "Localización",
@@ -177,6 +178,7 @@ const locales = {
       save: "Save",
       delete: "Delete",
       titleDetail: "User detail",
+      createUser: "Create user",
     },
     location: {
       title: "Location",
@@ -279,6 +281,7 @@ const locales = {
       save: "Gardar",
       delete: "Eliminar",
       titleDetail: "Información de usuario",
+      createUser: "Crear usuario",
     },
     location: {
       title: "Localización",

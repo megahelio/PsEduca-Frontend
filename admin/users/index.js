@@ -1,4 +1,9 @@
-import { getPageLanguage, setPageLanguage } from "./lang/i18n.js";
+import { getPageLanguage, setPageLanguage } from "../../lang/i18n.js";
+import { getUsers } from "../../queries/users.js";
+
+if(!sessionStorage.getItem('token') || sessionStorage.getItem('ROL') !== 'ADMIN_GLOBAL'){
+    location.href = '../../login/index.html';
+}
 
 const $ = (elem) => document.querySelector(elem);
 const $$ = (elem) => document.querySelectorAll(elem);
@@ -19,10 +24,10 @@ if(sessionStorage.getItem('token') && sessionStorage.getItem('ROL')){
         <li class="list-item-with-children" id="list-item-with-children">
             <a href="javascript:void(0)" class="list-item-with-image">
                 <span data-i18n="header.navbar.intranet">Intranet</span>
-                <img src="./images/arrow_right_icon.svg" width="15px" class="rotate-90-deg inverted"/>
+                <img src="../../images/arrow_right_icon.svg" width="15px" class="rotate-90-deg inverted"/>
             </a>
             <ul class="sublist" id="sublist">
-                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="./admin/users/index.html" data-i18n="header.navbar.userManagement">Gestión usuarios</a></li>' : ''}
+                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="javascript:void(0);" data-i18n="header.navbar.userManagement">Gestión usuarios</a></li>' : ''}
                 ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="#" data-i18n="header.navbar.membersManagement">Gestión miembros</a></li>' : ''}
                 ${ROL === 'ADMIN_GLOBAL' || ROL === 'GESTOR_CATALOGO' ? '<li><a href="#" data-i18n="header.navbar.catalogManagement">Gestión catálogo</a></li>' : ''}
                 ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="#" data-i18n="header.navbar.formationManagement">Gestión formación</a></li>' : ''}
@@ -44,6 +49,36 @@ if(sessionStorage.getItem('token') && sessionStorage.getItem('ROL')){
 }
 
 setPageLanguage();
+
+async function loadUsers(){
+    const users = await getUsers();
+    const $usersTable = $('#user-management-table > tbody');
+
+    if(!users.error){
+        users.forEach(user => {
+            $usersTable.innerHTML += `
+                <tr data-user-id="${user.id}">
+                    <td>${user.nombre_completo}</td>
+                    <td>${user.nombre_usuario}</td>
+                    <td>${user.rol}</td>
+                    <td class="actions-cell-table">
+                        <a class="access-user-link" href="./detail/index.html?id=${user.id}">
+                            <img src="../../images/edit-icon.svg" width="20px" class="inverted"/>
+                        </a>
+                    </td>
+                </tr>
+            `;
+        });
+    }else{
+        $usersTable.innerHTML = `
+            <tr>
+                <td colspan="4" class="error-message">${users.error}</td>
+            </tr>
+        `;
+    }
+}
+
+loadUsers();
 
 $('#button-menu').addEventListener('click', (e) => {
     $listSections.classList.toggle('active');

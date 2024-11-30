@@ -1,8 +1,8 @@
 @font-face {
     font-family: 'roboto';
-    src: url('../fonts/roboto-regular.woff2') format('woff2'),
-         url('../fonts/roboto-regular.woff') format('woff'),
-         url('../fonts/roboto-regular.ttf') format('truetype');
+    src: url('../../../fonts/roboto-regular.woff2') format('woff2'),
+         url('../../../fonts/roboto-regular.woff') format('woff'),
+         url('./../../fonts/roboto-regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -19,7 +19,7 @@ body, h1, h2, h3{
 }
 
 *{
-    font-family: 'roboto', Verdana, Arial;
+    font-family: 'roboto', Verdana, Arial, sans-serif;
 }
 
 .inverted{
@@ -380,117 +380,93 @@ header{
 
 /* Inicio del CSS de la página */
 main{
-    width: 80%;
-    margin: 0 auto;
-    padding-top: 10px;
-    padding-bottom: 20px;
-}
-
-.location-container, .contact-container{
-    width: 100%;
-
-    & > h1{
-        font-size: 1.5em;
-        margin: 20px 0 10px 0;
-        text-transform: uppercase;
-        font-style: italic;
-        color: #073349;
-        text-align: center;
-    }
-}
-
-.location-items-container{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 20px;
-    row-gap: 20px;
-}
-
-.location-item{
-    margin: 0 auto;
     width: 90%;
-}
-
-.location-item-info{
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 10px;
-
-    & > h3{
-        font-size: 1.1em;
-        color: #073349;
-        padding-bottom: 10px;
-    }
-
-    & > p{
-        font-size: 1em;
-        color: #073349;
-        margin: 0;
-    }
-}
-
-.location-item-iframe{
-    & > iframe{
-        width: 100%;
-        height: 300px;
-        border: none;
-    }
-}
-
-.contact-form-container{
-    width: 60%;
     margin: 0 auto;
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.user-detail-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    width: 70%;
+    margin: 0 auto;
+    background-color: #e2e2e2;
 }
 
-.contact-form{
+.user-detail-title{
+    font-size: 1.5em;
+    margin: 20px 0;
+    text-transform: uppercase;
+    font-style: italic;
+    color: #073349;
+    text-align: center;
+}
+
+.user-detail-form{
     display: flex;
     flex-direction: column;
-    row-gap: 10px;
+    row-gap: 20px;
     width: 80%;
     margin: 0 auto;
-}
-
-.contact-form-item{
-    display: flex;
-    flex-direction: column;
-    row-gap: 2px;
-
-    & > label{
-        font-size: 0.9em;
-        color: #073349;
-    }
-
-    & > input{
-        padding: 5px;
-        border: 1px solid #8f8f8f;
-        font-size: 0.9em;
-    }
-
-    & > textarea{
-        padding: 7px;
-        border: 1px solid #8f8f8f;
-        font-size: 0.9em;
-        height: 50px;
-        resize: vertical;
-    }
-
-    & > button{
-        width: 80px;
-        margin: 0 auto;
-        padding: 5px 10px;
-        border: none;
-        font-size: 1em;
-        cursor: pointer;
-        background-color: #073349f3;
-        color: white;
-    }
 }
 
 .error-message{
     color: red;
     font-size: 1em;
-    margin: 5px 0;
     text-align: center;
+    margin: 0;
+    display: none;
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    row-gap: 2px;
+}
+
+.form-group>label{
+    font-size: 1em;
+}
+
+.form-group>input, .form-group>select{
+    padding: 7px;
+    border: 1px solid #8f8f8f;
+    font-size: 0.9em;
+}
+
+.form-group:has(button){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    column-gap: 5px;
+}
+
+.form-group>button{
+    padding: 10px;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.form-group>button[class*='save']{
+    background-color: #073349f3;
+    color: white;
+}
+
+.form-group>button[class*='delete']{
+    background-color: white;
+    color: #073349;
+    border: 1px solid #073349;
+}
+
+.form-group>button:hover{
+    filter: opacity(0.9);
 }
 
 /* Fin del CSS de la página */
@@ -588,8 +564,12 @@ main{
 
     /* Inicio del CSS de la página */
 
-    .contact-form-container{
+    .user-detail-container{
         width: 90%;
+    }
+
+    .user-detail-form{
+        width: 95%;
     }
 
     /* Fin del CSS de la página */
@@ -617,14 +597,6 @@ main{
     }
 
     /* Inicio del CSS de la página */
-
-    main{
-        width: 95%;
-    }
-
-    .location-items-container{
-        grid-template-columns: 1fr;
-    }
     
     /* Fin del CSS de la página */
 }

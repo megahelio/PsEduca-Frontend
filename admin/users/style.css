@@ -1,8 +1,8 @@
 @font-face {
     font-family: 'roboto';
-    src: url('../fonts/roboto-regular.woff2') format('woff2'),
-         url('../fonts/roboto-regular.woff') format('woff'),
-         url('../fonts/roboto-regular.ttf') format('truetype');
+    src: url('../../fonts/roboto-regular.woff2') format('woff2'),
+         url('../../fonts/roboto-regular.woff') format('woff'),
+         url('../../fonts/roboto-regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -379,120 +379,95 @@ header{
 }
 
 /* Inicio del CSS de la página */
-main{
+.main-container{
     width: 80%;
     margin: 0 auto;
-    padding-top: 10px;
-    padding-bottom: 20px;
+    padding: 20px 0;
 }
 
-.location-container, .contact-container{
+.user-management-title{
+    font-size: 1.5em;
+    margin: 20px 0;
+    text-transform: uppercase;
+    font-style: italic;
+    color: #073349;
+    text-align: center;
+}
+
+.anchor-create-user-container{
+    margin: 5px 0;
+}
+
+.anchor-create-user{
+    width: fit-content;
+    background-color: #073349;
+    color: white;
+    border: none;
+    padding: 7px 9px;
+    cursor: pointer;
+    border-radius: 3px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+}
+
+.anchor-create-user:hover{
+    background-color: #073349da;
+}
+
+.user-management-table{
+    --border-color: #033c5b57;
     width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--border-color);
 
-    & > h1{
-        font-size: 1.5em;
-        margin: 20px 0 10px 0;
-        text-transform: uppercase;
-        font-style: italic;
-        color: #073349;
-        text-align: center;
-    }
-}
-
-.location-items-container{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 20px;
-    row-gap: 20px;
-}
-
-.location-item{
-    margin: 0 auto;
-    width: 90%;
-}
-
-.location-item-info{
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 10px;
-
-    & > h3{
-        font-size: 1.1em;
-        color: #073349;
-        padding-bottom: 10px;
-    }
-
-    & > p{
-        font-size: 1em;
-        color: #073349;
-        margin: 0;
-    }
-}
-
-.location-item-iframe{
-    & > iframe{
-        width: 100%;
-        height: 300px;
-        border: none;
-    }
-}
-
-.contact-form-container{
-    width: 60%;
-    margin: 0 auto;
-}
-
-.contact-form{
-    display: flex;
-    flex-direction: column;
-    row-gap: 10px;
-    width: 80%;
-    margin: 0 auto;
-}
-
-.contact-form-item{
-    display: flex;
-    flex-direction: column;
-    row-gap: 2px;
-
-    & > label{
-        font-size: 0.9em;
-        color: #073349;
-    }
-
-    & > input{
-        padding: 5px;
-        border: 1px solid #8f8f8f;
-        font-size: 0.9em;
-    }
-
-    & > textarea{
+    & > thead th,
+    & > tbody td{
+        border: 1px solid var(--border-color);
         padding: 7px;
-        border: 1px solid #8f8f8f;
-        font-size: 0.9em;
-        height: 50px;
-        resize: vertical;
     }
 
-    & > button{
-        width: 80px;
-        margin: 0 auto;
-        padding: 5px 10px;
-        border: none;
-        font-size: 1em;
-        cursor: pointer;
-        background-color: #073349f3;
-        color: white;
+    & > thead th{
+        background-color: #0733491d;
+        color: #073349;
+        font-weight: 500;
     }
+
+    & > tbody tr:nth-of-type(2n + 1){
+        background-color: #f2f2f2a4;
+    }
+
+    & > tbody tr:hover{
+        background-color: #d2d2d25d;
+    }  
+}
+
+.actions-cell-table{
+    height: 100%;
+    text-align: center;
+}
+
+.access-user-link{
+    background-color: #073349;
+    color: white;
+    border: none;
+    padding: 7px 9px;
+    cursor: pointer;
+    border-radius: 3px;
+    text-decoration: none;
+    display: grid;
+    place-content: center;
+    width: 30px;
+    margin: 0 auto;
 }
 
 .error-message{
     color: red;
-    font-size: 1em;
+    font-size: 1.2em;
     margin: 5px 0;
     text-align: center;
 }
-
 /* Fin del CSS de la página */
 
 @media screen and (max-width: 1180px){
@@ -587,9 +562,12 @@ main{
     }
 
     /* Inicio del CSS de la página */
+    .main-container{
+        width: 95%;
+    }
 
-    .contact-form-container{
-        width: 90%;
+    .user-management-table-container{
+        overflow-x: auto;
     }
 
     /* Fin del CSS de la página */
@@ -617,14 +595,6 @@ main{
     }
 
     /* Inicio del CSS de la página */
-
-    main{
-        width: 95%;
-    }
-
-    .location-items-container{
-        grid-template-columns: 1fr;
-    }
     
     /* Fin del CSS de la página */
 }
