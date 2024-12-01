@@ -105,12 +105,12 @@ export async function createUser({ username, fullname, role, password }) {
     }
 }
 
-export async function updateUser({ id, nombre_usuario, nombre_completo, rol, password }) {
+export async function updateUser({ id, username, fullname, role, password }) {
     const formData = new FormData();
     formData.append('id', id);
-    formData.append('userName', nombre_usuario);
-    formData.append('fullName', nombre_completo);
-    formData.append('role', rol);
+    formData.append('userName', username);
+    formData.append('fullName', fullname);
+    formData.append('role', role);
     formData.append('password', password || null);
 
     try{

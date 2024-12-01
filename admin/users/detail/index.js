@@ -194,7 +194,7 @@ $form.addEventListener('submit', async (e) => {
     }
     
     let response;
-    if(id === '0'){
+    if(id === ''){
         response = await createUser({fullname, username, role, password});
     }else{
         response = await updateUser({id, fullname, username, role, password});
