@@ -1,5 +1,9 @@
 import { getPageLanguage, setPageLanguage } from "../../lang/i18n.js";
-import { sendEmail } from "../queries/contact.js";
+import { getMembers } from "../../queries/members.js";
+
+if(!sessionStorage.getItem('token') || sessionStorage.getItem('ROL') !== 'ADMIN_GLOBAL'){
+    location.href = '../../login/index.html';
+}
 
 const $ = (elem) => document.querySelector(elem);
 const $$ = (elem) => document.querySelectorAll(elem);
@@ -20,13 +24,13 @@ if(sessionStorage.getItem('token') && sessionStorage.getItem('ROL')){
         <li class="list-item-with-children" id="list-item-with-children">
             <a href="javascript:void(0)" class="list-item-with-image">
                 <span data-i18n="header.navbar.intranet">Intranet</span>
-                <img src="../images/arrow_right_icon.svg" width="15px" class="rotate-90-deg inverted"/>
+                <img src="/images/arrow_right_icon.svg" width="15px" class="rotate-90-deg inverted"/>
             </a>
             <ul class="sublist" id="sublist">
-                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../admin/users/index.html" data-i18n="header.navbar.userManagement">Gestión usuarios</a></li>' : ''}
-                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../admin/members/index.html" data-i18n="header.navbar.membersManagement">Gestión miembros</a></li>' : ''}
+                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../users/index.html" data-i18n="header.navbar.userManagement">Gestión usuarios</a></li>' : ''}
+                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="javascript:void(0);" data-i18n="header.navbar.membersManagement">Gestión miembros</a></li>' : ''}
                 ${ROL === 'ADMIN_GLOBAL' || ROL === 'GESTOR_CATALOGO' ? '<li><a href="#" data-i18n="header.navbar.catalogManagement">Gestión catálogo</a></li>' : ''}
-                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../admin/formation/index.html" data-i18n="header.navbar.formationManagement">Gestión formación</a></li>' : ''}
+                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../formation/index.html" data-i18n="header.navbar.formationManagement">Gestión formación</a></li>' : ''}
                 ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="#" data-i18n="header.navbar.divulgationManagement">Gestión divulgación</a></li>' : ''}
                 ${ROL === 'ADMIN_GLOBAL' || ROL === 'USUARIO_PYP' ? '<li><a href="#" data-i18n="header.navbar.pypManagement">Gestión PyP</a></li>' : ''}
             </ul>
@@ -45,6 +49,44 @@ if(sessionStorage.getItem('token') && sessionStorage.getItem('ROL')){
 }
 
 setPageLanguage();
+
+async function loadMembers(){
+    const members = await getMembers();
+    const $membersTable = $('#member-management-table > tbody');
+
+    if(!members.error){
+        members.forEach(member => {
+            $membersTable.innerHTML += `
+                <tr data-member-id="${member.id}">
+                    <td>${member.name}</td>
+                    <td>${member.email || ''}</td>
+                    <td style="text-overflow: ellipsis;">${member.description?.substring(0, 100) || ''}...</td>
+                    <td>
+                        <a href="${member.link || ''}" target="_blank">Aportaciones</a>
+                    </td>
+                    <td style="text-align:center;">
+                        <a href="${member.image}" target="_blank">
+                            <img src="${member.image}" width="50px"/>
+                        </a>
+                    </td>
+                    <td class="actions-cell-table">
+                        <a class="access-member-link" href="./detail/index.html?id=${member.id}">
+                            <img src="../../images/edit-icon.svg" width="20px" class="inverted" loading="lazy"/>
+                        </a>
+                    </td>
+                </tr>
+            `;
+        });
+    }else{
+        $membersTable.innerHTML = `
+            <tr>
+                <td colspan="4" class="error-message">${members.error}</td>
+            </tr>
+        `;
+    }
+}
+
+loadMembers();
 
 $('#button-menu').addEventListener('click', (e) => {
     $listSections.classList.toggle('active');
@@ -125,38 +167,3 @@ $$buttonsLanguage.forEach((button) => {
         button.classList.add('language-selected');
     }
 });
-
-const $contactForm = $('#contact-form');
-
-$contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const name = $('#name').value;
-    const email = $('#email').value;
-    const subject = $('#subject').value;
-    const message = $('#message').value;
-    
-    const $submit = $('#submit-contact-button');
-    $submit.disabled = true;
-
-    setErrorMessage('all', '');
-    setErrorMessage('name', '');
-    setErrorMessage('email', '');
-    setErrorMessage('subject', '');
-    setErrorMessage('message', '');
-
-    const response = await sendEmail({ name, email, subject, message });
-
-    if (Object.keys(response).length > 0) {
-        Object.keys(response).forEach((field) => {
-            setErrorMessage(field, response[field]);
-        });
-    }
-
-    $submit.disabled = false;
-});
-
-function setErrorMessage(field, message){
-    const $errorMessage = $(`#error-message-${field}`);
-    $errorMessage.textContent = message;
-}

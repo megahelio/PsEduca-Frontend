@@ -23,7 +23,7 @@ export async function getUsers() {
 
     if(!ok){
         return {
-            error: ERROR_MESSAGES[pageLanguage][code[0]] || 'Error' //TODO: map error codes to form fields
+            error: ERROR_MESSAGES[pageLanguage][code[0]] || 'Error'
         }
     }
 

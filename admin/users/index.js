@@ -28,9 +28,9 @@ if(sessionStorage.getItem('token') && sessionStorage.getItem('ROL')){
             </a>
             <ul class="sublist" id="sublist">
                 ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="javascript:void(0);" data-i18n="header.navbar.userManagement">Gestión usuarios</a></li>' : ''}
-                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="#" data-i18n="header.navbar.membersManagement">Gestión miembros</a></li>' : ''}
+                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../members/index.html" data-i18n="header.navbar.membersManagement">Gestión miembros</a></li>' : ''}
                 ${ROL === 'ADMIN_GLOBAL' || ROL === 'GESTOR_CATALOGO' ? '<li><a href="#" data-i18n="header.navbar.catalogManagement">Gestión catálogo</a></li>' : ''}
-                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="#" data-i18n="header.navbar.formationManagement">Gestión formación</a></li>' : ''}
+                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../formation/index.html" data-i18n="header.navbar.formationManagement">Gestión formación</a></li>' : ''}
                 ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="#" data-i18n="header.navbar.divulgationManagement">Gestión divulgación</a></li>' : ''}
                 ${ROL === 'ADMIN_GLOBAL' || ROL === 'USUARIO_PYP' ? '<li><a href="#" data-i18n="header.navbar.pypManagement">Gestión PyP</a></li>' : ''}
             </ul>

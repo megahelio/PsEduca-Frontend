@@ -1,8 +1,8 @@
 @font-face {
     font-family: 'roboto';
-    src: url('../../fonts/roboto-regular.woff2') format('woff2'),
-         url('../../fonts/roboto-regular.woff') format('woff'),
-         url('../../fonts/roboto-regular.ttf') format('truetype');
+    src: url('../../../fonts/roboto-regular.woff2') format('woff2'),
+         url('../../../fonts/roboto-regular.woff') format('woff'),
+         url('./../../fonts/roboto-regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -19,7 +19,7 @@ body, h1, h2, h3{
 }
 
 *{
-    font-family: 'roboto', Verdana, Arial;
+    font-family: 'roboto', Verdana, Arial, sans-serif;
 }
 
 .inverted{
@@ -379,13 +379,26 @@ header{
 }
 
 /* Inicio del CSS de la página */
-.main-container{
-    width: 80%;
+main{
+    width: 90%;
     margin: 0 auto;
     padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.member-detail-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    width: 70%;
+    margin: 0 auto;
+    background-color: #e2e2e2;
 }
 
-.user-management-title{
+.member-detail-title{
     font-size: 1.5em;
     margin: 20px 0;
     text-transform: uppercase;
@@ -394,86 +407,119 @@ header{
     text-align: center;
 }
 
-.anchor-create-user-container{
-    margin: 5px 0;
-}
-
-.anchor-create-user{
-    width: fit-content;
-    background-color: #073349;
-    color: white;
-    border: none;
-    padding: 7px 9px;
-    cursor: pointer;
-    border-radius: 3px;
-    text-decoration: none;
+.member-detail-form{
     display: flex;
-    align-items: center;
-    column-gap: 5px;
-}
-
-.anchor-create-user:hover{
-    background-color: #073349da;
-}
-
-.user-management-table-container{
-    width: 100%;
-    overflow-x: auto;
-}
-
-.user-management-table{
-    --border-color: #033c5b57;
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px solid var(--border-color);
-    table-layout: auto;
-    
-    & > thead th,
-    & > tbody td{
-        border: 1px solid var(--border-color);
-        padding: 7px;
-    }
-
-    & > thead th{
-        background-color: #0733491d;
-        color: #073349;
-        font-weight: 500;
-    }
-
-    & > tbody tr:nth-of-type(2n + 1){
-        background-color: #f2f2f2a4;
-    }
-
-    & > tbody tr:hover{
-        background-color: #d2d2d25d;
-    }  
-}
-
-.actions-cell-table{
-    height: 100%;
-    text-align: center;
-}
-
-.access-user-link{
-    background-color: #073349;
-    color: white;
-    border: none;
-    padding: 7px 9px;
-    cursor: pointer;
-    border-radius: 3px;
-    text-decoration: none;
-    display: grid;
-    place-content: center;
-    width: 30px;
+    flex-direction: column;
+    row-gap: 20px;
+    width: 80%;
     margin: 0 auto;
 }
 
 .error-message{
     color: red;
-    font-size: 1.2em;
-    margin: 5px 0;
+    font-size: 1em;
     text-align: center;
+    margin: 0;
+    display: none;
 }
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    row-gap: 2px;
+}
+
+.form-group>label{
+    font-size: 1em;
+}
+
+.form-group>input, .form-group>select{
+    padding: 7px;
+    border: 1px solid #8f8f8f;
+    font-size: 0.9em;
+}
+
+.form-group:has(input[type='file']){
+    padding: 5px;
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    column-gap: 10px;
+
+    & > img{
+        width: 100%;
+    }
+
+    & > div{
+        display: flex;
+        flex-direction: column;
+        row-gap: 5px;
+
+        & > label{
+            font-size: 1em;
+            display: flex;
+            align-items: center;
+            column-gap: 5px;
+            cursor: pointer;
+            color: #073349;
+            background-color: white;
+            width: fit-content;
+            padding: 5px;
+            border: 1px solid #073349;
+            border-radius: 5px;
+
+            & > img{
+                width: 25px;
+            }
+        }
+
+        & > label:hover{
+            background-color: #efefef;
+        }
+
+        & > input{
+            display: none;
+        }
+    }
+}
+
+.textarea-member-description{
+    padding: 7px;
+    border: 1px solid #8f8f8f;
+    font-size: 0.9em;
+    resize: vertical;
+    height: 120px;
+}
+
+.form-group:has(button){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    column-gap: 5px;
+}
+
+.form-group>button{
+    padding: 10px;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.form-group>button[class*='save']{
+    background-color: #073349f3;
+    color: white;
+}
+
+.form-group>button[class*='delete']{
+    background-color: white;
+    color: #073349;
+    border: 1px solid #073349;
+}
+
+.form-group>button:hover{
+    filter: opacity(0.9);
+}
+
 /* Fin del CSS de la página */
 
 @media screen and (max-width: 1180px){
@@ -568,13 +614,13 @@ header{
     }
 
     /* Inicio del CSS de la página */
-    .main-container{
-        width: 95%;
+
+    .member-detail-container{
+        width: 90%;
     }
 
-    .user-management-table{
-        overflow-x: scroll;
-
+    .member-detail-form{
+        width: 95%;
     }
 
     /* Fin del CSS de la página */

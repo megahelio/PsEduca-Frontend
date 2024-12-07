@@ -440,8 +440,6 @@ header{
 }
 
 .group-members-list{
-    /* display: grid;
-    grid-template-columns: repeat(3, 1fr); */
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -462,7 +460,9 @@ header{
 }
 
 .group-member-image{
-    width: 300px;
+    height: 300px;
+    aspect-ratio: 1/1;
+    object-fit: scale-down;
 }
 
 .group-member-item-description{
@@ -507,6 +507,15 @@ header{
 
 .member-email:hover{
     color: black;
+    text-decoration: underline;
+}
+
+.read-more{
+    cursor: pointer;
+    font-style: italic;
+}
+
+.read-more:hover{
     text-decoration: underline;
 }
 

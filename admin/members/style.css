@@ -385,7 +385,7 @@ header{
     padding: 20px 0;
 }
 
-.user-management-title{
+.member-management-title{
     font-size: 1.5em;
     margin: 20px 0;
     text-transform: uppercase;
@@ -394,11 +394,11 @@ header{
     text-align: center;
 }
 
-.anchor-create-user-container{
+.anchor-create-member-container{
     margin: 5px 0;
 }
 
-.anchor-create-user{
+.anchor-create-member{
     width: fit-content;
     background-color: #073349;
     color: white;
@@ -412,26 +412,28 @@ header{
     column-gap: 5px;
 }
 
-.anchor-create-user:hover{
+.anchor-create-member:hover{
     background-color: #073349da;
 }
 
-.user-management-table-container{
+.member-management-table-container{
     width: 100%;
     overflow-x: auto;
 }
 
-.user-management-table{
+.member-management-table{
     --border-color: #033c5b57;
     width: 100%;
     border-collapse: collapse;
     border: 1px solid var(--border-color);
+    border-spacing: 0;
     table-layout: auto;
-    
+
     & > thead th,
     & > tbody td{
         border: 1px solid var(--border-color);
         padding: 7px;
+
     }
 
     & > thead th{
@@ -452,9 +454,10 @@ header{
 .actions-cell-table{
     height: 100%;
     text-align: center;
+
 }
 
-.access-user-link{
+.access-member-link{
     background-color: #073349;
     color: white;
     border: none;
@@ -487,7 +490,6 @@ header{
     }
 
     /* Inicio del CSS de la página */
-
 
 
     /* Fin del CSS de la página */
@@ -570,11 +572,6 @@ header{
     /* Inicio del CSS de la página */
     .main-container{
         width: 95%;
-    }
-
-    .user-management-table{
-        overflow-x: scroll;
-
     }
 
     /* Fin del CSS de la página */

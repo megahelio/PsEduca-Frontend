@@ -1,5 +1,10 @@
-import { getPageLanguage, setPageLanguage } from "../../lang/i18n.js";
-import { sendEmail } from "../queries/contact.js";
+import { getPageLanguage, setPageLanguage } from "../../../lang/i18n.js";
+import { createMember, deleteMember, getMemberById, updateMember } from "../../../queries/members.js";
+import { validateMember } from "../../../validators/member.js";
+
+if(!sessionStorage.getItem('token') || sessionStorage.getItem('ROL') !== 'ADMIN_GLOBAL'){
+    location.href = '../../../login/index.html';
+}
 
 const $ = (elem) => document.querySelector(elem);
 const $$ = (elem) => document.querySelectorAll(elem);
@@ -20,13 +25,13 @@ if(sessionStorage.getItem('token') && sessionStorage.getItem('ROL')){
         <li class="list-item-with-children" id="list-item-with-children">
             <a href="javascript:void(0)" class="list-item-with-image">
                 <span data-i18n="header.navbar.intranet">Intranet</span>
-                <img src="../images/arrow_right_icon.svg" width="15px" class="rotate-90-deg inverted"/>
+                <img src="../../../images/arrow_right_icon.svg" width="15px" class="rotate-90-deg inverted"/>
             </a>
             <ul class="sublist" id="sublist">
-                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../admin/users/index.html" data-i18n="header.navbar.userManagement">Gestión usuarios</a></li>' : ''}
-                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../admin/members/index.html" data-i18n="header.navbar.membersManagement">Gestión miembros</a></li>' : ''}
+                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../../users/index.html" data-i18n="header.navbar.userManagement">Gestión usuarios</a></li>' : ''}
+                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../index.html" data-i18n="header.navbar.membersManagement">Gestión miembros</a></li>' : ''}
                 ${ROL === 'ADMIN_GLOBAL' || ROL === 'GESTOR_CATALOGO' ? '<li><a href="#" data-i18n="header.navbar.catalogManagement">Gestión catálogo</a></li>' : ''}
-                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../admin/formation/index.html" data-i18n="header.navbar.formationManagement">Gestión formación</a></li>' : ''}
+                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../../formation/index.html" data-i18n="header.navbar.formationManagement">Gestión formación</a></li>' : ''}
                 ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="#" data-i18n="header.navbar.divulgationManagement">Gestión divulgación</a></li>' : ''}
                 ${ROL === 'ADMIN_GLOBAL' || ROL === 'USUARIO_PYP' ? '<li><a href="#" data-i18n="header.navbar.pypManagement">Gestión PyP</a></li>' : ''}
             </ul>
@@ -45,6 +50,41 @@ if(sessionStorage.getItem('token') && sessionStorage.getItem('ROL')){
 }
 
 setPageLanguage();
+
+const path = window.location.search;
+
+const REGEX_PATH = /\?id=[0-9]+$/;
+
+if (!REGEX_PATH.test(path)) {
+    window.location.href = '../../../index.html'
+}
+
+async function loadMember(){
+    const id = path.split('=')[1];
+
+    if(id !== '0'){
+        const member = await getMemberById(id)
+    
+        const $errorMessage = $('#error-message-all')
+        if (member.error) {
+            $errorMessage.textContent = member.error;
+            $errorMessage.classList.add('active');
+            return;
+        }
+
+        $('#id').value = member.id;
+        $('#name').value = member.name;
+        $('#email').value = member.email;
+        $('#link').value = member.link;
+        $('#image-preview').src = member.image;
+        $('#description').value = member.description;
+    }else{
+        $('#image-preview').style.display = 'none';
+        $('#delete-member-button').style.display = 'none';
+    }
+}
+
+loadMember();
 
 $('#button-menu').addEventListener('click', (e) => {
     $listSections.classList.toggle('active');
@@ -87,7 +127,6 @@ $$listItemWithSubmenu.forEach(el => {
         }
     });
 })
-    
 
 window.addEventListener('resize', () => {
     if (window.matchMedia('(min-width: 1050px)').matches) {
@@ -126,37 +165,88 @@ $$buttonsLanguage.forEach((button) => {
     }
 });
 
-const $contactForm = $('#contact-form');
+const $form = $('#member-detail-form');
 
-$contactForm.addEventListener('submit', async (e) => {
+$form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
+    $('#error-message-all').classList.remove('active');
+    $('#error-message-name').classList.remove('active');
+    $('#error-message-email').classList.remove('active');
+    $('#error-message-link').classList.remove('active');
+    $('#error-message-description').classList.remove('active');
+    $('#error-message-image').classList.remove('active');
+
+    const id = $('#id').value;
     const name = $('#name').value;
     const email = $('#email').value;
-    const subject = $('#subject').value;
-    const message = $('#message').value;
+    const link = $('#link').value;
+    const description = $('#description').value;
+    const image = {
+        name: $('#image').value,
+        file: $('#image').files[0] || null
+    };
     
-    const $submit = $('#submit-contact-button');
-    $submit.disabled = true;
-
-    setErrorMessage('all', '');
-    setErrorMessage('name', '');
-    setErrorMessage('email', '');
-    setErrorMessage('subject', '');
-    setErrorMessage('message', '');
-
-    const response = await sendEmail({ name, email, subject, message });
-
-    if (Object.keys(response).length > 0) {
-        Object.keys(response).forEach((field) => {
-            setErrorMessage(field, response[field]);
+    const ERRORS = validateMember({id, name, email, link, description, image}, id !== '');
+    if (Object.keys(ERRORS).length > 0) {
+        Object.keys(ERRORS).forEach((key) => {
+            const $errorMessage = $(`#error-message-${key}`);
+            $errorMessage.textContent = ERRORS[key];
+            $errorMessage.classList.add('active');
         });
+        return;
+    }
+    
+    let response;
+    if(id === ''){
+        response = await createMember({name, email, link, description, image});
+    }else{
+        response = await updateMember({id, name, email, link, description, image});
     }
 
-    $submit.disabled = false;
+    if(Object.keys(response).length === 0){
+        location.href = '../index.html';
+        return;
+    }
+
+    Object.keys(response).forEach((key) => {
+        const $errorMessage = $(`#error-message-${key}`);
+        $errorMessage.textContent = response[key];
+        $errorMessage.classList.add('active');
+    });
 });
 
-function setErrorMessage(field, message){
-    const $errorMessage = $(`#error-message-${field}`);
-    $errorMessage.textContent = message;
-}
+const $deleteUserButton = $('#delete-member-button');
+$deleteUserButton.onclick = async (e) => {
+    const id = $('#id').value;
+
+    const response = await deleteMember(id);
+    if(Object.keys(response).length === 0){
+        location.href = '../index.html';
+        return;
+    }
+
+    Object.keys(response).forEach((key) => {
+        const $errorMessage = $(`#error-message-${key}`);
+        $errorMessage.textContent = response[key];
+        $errorMessage.classList.add('active');
+    });
+};
+
+$('#image').addEventListener('change', (e) => {
+    const file = e.target.files[0] || null;
+
+    if(!file){
+        return;
+    }
+
+    $('#image-input-span').textContent = file.name;
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+        $('#image-preview').src = e.target.result;
+        $('#image-preview').style.display = 'block';
+    }
+
+    reader.readAsDataURL(file);
+});

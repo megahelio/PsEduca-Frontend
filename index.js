@@ -1,4 +1,5 @@
 import { getPageLanguage, setPageLanguage } from "./lang/i18n.js";
+import { getMemberById, getMembers } from "./queries/members.js";
 
 const $ = (elem) => document.querySelector(elem);
 const $$ = (elem) => document.querySelectorAll(elem);
@@ -23,9 +24,9 @@ if(sessionStorage.getItem('token') && sessionStorage.getItem('ROL')){
             </a>
             <ul class="sublist" id="sublist">
                 ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="./admin/users/index.html" data-i18n="header.navbar.userManagement">Gestión usuarios</a></li>' : ''}
-                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="#" data-i18n="header.navbar.membersManagement">Gestión miembros</a></li>' : ''}
+                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="./admin/members/index.html" data-i18n="header.navbar.membersManagement">Gestión miembros</a></li>' : ''}
                 ${ROL === 'ADMIN_GLOBAL' || ROL === 'GESTOR_CATALOGO' ? '<li><a href="#" data-i18n="header.navbar.catalogManagement">Gestión catálogo</a></li>' : ''}
-                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="#" data-i18n="header.navbar.formationManagement">Gestión formación</a></li>' : ''}
+                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="./admin/formation/index.html" data-i18n="header.navbar.formationManagement">Gestión formación</a></li>' : ''}
                 ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="#" data-i18n="header.navbar.divulgationManagement">Gestión divulgación</a></li>' : ''}
                 ${ROL === 'ADMIN_GLOBAL' || ROL === 'USUARIO_PYP' ? '<li><a href="#" data-i18n="header.navbar.pypManagement">Gestión PyP</a></li>' : ''}
             </ul>
@@ -42,6 +43,60 @@ if(sessionStorage.getItem('token') && sessionStorage.getItem('ROL')){
         location.reload();
     });
 }
+
+let descriptions = {};
+
+async function loadMembers(){
+    const members = await getMembers();
+    const $membersList = $('#group-members-list');
+
+    if(!members.error){
+        members.forEach(member => {
+            descriptions[member.id] = member.description;
+            $membersList.innerHTML += `
+                <li class="group-member-item">
+                    <div class="group-member-item-container">
+                        <div class="group-member-item-image">
+                            <img src="${member.image}" alt="Imagen de ${member.name}" class="group-member-image">
+                        </div>
+                        <div class="group-member-item-description">
+                            <h4>${member.name}</h4>
+                            <a href="mailto:${member.email}" class="member-email">
+                                <img src="./images/mail_icon.svg" width="20px" class="member-email-icon"/>
+                                <span>
+                                    ${member.email}
+                                </span>
+                            </a>
+                            <p>
+                                ${member.description.substring(0, 100)}... <span class="read-more" data-member-id="${member.id}">Leer más</span>
+                            </p>
+                            <a href="${member.link}" target="_blank" class="member-link">
+                                <span data-i18n="us.linkInfoMember">Más información</span>
+                                <img src="./images/full-arrow-right.svg" width="20px" class="member-link-icon inverted"/>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            `;
+        });
+    }else{
+        $membersList.innerHTML = `
+            <li>
+                <p style="color: red;" class="error-message">${members.error}</p>
+            </li>
+        `;
+    }
+}
+
+loadMembers().then(() => {
+    $$('.read-more').forEach((el) => {
+        el.addEventListener('click', async () => {
+            const memberDescription = descriptions[el.dataset.memberId] || 'No se ha encontrado la descripción del miembro'; 
+            const $memberDescription = el.parentElement;
+            $memberDescription.innerHTML = memberDescription;   
+        });
+    });
+});
 
 setPageLanguage();
 

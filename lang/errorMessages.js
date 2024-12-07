@@ -162,7 +162,73 @@ export const ERROR_MESSAGES = {
         'MENSAJE_CARACTERES_F_KO': {
             message: 'El mensaje tiene caracteres inválidos',
             field: 'message'
-        }
+        },
+
+        // MEMBER
+        'ERROR_CREATING_MEMBER': {
+            message: 'Error al crear el miembro',
+            field: 'all'
+        },
+        'ERROR_UPDATING_MEMBER': {
+            message: 'Error al actualizar el miembro',
+            field: 'all'
+        },
+        'ERROR_DELETING_MEMBER': {
+            message: 'Error al eliminar el miembro',
+            field: 'all'
+        },
+        'NOMBRE_MIEMBRO_MINIMO_F_KO': {
+            message: 'El nombre del miembro debe tener al menos 4 caracteres',
+            field: 'name'
+        },
+        'NOMBRE_MIEMBRO_MAXIMO_F_KO': {
+            message: 'El nombre del miembro debe tener como máximo 254 caracteres',
+            field: 'name'
+        },
+        'NOMBRE_MIEMBRO_CARACTERES_F_KO': {
+            message: 'El nombre del miembro tiene caracteres inválidos',
+            field: 'name'
+        },
+        'DESCRIPCION_MINIMO_F_KO': {
+            message: 'La descripción debe tener al menos 10 caracteres',
+            field: 'description'
+        },
+        'DESCRIPCION_MAXIMO_F_KO': {
+            message: 'La descripción debe tener como máximo 1000 caracteres',
+            field: 'description'
+        },
+        'DESCRIPCION_CARACTERES_F_KO': {
+            message: 'La descripción tiene caracteres inválidos',
+            field: 'description'
+        },
+        'EMAIL_MIEMBRO_INVALIDO_F_KO': {
+            message: 'Introduzca un correo válido',
+            field: 'email'
+        },
+        'LINK_MINIMO_F_KO': {
+            message: 'El enlace debe tener al menos 4 caracteres',
+            field: 'link'
+        },
+        'LINK_MAXIMO_F_KO': {
+            message: 'El enlace debe tener como máximo 254 caracteres',
+            field: 'link'
+        },
+        'LINK_INVALIDO_F_KO': {
+            message: 'El enlace tiene un formato inválido',
+            field: 'link'
+        },
+        'IMAGEN_FORMATO_F_KO': {
+            message: 'Solo se admiten imágenes en formato: jpeg, jpg, png, gif, svg, webp, avif, ico',
+            field: 'image'
+        },
+        'IMAGEN_TAMAÑO_F_KO': {
+            message: 'La imagen no debe superar los 10MB',
+            field: 'image'
+        },
+        'MIEMBRO_NO_ENCONTRADO_A_KO': {
+            message: 'Miembro no encontrado',
+            field: 'all'
+        },
     },
     en: {
         'SERVER_ERROR': 'Server error',
@@ -327,7 +393,73 @@ export const ERROR_MESSAGES = {
         'MENSAJE_CARACTERES_F_KO': {
             message: 'Message has invalid characters',
             field: 'message'
-        }
+        },
+
+        // MEMBER
+        'ERROR_CREATING_MEMBER': {
+            message: 'Error creating member',
+            field: 'all'
+        },
+        'ERROR_UPDATING_MEMBER': {
+            message: 'Error updating member',
+            field: 'all'
+        },
+        'ERROR_DELETING_MEMBER': {
+            message: 'Error deleting member',
+            field: 'all'
+        },
+        'NOMBRE_MIEMBRO_MINIMO_F_KO': {
+            message: 'Member name must have at least 4 characters',
+            field: 'name'
+        },
+        'NOMBRE_MIEMBRO_MAXIMO_F_KO': {
+            message: 'Member name must have at most 254 characters',
+            field: 'name'
+        },
+        'NOMBRE_MIEMBRO_CARACTERES_F_KO': {
+            message: 'Member name has invalid characters',
+            field: 'name'
+        },
+        'DESCRIPCION_MINIMO_F_KO': {
+            message: 'Description must have at least 10 characters',
+            field: 'description'
+        },
+        'DESCRIPCION_MAXIMO_F_KO': {
+            message: 'Description must have at most 1000 characters',
+            field: 'description'
+        },
+        'DESCRIPCION_CARACTERES_F_KO': {
+            message: 'Description has invalid characters',
+            field: 'description'
+        },
+        'EMAIL_MIEMBRO_INVALIDO_F_KO': {
+            message: 'Enter a valid email',
+            field: 'email'
+        },
+        'LINK_MINIMO_F_KO': {
+            message: 'Link must have at least 4 characters',
+            field: 'link'
+        },
+        'LINK_MAXIMO_F_KO': {
+            message: 'Link must have at most 254 characters',
+            field: 'link'
+        },
+        'LINK_INVALIDO_F_KO': {
+            message: 'Link has an invalid format',
+            field: 'link'
+        },
+        'IMAGEN_FORMATO_F_KO': {
+            message: 'Only images in format: jpeg, jpg, png, gif, svg, webp, avif, ico are allowed',
+            field: 'image'
+        },
+        'IMAGEN_TAMAÑO_F_KO': {
+            message: 'Image must not exceed 10MB',
+            field: 'image'
+        },
+        'MIEMBRO_NO_ENCONTRADO_A_KO': {
+            message: 'Member not found',
+            field: 'all'
+        },
     },
     gl: {
         'SERVER_ERROR': 'Erro do servidor',
@@ -492,6 +624,72 @@ export const ERROR_MESSAGES = {
         'MENSAJE_CARACTERES_F_KO': {
             message: 'A mensaxe ten caracteres inválidos',
             field: 'message'
-        }
+        },
+
+        // MEMBER
+        'ERROR_CREATING_MEMBER': {
+            message: 'Erro ao crear o membro',
+            field: 'all'
+        },
+        'ERROR_UPDATING_MEMBER': {
+            message: 'Erro ao actualizar o membro',
+            field: 'all'
+        },
+        'ERROR_DELETING_MEMBER': {
+            message: 'Erro ao eliminar o membro',
+            field: 'all'
+        },
+        'NOMBRE_MIEMBRO_MINIMO_F_KO': {
+            message: 'O nome do membro debe ter polo menos 4 caracteres',
+            field: 'name'
+        },
+        'NOMBRE_MIEMBRO_MAXIMO_F_KO': {
+            message: 'O nome do membro debe ter como máximo 254 caracteres',
+            field: 'name'
+        },
+        'NOMBRE_MIEMBRO_CARACTERES_F_KO': {
+            message: 'O nome do membro ten caracteres inválidos',
+            field: 'name'
+        },
+        'DESCRIPCION_MINIMO_F_KO': {
+            message: 'A descrición debe ter polo menos 10 caracteres',
+            field: 'description'
+        },
+        'DESCRIPCION_MAXIMO_F_KO': {
+            message: 'A descrición debe ter como máximo 1000 caracteres',
+            field: 'description'
+        },
+        'DESCRIPCION_CARACTERES_F_KO': {
+            message: 'A descrición ten caracteres inválidos',
+            field: 'description'
+        },
+        'EMAIL_MIEMBRO_INVALIDO_F_KO': {
+            message: 'Introduza un correo válido',
+            field: 'email'
+        },
+        'LINK_MINIMO_F_KO': {
+            message: 'O enlace debe ter polo menos 4 caracteres',
+            field: 'link'
+        },
+        'LINK_MAXIMO_F_KO': {
+            message: 'O enlace debe ter como máximo 254 caracteres',
+            field: 'link'
+        },
+        'LINK_INVALIDO_F_KO': {
+            message: 'O enlace ten un formato inválido',
+            field: 'link'
+        },
+        'IMAGEN_FORMATO_F_KO': {
+            message: 'Só se admiten imaxes en formato: jpeg, jpg, png, gif, svg, webp, avif, ico',
+            field: 'image'
+        },
+        'IMAGEN_TAMAÑO_F_KO': {
+            message: 'A imaxe non debe superar os 10MB',
+            field: 'image'
+        },
+        'MIEMBRO_NO_ENCONTRADO_A_KO': {
+            message: 'Membro non atopado',
+            field: 'all'
+        },
     },
 };
