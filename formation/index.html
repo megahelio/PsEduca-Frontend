@@ -10,13 +10,13 @@
 <body>
     <header>
         <div class="full-header">
-            <a class="logo-container" href="#">
+            <a class="logo-container" href="../index.html">
                 <img height="auto" src="../images/Logotipo_PsEduca_bw.png" class="logo-uvigo inverted">
             </a>
             <section class="top-header">
                 <div class="top-header-left">
                     <div class="log-in">
-                        <a href="javascript:void(0)" class="log-in-link" id="log-in-link">
+                        <a href="../login/index.html" class="log-in-link" id="log-in-link">
                             <img src="../images/profile_icon.svg" class="inverted"/>
                             <span data-i18n="header.logIn" id="log-in-span">Iniciar sesión</span>
                         </a>
@@ -47,7 +47,7 @@
                         </ul>
                     </li>
                     <li><a href="#" data-i18n="header.navbar.divulgation">Divulgación</a></li>
-                    <li><a href="../formation/index.html" data-i18n="header.navbar.formation">Formación</a></li>
+                    <li><a href="javascript:void(0);" data-i18n="header.navbar.formation">Formación</a></li>
                     <li><a href="#" data-i18n="header.navbar.catalog">Catálogo</a></li>
                     <li><a href="../contact/index.html" data-i18n="contact">Contacto</a></li>
                 </ul>
@@ -60,22 +60,102 @@
 
     <main>
         <!-- el contenido de la página va aquí -->
-        <section class="login-container">
-            <h1 data-i18n="login.title" class="title-login">Iniciar sesión</h1>
-            <form class="login-form" id="login-form">
-                <div class="input-field-container">
-                    <label for="username" data-i18n="login.username">Nombre de usuario</label>
-                    <input type="username" id="username" name="username" required autocomplete="username">
-                    <p class="error-message" id="error-message-username"></p>
-                </div>
-                <div class="input-field-container">
-                    <label for="password" data-i18n="login.password">Contraseña</label>
-                    <input type="password" id="password" name="password" required autocomplete="current-password">
-                    <p class="error-message" id="error-message-password"></p>
-                </div>
-                <p class="error-message" id="error-message-all"></p>
-                <button type="submit" data-i18n="login.submit" class="login-submit-button">Iniciar sesión</button>
-            </form>
+        <p class="error-message" id="error-message">Error</p>
+        <section class="actual-formation-container">
+            <h2 data-i18n="formation.titleActual">Formación actual</h2>
+            <ul class="formations-list">
+               <li class="formation-list-item">
+                    <h3 data-i18n="formation.masters">Másteres</h3>
+                    <ul id="actual-master-list" class="individual-formation-list">
+                        <!--  -->
+                    </ul>
+                    <div class="button-slider-container">
+                        <button class="button-slider" data-date="actual" data-type="master" data-direction="left">
+                            <img src="../images/arrow_right_icon.svg" width="15px" class="rotate-180-deg" />
+                        </button>
+                        <button class="button-slider" data-date="actual" data-type="master" data-direction="right">
+                            <img src="../images/arrow_right_icon.svg" width="15px" class=""/>
+                        </button>
+                    </div>
+               </li> 
+               <li class="formation-list-item">
+                    <h3 data-i18n="formation.doctorates">Doctorados</h3>
+                    <ul id="actual-doctorado-list" class="individual-formation-list">
+                        <!--  -->
+                    </ul>
+                    <div class="button-slider-container">
+                        <button class="button-slider" data-date="actual" data-type="doctorado" data-direction="left">
+                            <img src="../images/arrow_right_icon.svg" width="15px" class="rotate-180-deg" />
+                        </button>
+                        <button class="button-slider" data-date="actual" data-type="doctorado" data-direction="right">
+                            <img src="../images/arrow_right_icon.svg" width="15px" class=""/>
+                        </button>
+                    </div>
+               </li>
+               <li class="formation-list-item">
+                    <h3 data-i18n="formation.courses">Cursos</h3>
+                    <ul id="actual-curso-list" class="individual-formation-list">
+                        <!--  -->
+                    </ul>
+                    <div class="button-slider-container">
+                        <button class="button-slider" data-date="actual" data-type="curso" data-direction="left">
+                            <img src="../images/arrow_right_icon.svg" width="15px" class="rotate-180-deg" />
+                        </button>
+                        <button class="button-slider" data-date="actual" data-type="curso" data-direction="right">
+                            <img src="../images/arrow_right_icon.svg" width="15px" class=""/>
+                        </button>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section class="past-formation-container">
+            <h2 data-i18n="formation.titlePast">Formación finalizada</h2>
+            <ul class="formations-list">
+               <li class="formation-list-item">
+                    <h3 data-i18n="formation.masters">Másteres</h3>
+                    <ul id="past-master-list" class="individual-formation-list">
+                        <!--  -->
+                    </ul>
+                    <div class="button-slider-container">
+                        <button class="button-slider" data-date="past" data-type="master" data-direction="left">
+                            <img src="../images/arrow_right_icon.svg" width="15px" class="rotate-180-deg" />
+                        </button>
+                        <button class="button-slider" data-date="past" data-type="master" data-direction="right">
+                            <img src="../images/arrow_right_icon.svg" width="15px" class=""/>
+                        </button>
+                    </div>
+                </li>
+                <li class="formation-list-item">
+                    <h3 data-i18n="formation.doctorates">Doctorados</h3>
+                    <ul id="past-doctorado-list" class="individual-formation-list">
+                        <!--  -->
+                    </ul>
+                    <div class="button-slider-container">
+                        <button class="button-slider" data-date="past" data-type="doctorado" data-direction="left">
+                            <img src="../images/arrow_right_icon.svg" width="15px" class="rotate-180-deg" />
+                        </button>
+                        <button class="button-slider" data-date="past" data-type="doctorado" data-direction="right">
+                            <img src="../images/arrow_right_icon.svg" width="15px" class=""/>
+                        </button>
+                    </div>
+                </li>
+                <li class="formation-list-item">
+                    <h3 data-i18n="formation.courses">Cursos</h3>
+                    <ul id="past-curso-list" class="individual-formation-list">
+                        <!--  -->
+                    </ul>
+                    <div class="button-slider-container">
+                        <button class="button-slider" data-date="past" data-type="curso" data-direction="left">
+                            <img src="../images/arrow_right_icon.svg" width="15px" class="rotate-180-deg" />
+                        </button>
+                        <button class="button-slider" data-date="past" data-type="curso" data-direction="right">
+                            <img src="../images/arrow_right_icon.svg" width="15px" class=""/>
+                        </button>
+                    </div>
+                </li>
+            </ul>
+
         </section>
     </main>
 

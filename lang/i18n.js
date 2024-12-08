@@ -252,6 +252,8 @@ const locales = {
       delete: "Delete",
       titleDetail: "Formation detail",
       createFormation: "Create formation",
+      startYear: "Start year",
+      endYear: "End year (optional)",
     }
   },
 
@@ -378,6 +380,8 @@ const locales = {
       delete: "Eliminar",
       titleDetail: "Información da formación",
       createFormation: "Crear formación",
+      startYear: "Ano de inicio",
+      endYear: "Ano de fin (opcional)",
     }
   },
 };

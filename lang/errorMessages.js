@@ -190,7 +190,7 @@ export const ERROR_MESSAGES = {
             field: 'name'
         },
         'DESCRIPCION_MINIMO_F_KO': {
-            message: 'La descripción debe tener al menos 10 caracteres',
+            message: 'La descripción debe tener al menos 4 caracteres',
             field: 'description'
         },
         'DESCRIPCION_MAXIMO_F_KO': {
@@ -227,6 +227,68 @@ export const ERROR_MESSAGES = {
         },
         'MIEMBRO_NO_ENCONTRADO_A_KO': {
             message: 'Miembro no encontrado',
+            field: 'all'
+        },
+
+        // FORMATION
+        'ERROR_CREATING_FORMATION': {
+            message: 'Error al crear la formación',
+            field: 'all'
+        },
+        'ERROR_UPDATING_FORMATION': {
+            message: 'Error al actualizar la formación',
+            field: 'all'
+        },
+        'ERROR_DELETING_FORMATION': {
+            message: 'Error al eliminar la formación',
+            field: 'all'
+        },
+        'TITULO_FORMACION_MINIMO_F_KO': {
+            message: 'El título de la formación debe tener al menos 4 caracteres',
+            field: 'title'
+        },
+        'TITULO_FORMACION_MAXIMO_F_KO': {
+            message: 'El título de la formación debe tener como máximo 254 caracteres',
+            field: 'title'
+        },
+        'TITULO_FORMACION_CARACTERES_F_KO': {
+            message: 'El título de la formación tiene caracteres inválidos',
+            field: 'title'
+        },
+        'ANHO_INICIO_INVALIDO_F_KO': {
+            message: 'El año debe ser un número positivo',
+            field: 'date'
+        },
+        'ANHO_INICIO_MINIMO_F_KO': {
+            message: 'El año debe ser igual o mayor que 1900',
+            field: 'date'
+        },
+        'ANHO_INICIO_MAXIMO_F_KO': {
+            message: 'El año debe ser igual o menor que 3000',
+            field: 'date'
+        },
+        'ANHO_FIN_INVALIDO_F_KO': {
+            message: 'El año debe ser un número positivo',
+            field: 'date'
+        },
+        'ANHO_FIN_MINIMO_F_KO': {
+            message: 'El año debe ser igual o mayor que 1900',
+            field: 'date'
+        },
+        'ANHO_FIN_MAXIMO_F_KO': {
+            message: 'El año debe ser igual o menor que 3000',
+            field: 'date'
+        },
+        'ANHO_FIN_MENOR_INICIO_F_KO': {
+            message: 'El año de fin no puede ser menor que el de inicio',
+            field: 'date'
+        },
+        'TIPO_F_KO': {
+            message: 'Tipo de formación inválido',
+            field: 'type'
+        },
+        'ITEM_FORMACION_NO_ENCONTRADO_A_KO': {
+            message: 'Elemento de formación no encontrado',
             field: 'all'
         },
     },
@@ -460,6 +522,68 @@ export const ERROR_MESSAGES = {
             message: 'Member not found',
             field: 'all'
         },
+
+        // FORMATION
+        'ERROR_CREATING_FORMATION': {
+            message: 'Error creating formation',
+            field: 'all'
+        },
+        'ERROR_UPDATING_FORMATION': {
+            message: 'Error updating formation',
+            field: 'all'
+        },
+        'ERROR_DELETING_FORMATION': {
+            message: 'Error deleting formation',
+            field: 'all'
+        },
+        'TITULO_FORMACION_MINIMO_F_KO': {
+            message: 'Formation title must have at least 4 characters',
+            field: 'title'
+        },
+        'TITULO_FORMACION_MAXIMO_F_KO': {
+            message: 'Formation title must have at most 254 characters',
+            field: 'title'
+        },
+        'TITULO_FORMACION_CARACTERES_F_KO': {
+            message: 'Formation title has invalid characters',
+            field: 'title'
+        },
+        'ANHO_INICIO_INVALIDO_F_KO': {
+            message: 'Year must be a positive number',
+            field: 'date'
+        },
+        'ANHO_INICIO_MINIMO_F_KO': {
+            message: 'Year must be equal or greater than 1900',
+            field: 'date'
+        },
+        'ANHO_INICIO_MAXIMO_F_KO': {
+            message: 'Year must be equal or less than 3000',
+            field: 'date'
+        },
+        'ANHO_FIN_INVALIDO_F_KO': {
+            message: 'Year must be a positive number',
+            field: 'date'
+        },
+        'ANHO_FIN_MINIMO_F_KO': {
+            message: 'Year must be equal or greater than 1900',
+            field: 'date'
+        },
+        'ANHO_FIN_MAXIMO_F_KO': {
+            message: 'Year must be equal or less than 3000',
+            field: 'date'
+        },
+        'ANHO_FIN_MENOR_INICIO_F_KO': {
+            message: 'End year cannot be less than start year',
+            field: 'date'
+        },
+        'TIPO_F_KO': {
+            message: 'Invalid formation type',
+            field: 'type'
+        },
+        'ITEM_FORMACION_NO_ENCONTRADO_A_KO': {
+            message: 'Formation item not found',
+            field: 'all'
+        },
     },
     gl: {
         'SERVER_ERROR': 'Erro do servidor',
@@ -689,6 +813,68 @@ export const ERROR_MESSAGES = {
         },
         'MIEMBRO_NO_ENCONTRADO_A_KO': {
             message: 'Membro non atopado',
+            field: 'all'
+        },
+
+        // FORMATION
+        'ERROR_CREATING_FORMATION': {
+            message: 'Erro ao crear a formación',
+            field: 'all'
+        },
+        'ERROR_UPDATING_FORMATION': {
+            message: 'Erro ao actualizar a formación',
+            field: 'all'
+        },
+        'ERROR_DELETING_FORMATION': {
+            message: 'Erro ao eliminar a formación',
+            field: 'all'
+        },
+        'TITULO_FORMACION_MINIMO_F_KO': {
+            message: 'O título da formación debe ter polo menos 4 caracteres',
+            field: 'title'
+        },
+        'TITULO_FORMACION_MAXIMO_F_KO': {
+            message: 'O título da formación debe ter como máximo 254 caracteres',
+            field: 'title'
+        },
+        'TITULO_FORMACION_CARACTERES_F_KO': {
+            message: 'O título da formación ten caracteres inválidos',
+            field: 'title'
+        },
+        'ANHO_INICIO_INVALIDO_F_KO': {
+            message: 'O ano debe ser un número positivo',
+            field: 'date'
+        },
+        'ANHO_INICIO_MINIMO_F_KO': {
+            message: 'O ano debe ser igual ou maior que 1900',
+            field: 'date'
+        },
+        'ANHO_INICIO_MAXIMO_F_KO': {
+            message: 'O ano debe ser igual ou menor que 3000',
+            field: 'date'
+        },
+        'ANHO_FIN_INVALIDO_F_KO': {
+            message: 'O ano debe ser un número positivo',
+            field: 'date'
+        },
+        'ANHO_FIN_MINIMO_F_KO': {
+            message: 'O ano debe ser igual ou maior que 1900',
+            field: 'date'
+        },
+        'ANHO_FIN_MAXIMO_F_KO': {
+            message: 'O ano debe ser igual ou menor que 3000',
+            field: 'date'
+        },
+        'ANHO_FIN_MENOR_INICIO_F_KO': {
+            message: 'O ano de fin non pode ser menor que o de inicio',
+            field: 'date'
+        },
+        'TIPO_F_KO': {
+            message: 'Tipo de formación inválido',
+            field: 'type'
+        },
+        'ITEM_FORMACION_NO_ENCONTRADO_A_KO': {
+            message: 'Elemento de formación non atopado',
             field: 'all'
         },
     },
