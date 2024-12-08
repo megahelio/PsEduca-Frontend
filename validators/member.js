@@ -23,7 +23,7 @@ export function validateMember({id, name, email, link, description, image}, isUp
             ERRORS[error.field] = error.message;
         }
     }
-    console.log(email)
+
     // EMAIL
     if(email.length > 0){
         if(email.length < 4){
@@ -63,10 +63,6 @@ export function validateMember({id, name, email, link, description, image}, isUp
         }
     }
 
-    // IMAGE
-    // It's verified in backend
-
-    console.log(ERRORS)
     return ERRORS;
 }
 
