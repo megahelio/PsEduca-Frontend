@@ -23,7 +23,7 @@ export function validateFormation({id, title, type, link, description, image, st
     }
 
     // DESCRIPTION
-    if(description.legth < 4){
+    if(description.length < 4){
         const error = ERROR_MESSAGES[pageLanguage].DESCRIPCION_MINIMO_F_KO;
         ERRORS[error.field] = error.message;
     } else if(description.length > 1000){
@@ -42,7 +42,7 @@ export function validateFormation({id, title, type, link, description, image, st
     }
 
     // START YEAR
-    if(!startYear.match(/^[0-9]{4}$/)){
+    if(parseInt(endYear) === NaN || !startYear.match(/^[0-9]{4}$/)){
         const error = ERROR_MESSAGES[pageLanguage].ANHO_INICIO_INVALIDO_F_KO;
         ERRORS[error.field] = error.message;
     } else if(parseInt(startYear) < 1900){
@@ -55,7 +55,7 @@ export function validateFormation({id, title, type, link, description, image, st
 
     // END YEAR
     if(endYear){
-        if(!endYear.match(/^[0-9]{4}$/)){
+        if(parseInt(endYear) === NaN || !endYear.match(/^[0-9]{4}$/)){
             const error = ERROR_MESSAGES[pageLanguage].ANHO_FIN_INVALIDO_F_KO;
             ERRORS[error.field] = error.message;
         } else if(parseInt(endYear) < 1900){
