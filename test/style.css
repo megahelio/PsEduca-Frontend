@@ -1,10 +1,16 @@
  table {
-     width: 100%;
+     max-width: 90vw;
+     margin: 5px;
+     width: 90%;
      border-collapse: collapse;
  }
 
  th,
  td {
+     max-width: 50vw;
+     white-space: nowrap;
+     overflow: hidden;
+     text-overflow: ellipsis;
      border: 1px solid black;
      padding: 8px;
      text-align: left;
@@ -12,4 +18,40 @@
 
  th {
      background-color: #f2f2f2;
+ }
+
+ body {
+     margin: 0;
+     font-family: Arial, sans-serif;
+ }
+
+ .center-text {
+     text-align: center;
+     vertical-align: middle;
+ }
+
+
+ .navbar {
+     display: flex;
+     justify-content: flex-start;
+     background-color: #333;
+     padding: 0.5rem 1rem;
+     position: sticky;
+     top: 0;
+     z-index: 1000;
+ }
+
+ .navbar a {
+     color: white;
+     text-decoration: none;
+     padding: 0.5rem 1rem;
+     transition: background-color 0.3s;
+ }
+
+ .navbar a:hover {
+     background-color: #575757;
+ }
+
+ .navbar a.active {
+     background-color: #007BFF;
  }
