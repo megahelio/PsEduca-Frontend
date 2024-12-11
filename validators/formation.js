@@ -23,7 +23,7 @@ export function validateFormation({id, title, type, link, description, image, st
     }
 
     // DESCRIPTION
-    if(description.legth < 4){
+    if(description.length < 4){
         const error = ERROR_MESSAGES[pageLanguage].DESCRIPCION_MINIMO_F_KO;
         ERRORS[error.field] = error.message;
     } else if(description.length > 1000){
