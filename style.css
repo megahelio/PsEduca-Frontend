@@ -472,6 +472,12 @@ header{
         margin-bottom: 0;
     }
 
+    & > a{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
+    }
+
     & > p{
         margin-top: 5px;
         font-size: 15px;
