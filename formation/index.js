@@ -1,5 +1,7 @@
+import config from "../config.js";
 import { getPageLanguage, setPageLanguage } from "../lang/i18n.js";
 import { getMappedFormations } from "../queries/formations.js";
+import config from "../config.js";
 
 const $ = (elem) => document.querySelector(elem);
 const $$ = (elem) => document.querySelectorAll(elem);
@@ -8,6 +10,7 @@ const $listSections = $('.list-sections');
 const $logInLink = $('#log-in-link');
 
 const ROLS = ['ADMIN_GLOBAL','GESTOR_CATALOGO','USUARIO_PYP'];
+const SERVER_URL = config.SERVER_URL;
 if(sessionStorage.getItem('token') && sessionStorage.getItem('ROL')){
     const ROL = sessionStorage.getItem('ROL');
     if(!ROLS.includes(ROL)){
@@ -168,7 +171,7 @@ function addFormationsToDOM(date, type, formationList){
         <li>
             <a href="${formation.link}" target="_blank">
                 <div class="image-formation-item-container">
-                    <img src="${formation.image}" alt="${formation.title}">
+                    <img src="${SERVER_URL}${formation.image}" alt="${formation.title}">
                 </div>
                 <div class="info-formation-item-container">
                     <h4>${formation.title}</h4>
@@ -228,7 +231,7 @@ loadFormations().then(() => {
                     <li>
                         <a href="${formation.link}" target="_blank">
                             <div class="image-formation-item-container">
-                                <img src="${formation.image}" alt="${formation.title}">
+                                <img src="${SERVER_URL}${formation.image}" alt="${formation.title}">
                             </div>
                             <div class="info-formation-item-container">
                                 <h4>${formation.title}</h4>
@@ -253,7 +256,7 @@ loadFormations().then(() => {
                     <li>
                         <a href="${formation.link}" target="_blank">
                             <div class="image-formation-item-container">
-                                <img src="${formation.image}" alt="${formation.title}">
+                                <img src="${SERVER_URL}${formation.image}" alt="${formation.title}">
                             </div>
                             <div class="info-formation-item-container">
                                 <h4>${formation.title}</h4>
