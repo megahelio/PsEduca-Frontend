@@ -1,5 +1,6 @@
 import { getPageLanguage, setPageLanguage } from "../../lang/i18n.js";
 import { getMembers } from "../../queries/members.js";
+import config from "../../config.js";
 
 if(!sessionStorage.getItem('token') || sessionStorage.getItem('ROL') !== 'ADMIN_GLOBAL'){
     location.href = '../../login/index.html';
@@ -12,6 +13,7 @@ const $listSections = $('.list-sections');
 const $logInLink = $('#log-in-link');
 
 const ROLS = ['ADMIN_GLOBAL','GESTOR_CATALOGO','USUARIO_PYP'];
+const SERVER_URL = config.SERVER_URL;
 if(sessionStorage.getItem('token') && sessionStorage.getItem('ROL')){
     const ROL = sessionStorage.getItem('ROL');
     if(!ROLS.includes(ROL)){
@@ -65,8 +67,8 @@ async function loadMembers(){
                         <a href="${member.link || ''}" target="_blank">Aportaciones</a>
                     </td>
                     <td style="text-align:center;">
-                        <a href="${member.image}" target="_blank">
-                            <img src="${member.image}" width="50px"/>
+                        <a href="${SERVER_URL}${member.image}" target="_blank">
+                            <img src="${SERVER_URL}${member.image}" width="50px"/>
                         </a>
                     </td>
                     <td class="actions-cell-table">

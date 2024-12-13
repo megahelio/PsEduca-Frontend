@@ -1,3 +1,4 @@
+import config from "./config.js";
 import { getPageLanguage, setPageLanguage } from "./lang/i18n.js";
 import { getMemberById, getMembers } from "./queries/members.js";
 
@@ -8,6 +9,7 @@ const $listSections = $('.list-sections');
 const $logInLink = $('#log-in-link');
 
 const ROLS = ['ADMIN_GLOBAL','GESTOR_CATALOGO','USUARIO_PYP'];
+const SERVER_URL = config.SERVER_URL;
 if(sessionStorage.getItem('token') && sessionStorage.getItem('ROL')){
     const ROL = sessionStorage.getItem('ROL');
     if(!ROLS.includes(ROL)){
@@ -49,6 +51,7 @@ let descriptions = {};
 async function loadMembers(){
     const members = await getMembers();
     const $membersList = $('#group-members-list');
+    
 
     if(!members.error){
         members.forEach(member => {
@@ -57,7 +60,7 @@ async function loadMembers(){
                 <li class="group-member-item">
                     <div class="group-member-item-container">
                         <div class="group-member-item-image">
-                            <img src="${member.image}" alt="Imagen de ${member.name}" class="group-member-image">
+                            <img src="${SERVER_URL}${member.image}" alt="Imagen de ${member.name}" class="group-member-image">
                         </div>
                         <div class="group-member-item-description">
                             <h4>${member.name}</h4>

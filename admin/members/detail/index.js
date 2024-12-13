@@ -1,6 +1,7 @@
 import { getPageLanguage, setPageLanguage } from "../../../lang/i18n.js";
 import { createMember, deleteMember, getMemberById, updateMember } from "../../../queries/members.js";
 import { validateMember } from "../../../validators/member.js";
+import config from "../../../config.js";
 
 if(!sessionStorage.getItem('token') || sessionStorage.getItem('ROL') !== 'ADMIN_GLOBAL'){
     location.href = '../../../login/index.html';
@@ -13,6 +14,7 @@ const $listSections = $('.list-sections');
 const $logInLink = $('#log-in-link');
 
 const ROLS = ['ADMIN_GLOBAL','GESTOR_CATALOGO','USUARIO_PYP'];
+const SERVER_URL = config.SERVER_URL;
 if(sessionStorage.getItem('token') && sessionStorage.getItem('ROL')){
     const ROL = sessionStorage.getItem('ROL');
     if(!ROLS.includes(ROL)){
@@ -76,7 +78,7 @@ async function loadMember(){
         $('#name').value = member.name;
         $('#email').value = member.email;
         $('#link').value = member.link;
-        $('#image-preview').src = member.image;
+        $('#image-preview').src = SERVER_URL+member.image;
         $('#description').value = member.description;
     }else{
         $('#image-preview').style.display = 'none';
