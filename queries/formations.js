@@ -14,8 +14,9 @@ export async function getMappedFormations() {
             error: ERROR_MESSAGES[pageLanguage].SERVER_ERROR || 'Error'
         };
     }
+    const CURRENT_YEAR = new Date().getFullYear();
 
-    const mappedFormations = Object.groupBy(formations, (formation) => formation.endYear === null ? 'actual' : 'past');
+    const mappedFormations = Object.groupBy(formations, (formation) => (formation.endYear === null || parseInt(formation.endYear) >= CURRENT_YEAR) ? 'actual' : 'past');
     mappedFormations.actual = Object.groupBy(mappedFormations.actual || [], (formation) => formation.type);
     mappedFormations.past = Object.groupBy(mappedFormations.past || [], (formation) => formation.type);
     return mappedFormations;
