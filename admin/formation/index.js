@@ -1,5 +1,6 @@
 import { getPageLanguage, setPageLanguage } from "../../lang/i18n.js";
 import { getFormations } from "../../queries/formations.js";
+import config from "../../config.js";
 
 if(!sessionStorage.getItem('token') || sessionStorage.getItem('ROL') !== 'ADMIN_GLOBAL'){
     location.href = '../../login/index.html';
@@ -10,7 +11,7 @@ const $$ = (elem) => document.querySelectorAll(elem);
 
 const $listSections = $('.list-sections');
 const $logInLink = $('#log-in-link');
-
+const SERVER_URL = config.SERVER_URL;
 const ROLS = ['ADMIN_GLOBAL','GESTOR_CATALOGO','USUARIO_PYP'];
 if(sessionStorage.getItem('token') && sessionStorage.getItem('ROL')){
     const ROL = sessionStorage.getItem('ROL');
@@ -66,8 +67,8 @@ async function loadFormations(){
                         <a href="${formation.link}" target="_blank">Aportaciones</a>
                     </td>
                     <td style="text-align:center;">
-                        <a href="${formation.image}" target="_blank">
-                            <img src="${formation.image}" width="50px"/>
+                        <a href="${SERVER_URL}${formation.image}" target="_blank">
+                            <img src="${SERVER_URL}${formation.image}" width="50px"/>
                         </a>
                     </td>
                     <td class="actions-cell-table">

@@ -1,6 +1,7 @@
 import { getPageLanguage, setPageLanguage } from "../../../lang/i18n.js";
 import { createFormation, deleteFormation, getFormationById, updateFormation } from "../../../queries/formations.js";
 import { validateFormation } from "../../../validators/formation.js";
+import config from "../../../config.js";
 
 if(!sessionStorage.getItem('token') || sessionStorage.getItem('ROL') !== 'ADMIN_GLOBAL'){
     location.href = '../../../login/index.html';
@@ -13,6 +14,7 @@ const $listSections = $('.list-sections');
 const $logInLink = $('#log-in-link');
 
 const ROLS = ['ADMIN_GLOBAL','GESTOR_CATALOGO','USUARIO_PYP'];
+const SERVER_URL = config.SERVER_URL;
 if(sessionStorage.getItem('token') && sessionStorage.getItem('ROL')){
     const ROL = sessionStorage.getItem('ROL');
     if(!ROLS.includes(ROL)){
@@ -76,7 +78,7 @@ async function loadFormation(){
         $('#title').value = formation.title;
         $('#type').value = formation.type;
         $('#link').value = formation.link;
-        $('#image-preview').src = formation.image;
+        $('#image-preview').src = SERVER_URL+formation.image;
         $('#description').value = formation.description;
         $('#startYear').value = formation.startYear;
         $('#endYear').value = formation.endYear;
