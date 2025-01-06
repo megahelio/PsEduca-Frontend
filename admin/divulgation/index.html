@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <title>Grupo de investigación PsEduca</title>
+    <script src="./index.js" type="module"></script>
+</head>
+<body>
+    <header>
+        <div class="full-header">
+            <a class="logo-container" href="../../index.html">
+                <img height="auto" src="../../images/Logotipo_PsEduca_bw.png" class="logo-uvigo inverted">
+            </a>
+            <section class="top-header">
+                <div class="top-header-left">
+                    <div class="log-in">
+                        <a href="#" class="log-in-link" id="log-in-link">
+                            <img src="../../images/profile_icon.svg" class="inverted"/>
+                            <span data-i18n="header.logIn" id="log-in-span">Cerrar sesión</span>
+                        </a>
+                    </div>
+                    <div class="language-selector">
+                        <button class="language-selector-button" data-language="es">ES</button>
+                        <span>/</span>
+                        <button class="language-selector-button" data-language="en">EN</button>
+                        <span>/</span>
+                        <button class="language-selector-button" data-language="gl">GL</button>
+                    </div>
+                </div>
+            </section>
+            <section class="navbar">
+                <ul class="list-sections">
+                    <li><a href="#" data-i18n="header.navbar.testAndPrograms">Pruebas y programas</a></li>
+                    <li class="list-item-with-children" id="list-item-with-children">
+                        <a href="javascript:void(0)" class="list-item-with-image">
+                            <span data-i18n="header.navbar.investigation">Investigación</span>
+                            <img src="../../images/arrow_right_icon.svg" width="15px" class="rotate-90-deg inverted"/>
+                        </a>
+                        <ul class="sublist" id="sublist">
+                            <li><a href="https://portalcientifico.uvigo.gal/grupos/17693/lineas" data-i18n="header.navbar.lines" target="_blank">Líneas de<br>investigación</a></li>
+                            <li><a href="https://portalcientifico.uvigo.gal/grupos/17693/proyectos" data-i18n="header.navbar.projects" target="_blank">Proyectos</a></li>
+                            <li><a href="https://portalcientifico.uvigo.gal/grupos/17693/publicaciones" data-i18n="header.navbar.publications" target="_blank">Publicaciones</a></li>
+                            <li><a href="https://portalcientifico.uvigo.gal/grupos/17693/tesis" data-i18n="header.navbar.thesis" target="_blank">Tesis</a></li>
+                            <li><a href="#" data-i18n="header.navbar.tfgAndTfm">TFG / TFM</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../../divulgation/index.html" data-i18n="header.navbar.divulgation">Divulgación</a></li>
+                    <li><a href="../../formation/index.html" data-i18n="header.navbar.formation">Formación</a></li>
+                    <li><a href="#" data-i18n="header.navbar.catalog">Catálogo</a></li>
+                    <li><a href="../../contact/index.html" data-i18n="contact">Contacto</a></li>
+                </ul>
+                <button class="menu-button" id="button-menu">
+                    <img src="../../images/burguer_icon.svg" class="burguer-icon inverted"/>
+                </button>
+            </section>
+        </div>
+    </header>
+
+    <main>
+        <section class="main-container">
+            <div class="divulgation-management-title-container">
+                <h1 data-i18n="divulgation.title" class="divulgation-management-title">Divulgación</h1>
+            </div>
+            <div class="divulgation-management-table-container">
+                <div class="anchor-create-divulgation-container">
+                    <a class="anchor-create-divulgation" id="anchor-create-divulgation" href="./detail/index.html?id=0">
+                        <img src="../../images/add-icon.svg" width="25px" class="inverted"/>
+                        <span data-i18n="divulgation.createDivulgation">Crear divulgación</span>
+                    </a>
+                </div>
+                <table class="divulgation-management-table" id="divulgation-management-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="divulgation.titleDivulgation">Título</th>
+                            <th data-i18n="divulgation.description">Descripción</th>
+                            <th data-i18n="divulgation.content">Contenido</th>
+                            <th data-i18n="divulgation.link">Link</th>
+                            <th data-i18n="divulgation.image">Imagen</th>
+                            <th data-i18n="divulgation.access">Acceso</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            
+    </main>
+
+    <footer>
+        <section class="group-footer-container">
+            <div class="footer-items">
+                <article class="">
+                    <div class="footer-item">
+                        <img width="210"
+                            src="../../images/logo_grupo.png"
+                            alt="Departamento de Psicoloxía Evolutiva e Comunicación">
+                    </div>
+                </article>
+                <article class="">
+                    <div class="footer-item">
+                        <div class="footer-column">
+                            <p style="margin: 0;">
+                                <a href="https://goo.gl/maps/kaSss5S4GJB2" target="_blank" rel="noopener noreferrer"
+                                    style="display: flex; align-items: center; column-gap: 5px;"
+                                    class="footer-link">
+                                    <img src="../../images/location_icon.svg" width="25px" class="footer-icon"/>
+                                    <span data-i18n="footer.group.faculty">Edificio de Facultades</span>
+                                </a>
+                            </p>
+                            <p class="mb-3" style="margin: 0 0 0 35px;" data-i18n="footer.group.location">
+                                Las Lagunas, s/n<br>
+                                32004 Ourense
+                            </p>
+                            <p style="margin-bottom: 0; display: flex; align-items: center; column-gap: 5px;"> 
+                                <img src="../../images/phone_icon.svg" width="25px" class="footer-icon"/>
+                                <span data-i18n="footer.group.supportArea">Área de apoyo</span>
+                            </p>
+                            <p style="margin: 0 0 0 35px;">+34 988 368 902</p>
+                        </div>
+                    </div>
+                </article>
+                <article class="">
+                    <div class="footer-item">
+                        <p style="display: flex; align-content: center; column-gap: 5px;">
+                            <img src="../../images/arrow_right_icon.svg" width="15px" class="footer-icon"/>
+                            <a href="../../contact/index.html" class="footer-link" data-i18n="contact">Contacto</a>
+                        </p>
+                        <p style="display: flex; align-content: center; column-gap: 5px;">
+                            <img src="../../images/arrow_right_icon.svg" width="15px" class="footer-icon"/>
+                            <a href="https://secretaria.uvigo.gal/uv/web/qsp/" target="_blank"
+                                rel="noopener noreferrer" class="footer-link"
+                                data-i18n="footer.group.box">Caixa de queixas, suxestións e parabéns</a>
+                        </p>
+                    </div>
+                </article>
+            </div>
+            <article class="legal-advise">
+                <ul class="legal-advise-list">
+                    <li class="legal-advise-list-item">
+                        <a href="https://www.uvigo.gal/accesibilidade"
+                            class="nav-link" data-i18n="footer.accesibility">Accesibilidade</a>
+                    </li>
+                    <li class="legal-advise-list-item">
+                        <a href="https://www.uvigo.gal/aviso-legal"
+                            class="nav-link" data-i18n="footer.legalAdvice">Aviso Legal</a>
+                    </li>
+                    <li class="legal-advise-list-item">
+                        <a href="https://www.uvigo.gal/proteccion-datos"
+                            class="nav-link" data-i18n="footer.dataProtection">Protección de datos</a>
+                    </li>
+                </ul>
+            </article>
+        
+        </section>
+        <section class="uvigo-footer-container">
+            <div id="reorder-footer">
+                <div class="preview-uvigo-footer">
+                    <div>
+                        <a href="http://uvigo.gal" target="_blank">
+                            <img src="../../images/logo_uvigo_black.png"
+                            alt="Universidade de Vigo" class="footer-uvigo-logo inverted">
+                        </a>
+                    </div>
+                    <div>
+                        <button id="button-preview-uvigo-footer">
+                            <img src="../../images/arrow_right_icon.svg" width="15px" class="inverted" id="footer-icon-expanded-info"/>
+                            <span id="footer-text-button-preview" data-i18n="footer.uvigo.seeMore">Ver más</span>
+                        </button>
+                    </div>
+                </div>
+        
+                <div class="expanded-footer mt-5" id="footer-expanded-uvigo-info">
+                    <div class="footer-uvigo-row first-footer-uvigo-row">
+                        <article class="">
+                            <p>
+                                <img src="../../images/phone_icon.svg" width="25px" class="inverted"/>
+                                <strong data-i18n="footer.uvigo.information">Información</strong>
+                            </p>
+                            <p>+34 986 812 000</p>
+                            <p>
+                                <a href="mailto:informacion@uvigo.es">informacion@uvigo.es</a>
+                            </p>
+                        </article>
+        
+                        <article class="">
+                            <p>
+                                <img src="../../images/location_icon.svg" width="25px" class="inverted"/>
+                                <a
+                                    href="https://www.uvigo.gal/campus/ourense-campus-auga" target="_blank">
+                                    <strong data-i18n="footer.uvigo.campusOurense">Campus de Ourense</strong>
+                                </a>
+                            </p>
+                            <p>+34 988 387 102</p>
+                            <p>
+                                <img src="../../images/arrow_right_icon.svg" width="15px" class="inverted"/>
+                                <a href="https://www.uvigo.gal/campus/ourense-campus-auga" target="_blank"
+                                    data-i18n="footer.uvigo.campusAgua">
+                                    Campus da Auga
+                                </a>
+                            </p>
+                        </article>
+        
+                        <article class="">
+                            <p>
+                                <img src="../../images/location_icon.svg" width="25px" class="inverted"/>
+                                <a
+                                    href="https://www.uvigo.gal/campus/pontevedra-campus-crea"
+                                    target="_blank">
+                                    <strong data-i18n="footer.uvigo.campusPontevedra">Campus de Pontevedra</strong>
+                                </a>
+                            </p>
+                            <p>+34 986 802 080</p>
+                            <p>
+                                <img src="../../images/arrow_right_icon.svg" width="15px" class="inverted"/>
+                                <a href="https://www.uvigo.gal/campus/pontevedra-campus-crea" target="_blank"
+                                    data-i18n="footer.uvigo.campusCrea">
+                                    Campus CREA
+                                </a>
+                            </p>
+                        </article>
+        
+                        <article>
+                            <p>
+                                <img src="../../images/location_icon.svg" width="25px" class="inverted"/>
+                                <a
+                                    href="https://www.uvigo.gal/campus/vigo-campus-vigo-tecnoloxico"
+                                    target="_blank">
+                                    <strong data-i18n="footer.uvigo.campusVigo">Campus de Vigo</strong>
+                                </a>
+                            </p>
+                            <p>+34 986 812 000</p>
+                            <p>
+                                <img src="../../images/arrow_right_icon.svg" width="15px" class="inverted"/>
+                                <a href="https://www.uvigo.gal/campus/vigo-campus-vigo-tecnoloxico" target="_blank"
+                                    data-i18n="footer.uvigo.vigoTech">
+                                    Vigo Tecnolóxico
+                                </a>
+                            </p>
+                        </article>
+                    </div>
+        
+                    <div class="footer-uvigo-row">
+                        <article>
+                                <p>
+                                    <img src="../../images/arrow_right_icon.svg" width="15px" class="inverted"/>
+                                    <a
+                                        href="https://www.uvigo.gal/contacto" target="_blank">
+                                        <strong data-i18n="contact">Contacto</strong>
+                                    </a>
+                                </p>
+                        </article>
+        
+                        <article>
+                                <p>
+                                    <img src="../../images/arrow_right_icon.svg" width="15px" class="inverted"/>
+                                    <a
+                                        href="https://secretaria.uvigo.gal/uv/web/qsp/" target="_blank">
+                                        <strong data-i18n="footer.group.box">Caja de quejas, sugerencias y felicitaciones</strong>
+                                    </a>
+                                </p>
+                        </article>
+        
+                        <article>
+                                <p>
+                                    <img src="../../images/arrow_right_icon.svg" width="15px" class="inverted"/>
+                                    <a
+                                        href="https://www.uvigo.gal/universidade/informacion-institucional/outras-webs-universidade-vigo"
+                                        target="_blank">
+                                        <strong data-i18n="footer.uvigo.otherWebs">Otras webs institucionales</strong>
+                                    </a>
+                                </p>
+                        </article>
+        
+                        <article>
+                            <p style="margin-left: 20px; display: flex; column-gap: 20px; ">
+                                <a href="https://www.facebook.com/uvigo" target="_blank">
+                                    <img src="../../images/facebook_icon.svg" width="25px" class="inverted"/>
+                                </a>
+    
+                                <a href="https://twitter.com/uvigo" target="_blank">
+                                    <img src="../../images/twitter_icon.svg" width="25px" class="inverted"/>
+                                </a>
+    
+                                <a href="https://www.instagram.com/universidadedevigo/" target="_blank">
+                                    <img src="../../images/instagram_icon.svg" width="25px" class="inverted"/>
+                                </a>
+    
+                                <a href="https://www.youtube.com/@uvigo7787" target="_blank">
+                                    <img src="../../images/youtube_icon.svg" width="25px" class="inverted"/>
+                                </a>
+                            </p>
+                        </article>
+                    </div>
+        
+                    <div class="footer-uvigo-row">
+                        <article>
+                            <p>
+                                <a href="http://campusdomar.gal/"
+                                    target="_blank">
+                                    <strong data-i18n="footer.uvigo.campusMar">Campus del Mar</strong>
+                                </a>
+                            </p>
+                        </article>
+        
+                        <article>
+                            <p>
+                                <img src="../../images/arrow_right_icon.svg" width="15px" class="inverted"/>
+                                <a
+                                    href="https://transparencia.uvigo.es/"
+                                    target="_blank">
+                                    <strong data-i18n="footer.uvigo.transparency">Transparencia</strong>
+                                </a>
+                            </p>
+                        </article>
+        
+                        <article>
+                                <p>
+                                    <img src="../../images/arrow_right_icon.svg" width="15px" class="inverted"/>
+                                    <a
+                                        href="https://www.uvigo.gal/campus/vantaxes/emerxencias"
+                                        target="_blank">
+                                        <strong data-i18n="footer.uvigo.emergency">Emergencias</strong>
+                                    </a>
+                                </p>
+                        </article>
+        
+                        <article>
+                            <p>
+                                <img src="../../images/arrow_right_icon.svg" width="15px" class="inverted"/>
+                                <a
+                                    href="https://www.uvigo.gal/universidade/comunicacion/redes-sociais"
+                                    target="_blank">
+                                    <strong data-i18n="footer.uvigo.socialWall">Muro social</strong>
+                                </a>
+                            </p>
+                        </article>
+                    </div>
+        
+                    <div style="padding-bottom: 20px;">
+                        <article class="legal-advise">
+                            <ul class="legal-advise-list">
+                                <li class="legal-advise-list-item uvigo-footer-item">
+                                    <a href="https://www.uvigo.gal/accesibilidade"
+                                        class="nav-link" data-i18n="footer.accesibility">Accesibilidade</a>
+                                </li>
+                                <li class="legal-advise-list-item uvigo-footer-item">
+                                    <a href="https://www.uvigo.gal/aviso-legal"
+                                        class="nav-link" data-i18n="footer.legalAdvice">Aviso Legal</a>
+                                </li>
+                                <li class="legal-advise-list-item uvigo-footer-item">
+                                    <a href="https://www.uvigo.gal/proteccion-datos"
+                                        class="nav-link" data-i18n="footer.dataProtection">Protección de datos</a>
+                                </li>
+                            </ul>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+       </footer>
+</body>
+</html>

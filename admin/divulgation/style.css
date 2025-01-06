@@ -1,0 +1,603 @@
+@font-face {
+    font-family: 'roboto';
+    src: url('../../fonts/roboto-regular.woff2') format('woff2'),
+         url('../../fonts/roboto-regular.woff') format('woff'),
+         url('../../fonts/roboto-regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root{
+    --primary-color: #073349;
+    --secondary-color: #8f8f8f;
+    --white-color: #ffffff;
+}
+
+body, h1, h2, h3{
+    margin: 0;
+    padding: 0;
+}
+
+*{
+    font-family: 'roboto', Verdana, Arial;
+}
+
+.inverted{
+    filter: invert(1);
+}
+
+.rotate-90-deg{
+    transform: rotate(90deg);
+}
+
+header{
+    height: 100px;
+    color: var(--white-color);
+    width: 100%;
+    padding-top: 20px;
+    background-color: var(--primary-color);
+}
+
+.full-header{
+    width: 80%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    grid-template-rows: 30px 70px;
+    grid-column-gap: 20px;
+    grid-row-gap: 0px;
+}
+
+.logo-container{
+    grid-area: 1 / 1 / 3 / 2;
+    display: grid;
+    place-content: center;
+    height: 80px;
+}
+
+.logo-uvigo{
+    background-size: contain;
+    width: 100%;
+}
+
+.top-header{
+    grid-area: 1 / 2 / 2 / 3;
+    text-underline-offset: 3px;
+}
+
+.top-header-left{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    column-gap: 30px;
+    font-size: 11px;
+}
+
+.log-in{
+    
+    & > a{
+        display: flex;
+        align-items: center;
+        column-gap: 5px;
+        color: white;
+        text-decoration: none;
+        text-transform: uppercase;
+        
+        & > img{
+            width: 20px;
+        }
+
+        & > span{
+            width: fit-content;
+        }
+    }
+
+    & > a:hover{
+        text-decoration: underline;
+    }
+}
+
+.language-selector{
+    white-space: nowrap;
+
+    & > button{
+        background-color: transparent;
+        border: none;
+        color: var(--white-color);
+        cursor: pointer;
+        padding: 0;
+    }
+
+    & > button:hover{
+        text-decoration: underline;
+    }
+
+    & > button[class*='language-selected']{
+        text-decoration: underline;
+    } 
+}
+
+.navbar{
+    grid-area: 2 / 2 / 3 / 3;
+    width: 100%;
+    height: 70px;
+}
+
+.list-sections{
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    column-gap: 5px;
+    margin: 0;
+    height: 100%;
+    z-index: 99;
+}
+
+.list-sections li{
+    font-size: 15px;
+    width: fit-content;
+    text-align: center;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.list-sections>li>a{
+    color: white;
+    text-decoration: none;
+}
+
+.list-sections>li>a:hover{
+    color: #e7e7e7;
+}
+
+.menu-button{
+    position: absolute;
+    top: 60px;
+    right: 10%;
+    display: none;
+    background-color: transparent;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+
+    & > img{
+        width: 100%;
+    }
+}
+
+.menu-button:hover{
+    cursor: pointer;
+}
+
+.list-item-with-image{
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+    
+    & > img{
+        transition: all 0.2s;
+    }
+}
+
+.list-item-with-children{
+    position: relative;
+    display: flex;
+
+    & > ul{
+        display: none;
+        list-style: none;
+        padding: 10px 0;
+        flex-direction: column;
+        row-gap: 15px;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: #e2e2e2;
+        width: 120%;
+        z-index: 99;
+    }
+
+    & > ul > li{
+        width: 100%;
+        padding: 0;
+    }
+
+    & >ul a{
+        width: 100%;
+        text-decoration: none;
+        color: black;
+    }
+
+    & >ul a:hover{
+        color: #073349; 
+        text-decoration: underline;
+    }
+}
+
+.list-item-with-children:hover{
+
+    & > a > img{
+        transform: rotate(-90deg);
+    }
+    
+    & > ul{
+        display: flex;
+    }
+}
+
+.active{
+    display: flex !important;
+}
+
+.group-footer-container{
+    background-color: #e2e2e2;
+    color: var(--white-color);
+    padding: 20px 0 10px 0;
+    color: #041d2a;
+}
+
+.footer-items{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    column-gap: 20px;
+    row-gap: 20px;
+    margin-top: 20px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.footer-item{
+    font-size: 0.9em;
+}
+
+.footer-link{
+    color: #041d2a;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.footer-link:hover{
+    color: #073349;
+    text-decoration: underline;
+}
+
+.legal-advise{
+    margin: 0 auto;
+}
+
+.legal-advise-list{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    column-gap: 10px;
+    margin-bottom: 0;
+}
+
+.legal-advise-list-item{
+    font-size: 12px;
+}
+
+.legal-advise-list-item>a{
+    color: #041d2a;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.legal-advise-list-item>a:hover{
+    color: #073349;
+    text-decoration: underline;
+}
+
+.uvigo-footer-container{
+    background-color: var(--primary-color);
+    color: white;
+    width: 100%;
+    font-size: 0.9em;
+}
+
+.preview-uvigo-footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    width: 80%;
+    margin: 0 auto;
+}
+
+#button-preview-uvigo-footer{
+    border: none;
+    width: 130px;
+    margin: 0;
+    padding: 5px;
+    cursor: pointer;
+    background: transparent;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+    font-size: medium;
+}
+
+#button-preview-uvigo-footer>img{
+    transition: all 0.3s;
+}
+
+#footer-expanded-uvigo-info{
+    display: none;
+    flex-direction: column;
+    row-gap: 10px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.footer-uvigo-row{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 15px;
+    margin-bottom: 30px;
+}
+
+.footer-uvigo-row a{
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.footer-uvigo-row a:hover{
+    color: #e7e7e7;
+    text-decoration: underline;
+}
+
+.footer-uvigo-row > article > p{
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+}
+
+.first-footer-uvigo-row > article >p:first-child{
+    margin: 0;
+}
+
+.first-footer-uvigo-row > article >p:not(:first-child){
+    margin: 10px 0 0 35px;
+}
+
+.uvigo-footer-item>a{
+    color: white !important;
+}
+
+.footer-uvigo-logo{
+    width: 250px;
+}
+
+/* Inicio del CSS de la página */
+.main-container{
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.divulgation-management-title{
+    font-size: 1.5em;
+    margin: 20px 0;
+    text-transform: uppercase;
+    font-style: italic;
+    color: #073349;
+    text-align: center;
+}
+
+.anchor-create-divulgation-container{
+    margin: 5px 0;
+}
+
+.anchor-create-divulgation{
+    width: fit-content;
+    background-color: #073349;
+    color: white;
+    border: none;
+    padding: 7px 9px;
+    cursor: pointer;
+    border-radius: 3px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+}
+
+.anchor-create-divulgation:hover{
+    background-color: #073349da;
+}
+
+.divulgation-management-table-container{
+    width: 100%;
+    overflow-x: auto;
+}
+
+.divulgation-management-table{
+    --border-color: #033c5b57;
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--border-color);
+    border-spacing: 0;
+    table-layout: auto;
+
+    & > thead th,
+    & > tbody td{
+        border: 1px solid var(--border-color);
+        padding: 7px;
+
+    }
+
+    & > thead th{
+        background-color: #0733491d;
+        color: #073349;
+        font-weight: 500;
+    }
+
+    & > tbody tr:nth-of-type(2n + 1){
+        background-color: #f2f2f2a4;
+    }
+
+    & > tbody tr:hover{
+        background-color: #d2d2d25d;
+    }  
+}
+
+.actions-cell-table{
+    height: 100%;
+    text-align: center;
+}
+
+.access-divulgation-link{
+    background-color: #073349;
+    color: white;
+    border: none;
+    padding: 7px 9px;
+    cursor: pointer;
+    border-radius: 3px;
+    text-decoration: none;
+    display: grid;
+    place-content: center;
+    width: 30px;
+    margin: 0 auto;
+}
+
+.error-message{
+    color: red;
+    font-size: 1.2em;
+    margin: 5px 0;
+    text-align: center;
+}
+/* Fin del CSS de la página */
+
+@media screen and (max-width: 1180px){
+    .full-header{
+        grid-template-columns: 200px 1fr;
+        column-gap: 0;
+    }
+    .footer-uvigo-row{
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 25px;
+    }
+
+    /* Inicio del CSS de la página */
+
+
+    /* Fin del CSS de la página */
+}
+
+@media screen and (max-width: 1050px){
+    .full-header{
+        width: 85%;
+        grid-template-columns: 200px 1fr;
+        column-gap: 0;
+    }
+
+    .list-sections{
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: none;
+        flex-direction: column;
+        justify-content: flex-start;
+        row-gap: 20px;
+        width: 200px;
+        height: 100vmax;
+        background-color: var(--secondary-color);
+        padding: 20px 10px;
+        box-sizing: border-box;
+
+        & > li{
+            height: max-content;
+            width: 90%;
+            text-align: left;
+            align-items: flex-start;
+            border: 1px solid rgba(255, 255, 255, 0.714);
+            border-radius: 5px;
+            padding: 10px;
+        }
+    }
+
+    .list-item-with-children{
+        flex-direction: column;
+
+        & > ul{
+            padding-top: 20px;
+            position: initial !important;
+            background-color: transparent;
+            width: 100%;
+            color: white;
+        }
+
+        & > ul > li{
+            text-align: left;
+            padding: 0 20px;
+        }
+
+        & > ul > li > a{
+            color: white;
+            width: 100%;
+        }
+
+        & > ul > li > a:hover{
+            color: white;
+            width: 100%;
+        }
+    }
+
+    .list-item-with-children:hover{
+
+        & > a > img{
+            transform: rotate(90deg);
+        }
+        
+        & > ul{
+            display: none;
+        }
+    }
+
+    .menu-button{
+        display: block;
+    }
+
+    /* Inicio del CSS de la página */
+    .main-container{
+        width: 95%;
+    }
+
+    /* Fin del CSS de la página */
+}
+
+@media screen and (max-width: 600px){
+    .top-header-left{
+        margin-left: -5px;
+        font-size: 0.5em;
+        column-gap: 10px;
+    }
+
+    .language-selector{
+        & > button{
+            font-size: 11px;
+        }
+    }
+
+    .footer-uvigo-row{
+        grid-template-columns: 1fr;
+    }
+
+    .footer-uvigo-logo{
+        width: 150px;
+    }
+
+    /* Inicio del CSS de la página */
+    
+    /* Fin del CSS de la página */
+}
