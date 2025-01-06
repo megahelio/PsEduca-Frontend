@@ -156,7 +156,7 @@ export async function updateFormation({ id, title, description, type, link, imag
         const { ok, code, resource } = await response.json();
 
         if(!ok){
-            return validateUserResponse({ok, code, resource});
+            return validateFormationResponse({ok, code, resource});
         }
 
         return {}
@@ -183,7 +183,7 @@ export async function deleteFormation(id) {
         const { ok, code, resource } = await response.json();
 
         if(!ok){
-            return validateUserResponse({ok, code, resource});
+            return validateFormationResponse({ok, code, resource});
         }
 
         return {}
