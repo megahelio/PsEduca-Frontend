@@ -127,6 +127,19 @@ const locales = {
       createFormation: "Crear formación",
       startYear: "Año de inicio",
       endYear: "Año de fin (opcional)",
+    },
+    divulgation: {
+      title: "Divulgación",
+      createDivulgation: "Crear divulgación",
+      titleDivulgation: "Título",
+      description: "Descripción",
+      content: "Contenido",
+      link: "Link",
+      image: "Imagen",
+      access: "Acceso",
+      save: "Guardar",
+      delete: "Eliminar",
+      titleDetail: "Información de la divulgación",
     }
 
   },
@@ -257,6 +270,19 @@ const locales = {
       createFormation: "Create formation",
       startYear: "Start year",
       endYear: "End year (optional)",
+    },
+    divulgation: {
+      title: "Divulgation",
+      createDivulgation: "Create divulgation",
+      titleDivulgation: "Title",
+      description: "Description",
+      content: "Content",
+      link: "Link",
+      image: "Image",
+      access: "Access",
+      save: "Save",
+      delete: "Delete",
+      titleDetail: "Divulgation detail",
     }
   },
 
@@ -386,6 +412,19 @@ const locales = {
       createFormation: "Crear formación",
       startYear: "Ano de inicio",
       endYear: "Ano de fin (opcional)",
+    },
+    divulgation: {
+      title: "Divulgación",
+      createDivulgation: "Crear divulgación",
+      titleDivulgation: "Título",
+      description: "Descrición",
+      content: "Contido",
+      link: "Link",
+      image: "Imaxe",
+      access: "Acceso",
+      save: "Gardar",
+      delete: "Eliminar",
+      titleDetail: "Información da divulgación",
     }
   },
 };
