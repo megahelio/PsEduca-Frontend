@@ -82,6 +82,15 @@
                     <p class="error-message" id="error-message-title"></p>
                 </div>
                 <div class="form-group">
+                    <label for="type" data-i18n="divulgation.type">Rol</label>
+                    <select id="type" name="type">
+                        <option value="PAGINA_INTERNA">PAGINA_INTERNA</option>
+                        <option value="FICHERO_INTERNO">FICHERO_INTERNO</option>
+                        <option value="LINK_EXTERNO">LINK_EXTERNO</option>
+                    </select>
+                    <div class="error-message" id="error-message-type"></div>
+                </div>
+                <div class="form-group">
                     <label for="link" data-i18n="divulgation.link">Link</label>
                     <input type="url" id="link" name="link">
                     <p class="error-message" id="error-message-link"></p>
@@ -102,6 +111,17 @@
                         <p class="error-message" id="error-message-image"></p>
                     </div>
                 </div>
+                <div class="form-group">
+                    <div>
+                        <label for="file">
+                            <img src="../../../images/upload-icon.svg"/>
+                            <span data-i18n="divulgation.file">Archivo</span>                        
+                        </label>
+                        <input type="file" id="file" name="file" accept=".pdf">
+                        <p class="error-message" id="error-message-file"></p>
+                    </div>
+                </div>
+
                 <div class="ckeditor">
                     <label for="content" data-i18n="divulgation.content">Contenido</label>
                     <div id="content" class="content-divulgation"></div>

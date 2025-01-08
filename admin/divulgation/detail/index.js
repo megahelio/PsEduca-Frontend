@@ -1,6 +1,4 @@
 import { getPageLanguage, setPageLanguage } from "../../../lang/i18n.js";
-import { createFormation, deleteFormation, getFormationById, updateFormation } from "../../../queries/formations.js";
-import { validateFormation } from "../../../validators/formation.js";
 import config from "../../../config.js";
 import { createDivulgation, deleteDivulgation, getDivulgationById, updateDivulgation } from "../../../queries/divulgations.js";
 import {
@@ -18,6 +16,7 @@ import {
     ImageStyle, ImageResize,
     ImageUpload
 } from 'ckeditor5';
+import { validateDivulgation } from "../../../validators/divulgation.js";
 
 if(!sessionStorage.getItem('token') || sessionStorage.getItem('ROL') !== 'ADMIN_GLOBAL'){
     location.href = '../../../login/index.html';
@@ -144,6 +143,7 @@ async function loadDivulgation(){
         $('#link').value = divulgation.link;
         $('#description').value = divulgation.description;
         $('#image-preview').src = divulgation.image;
+        $('#type').value = divulgation.type;
 
         createEditor(lang, divulgation.content);    
     }else{
@@ -250,6 +250,9 @@ $form.addEventListener('submit', async (e) => {
     $('#error-message-link').classList.remove('active');
     $('#error-message-image').classList.remove('active');
     $('#error-message-content').classList.remove('active');
+    $('#error-message-description').classList.remove('active');
+    $('#error-message-file').classList.remove('active');
+    $('#error-message-type').classList.remove('active');
     
     const id = $('#id').value;
     const title = $('#title').value;
@@ -259,12 +262,14 @@ $form.addEventListener('submit', async (e) => {
         name: $('#image').value,
         file: $('#image').files[0] || null
     };
-    console.log(window.editor);
+    const type = $('#type').value;
+    const file = {
+        name: $('#file').value,
+        file: $('#file').files[0] || null
+    };
     const content = window.editor.getData()
 
-    console.log({id, title, link, image, content});
-/*    
-    const ERRORS = validateFormation({id, title, type, link, description, image, startYear, endYear}, id !== '');
+    const ERRORS = validateDivulgation({id, title, description, type, content, link, image, file}, id !== '');
     if (Object.keys(ERRORS).length > 0) {
         Object.keys(ERRORS).forEach((key) => {
             const $errorMessage = $(`#error-message-${key}`);
@@ -272,13 +277,13 @@ $form.addEventListener('submit', async (e) => {
             $errorMessage.classList.add('active');
         });
         return;
-    }*/
+    }
     
     let response;
     if(id === ''){
-        response = await createDivulgation({title, link, description, image, content});
+        response = await createDivulgation({ title, description, type, content, link, image, file });
     }else{
-        response = await updateDivulgation({id, title, link, description, image, content});
+        response = await updateDivulgation({id, title, description, type, content, link, image, file});
     }
 
     if(Object.keys(response).length === 0){

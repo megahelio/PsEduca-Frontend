@@ -140,6 +140,21 @@ const locales = {
       save: "Guardar",
       delete: "Eliminar",
       titleDetail: "Información de la divulgación",
+      type: "Tipo",
+      file: "Archivo",
+    },
+    catalog: {
+      resourcesSearch: "Búsqueda de recursos",
+      filterBy: "Filtrar por",
+      areas: "Áreas",
+      format: "Formato",
+      tags: "Etiquetas",
+      typeResource: "Tipo de recurso",
+      application: "Aplicación",
+      acronym: "Siglas",
+      name: "Nombre",
+      access: "Acceso",
+      see: "Ver"
     }
 
   },
@@ -283,6 +298,21 @@ const locales = {
       save: "Save",
       delete: "Delete",
       titleDetail: "Divulgation detail",
+      type: "Type",
+      file: "File",
+    },
+    catalog: {
+      resourcesSearch: "Resources search",
+      filterBy: "Filter by",
+      areas: "Areas",
+      format: "Format",
+      tags: "Tags",
+      typeResource: "Resource type",
+      application: "Application",
+      acronym: "Acronym",
+      name: "Name",
+      access: "Access",
+      see: "See"
     }
   },
 
@@ -425,6 +455,21 @@ const locales = {
       save: "Gardar",
       delete: "Eliminar",
       titleDetail: "Información da divulgación",
+      type: "Tipo",
+      file: "Arquivo",
+    },
+    catalog: {
+      resourcesSearch: "Búsqueda de recursos",
+      filterBy: "Filtrar por",
+      areas: "Áreas",
+      format: "Formato",
+      tags: "Etiquetas",
+      typeResource: "Tipo de recurso",
+      application: "Aplicación",
+      acronym: "Siglas",
+      name: "Nome",
+      access: "Acceso",
+      see: "Ver"
     }
   },
 };

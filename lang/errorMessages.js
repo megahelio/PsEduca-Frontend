@@ -284,11 +284,69 @@ export const ERROR_MESSAGES = {
             field: 'date'
         },
         'TIPO_F_KO': {
-            message: 'Tipo de formación inválido',
+            message: 'Tipo inválido',
             field: 'type'
         },
         'ITEM_FORMACION_NO_ENCONTRADO_A_KO': {
             message: 'Elemento de formación no encontrado',
+            field: 'all'
+        },
+
+        // DIVULGATION
+        'TITULO_MINIMO_F_KO': {
+            message: 'El título debe tener al menos 4 caracteres',
+            field: 'title'
+        },
+        'TITULO_MAXIMO_F_KO': {
+            message: 'El título debe tener como máximo 254 caracteres',
+            field: 'title'
+        },
+        'TITULO_CARACTERES_F_KO': {
+            message: 'El título tiene caracteres inválidos',
+            field: 'title'
+        },
+        'CAMPO_PAGINA_DETALLE_INCOMPATIBLE_CON_TIPO_LINK_EXTERNO_F_KO': {
+            message: 'El campo de página detalle es incompatible con el tipo de divulgación de enlace externo',
+            field: 'type'
+        },
+        'CAMPO_FICHERO_INCOMPATIBLE_CON_TIPO_LINK_EXTERNO_F_KO': {
+            message: 'El campo de fichero es incompatible con el tipo de divulgación de enlace externo',
+            field: 'type'
+        },
+        'FICHERO_TAMAÑO_F_KO': {
+            message: 'El fichero no debe superar los 1GB',
+            field: 'file'
+        },
+        'CAMPO_LINK_EXTERNO_INCOMPATIBLE_CON_TIPO_FICHERO_INTERNO_F_KO': {
+            message: 'El campo de enlace externo es incompatible con el tipo de divulgación de fichero interno',
+            field: 'type'
+        },
+        'CAMPO_PAGINA_DETALLE_INCOMPATIBLE_CON_TIPO_FICHERO_INTERNO_F_KO': {
+            message: 'El campo de página detalle es incompatible con el tipo de divulgación de fichero interno',
+            field: 'type'
+        },
+        'FICHERO_OBLIGATORIO_F_KO': {
+            message: 'El fichero es obligatorio',
+            field: 'file'
+        },
+        'PAGINA_DETALLE_MINIMO_F_KO': {
+            message: 'La página detalle debe tener al menos 4 caracteres',
+            field: 'content'
+        },
+        'PAGINA_DETALLE_MAXIMO_F_KO': {
+            message: 'La página detalle debe tener como máximo 65534 caracteres',
+            field: 'content'
+        },
+        'ERROR_CREATING_DIVULGATION': {
+            message: 'Error al crear la divulgación',
+            field: 'all'
+        },
+        'ERROR_UPDATING_DIVULGATION': {
+            message: 'Error al actualizar la divulgación',
+            field: 'all'
+        },
+        'ERROR_DELETING_DIVULGATION': {
+            message: 'Error al eliminar la divulgación',
             field: 'all'
         },
     },
@@ -577,11 +635,69 @@ export const ERROR_MESSAGES = {
             field: 'date'
         },
         'TIPO_F_KO': {
-            message: 'Invalid formation type',
+            message: 'Invalid type',
             field: 'type'
         },
         'ITEM_FORMACION_NO_ENCONTRADO_A_KO': {
             message: 'Formation item not found',
+            field: 'all'
+        },
+
+        // DIVULGATION
+        'TITULO_MINIMO_F_KO': {
+            message: 'Title must have at least 4 characters',
+            field: 'title'
+        },
+        'TITULO_MAXIMO_F_KO': {
+            message: 'Title must have at most 254 characters',
+            field: 'title'
+        },
+        'TITULO_CARACTERES_F_KO': {
+            message: 'Title has invalid characters',
+            field: 'title'
+        },
+        'CAMPO_PAGINA_DETALLE_INCOMPATIBLE_CON_TIPO_LINK_EXTERNO_F_KO': {
+            message: 'Content field is incompatible with external link type',
+            field: 'type'
+        },
+        'CAMPO_FICHERO_INCOMPATIBLE_CON_TIPO_LINK_EXTERNO_F_KO': {
+            message: 'File field is incompatible with external link type',
+            field: 'type'
+        },
+        'FICHERO_TAMAÑO_F_KO': {
+            message: 'File must not exceed 1GB',
+            field: 'file'
+        },
+        'CAMPO_LINK_EXTERNO_INCOMPATIBLE_CON_TIPO_FICHERO_INTERNO_F_KO': {
+            message: 'External link field is incompatible with internal file type',
+            field: 'type'
+        },
+        'CAMPO_PAGINA_DETALLE_INCOMPATIBLE_CON_TIPO_FICHERO_INTERNO_F_KO': {
+            message: 'Content field is incompatible with internal file type',
+            field: 'type'
+        },
+        'FICHERO_OBLIGATORIO_F_KO': {
+            message: 'File is required',
+            field: 'file'
+        },
+        'PAGINA_DETALLE_MINIMO_F_KO': {
+            message: 'Content must have at least 4 characters',
+            field: 'content'
+        },
+        'PAGINA_DETALLE_MAXIMO_F_KO': {
+            message: 'Content must have at most 65534 characters',
+            field: 'content'
+        },
+        'ERROR_CREATING_DIVULGATION': {
+            message: 'Error creating divulgation',
+            field: 'all'
+        },
+        'ERROR_UPDATING_DIVULGATION': {
+            message: 'Error updating divulgation',
+            field: 'all'
+        },
+        'ERROR_DELETING_DIVULGATION': {
+            message: 'Error deleting divulgation',
             field: 'all'
         },
     },
@@ -870,11 +986,69 @@ export const ERROR_MESSAGES = {
             field: 'date'
         },
         'TIPO_F_KO': {
-            message: 'Tipo de formación inválido',
+            message: 'Tipo inválido',
             field: 'type'
         },
         'ITEM_FORMACION_NO_ENCONTRADO_A_KO': {
             message: 'Elemento de formación non atopado',
+            field: 'all'
+        },
+
+        // DIVULGATION
+        'TITULO_MINIMO_F_KO': {
+            message: 'O título debe ter polo menos 4 caracteres',
+            field: 'title'
+        },
+        'TITULO_MAXIMO_F_KO': {
+            message: 'O título debe ter como máximo 254 caracteres',
+            field: 'title'
+        },
+        'TITULO_CARACTERES_F_KO': {
+            message: 'O título ten caracteres inválidos',
+            field: 'title'
+        },
+        'CAMPO_PAGINA_DETALLE_INCOMPATIBLE_CON_TIPO_LINK_EXTERNO_F_KO': {
+            message: 'O campo de páxina detalle é incompatible co tipo de divulgación de enlace externo',
+            field: 'type'
+        },
+        'CAMPO_FICHERO_INCOMPATIBLE_CON_TIPO_LINK_EXTERNO_F_KO': {
+            message: 'O campo de ficheiro é incompatible co tipo de divulgación de enlace externo',
+            field: 'type'
+        },
+        'FICHERO_TAMAÑO_F_KO': {
+            message: 'O ficheiro non debe superar os 1GB',
+            field: 'file'
+        },
+        'CAMPO_LINK_EXTERNO_INCOMPATIBLE_CON_TIPO_FICHERO_INTERNO_F_KO': {
+            message: 'O campo de enlace externo é incompatible co tipo de divulgación de ficheiro interno',
+            field: 'type'
+        },
+        'CAMPO_PAGINA_DETALLE_INCOMPATIBLE_CON_TIPO_FICHERO_INTERNO_F_KO': {
+            message: 'O campo de páxina detalle é incompatible co tipo de divulgación de ficheiro interno',
+            field: 'type'
+        },
+        'FICHERO_OBLIGATORIO_F_KO': {
+            message: 'O ficheiro é obrigatorio',
+            field: 'file'
+        },
+        'PAGINA_DETALLE_MINIMO_F_KO': {
+            message: 'A páxina detalle debe ter polo menos 4 caracteres',
+            field: 'content'
+        },
+        'PAGINA_DETALLE_MAXIMO_F_KO': {
+            message: 'A páxina detalle debe ter como máximo 65534 caracteres',
+            field: 'content'
+        },
+        'ERROR_CREATING_DIVULGATION': {
+            message: 'Erro ao crear a divulgación',
+            field: 'all'
+        },
+        'ERROR_UPDATING_DIVULGATION': {
+            message: 'Erro ao actualizar a divulgación',
+            field: 'all'
+        },
+        'ERROR_DELETING_DIVULGATION': {
+            message: 'Erro ao eliminar a divulgación',
             field: 'all'
         },
     },
