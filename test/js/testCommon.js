@@ -2,11 +2,12 @@ function loadNavbar() {
     const navbar = document.getElementById('navbar');
     if (navbar) {
         navbar.innerHTML = `
-            <a href="./contact.html">Contacto Tests</a>
-            <a href="./usuario.html">Usuario Tests</a>
-            <a href="./login.html">Login Tests</a>
-            <a href="./member.html">Miembro Tests</a>
-            <a href="./formation.html">Formación Tests</a>
+            <a href="./contact.html">Contacto</a>
+            <a href="./usuario.html">Usuario</a>
+            <a href="./login.html">Login</a>
+            <a href="./member.html">Miembro</a>
+            <a href="./formation.html">Formación</a>
+            <a href="./divulgation.html">Divulgación</a>
         `;
     } else {
         console.error('id="navbardiv" no encontrado.');
