@@ -1,10 +1,9 @@
-import { getPageLanguage, setPageLanguage } from "../../../lang/i18n.js";
-import { createUser, deleteUser, getUserById, updateUser } from "../../../queries/users.js";
-import { validateUser } from "../../../validators/user.js";
-
-if(!sessionStorage.getItem('token') || sessionStorage.getItem('ROL') !== 'ADMIN_GLOBAL'){
-    location.href = '../../../login/index.html';
-}
+import { getPageLanguage, setPageLanguage } from "../../lang/i18n.js";
+import { createMember, deleteMember, getMemberById, updateMember } from "../../queries/members.js";
+import { validateMember } from "../../validators/member.js";
+import config from "../../config.js";
+import { getDivulgationById } from "../../queries/divulgations.js";
+import { getCatalogById } from "../../queries/catalog.js";
 
 const $ = (elem) => document.querySelector(elem);
 const $$ = (elem) => document.querySelectorAll(elem);
@@ -13,6 +12,7 @@ const $listSections = $('.list-sections');
 const $logInLink = $('#log-in-link');
 
 const ROLS = ['ADMIN_GLOBAL','GESTOR_CATALOGO','USUARIO_PYP'];
+const SERVER_URL = config.SERVER_URL;
 if(sessionStorage.getItem('token') && sessionStorage.getItem('ROL')){
     const ROL = sessionStorage.getItem('ROL');
     if(!ROLS.includes(ROL)){
@@ -25,14 +25,14 @@ if(sessionStorage.getItem('token') && sessionStorage.getItem('ROL')){
         <li class="list-item-with-children" id="list-item-with-children">
             <a href="javascript:void(0)" class="list-item-with-image">
                 <span data-i18n="header.navbar.intranet">Intranet</span>
-                <img src="../../../images/arrow_right_icon.svg" width="15px" class="rotate-90-deg inverted"/>
+                <img src="../../images/arrow_right_icon.svg" width="15px" class="rotate-90-deg inverted"/>
             </a>
             <ul class="sublist" id="sublist">
-                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../index.html" data-i18n="header.navbar.userManagement">Gestión usuarios</a></li>' : ''}
-                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../../members/index.html" data-i18n="header.navbar.membersManagement">Gestión miembros</a></li>' : ''}
-                ${ROL === 'ADMIN_GLOBAL' || ROL === 'GESTOR_CATALOGO' ? '<li><a href="../../catalog/index.html" data-i18n="header.navbar.catalogManagement">Gestión catálogo</a></li>' : ''}
-                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../../formation/index.html" data-i18n="header.navbar.formationManagement">Gestión formación</a></li>' : ''}
-                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../../divulgation/index.html" data-i18n="header.navbar.divulgationManagement">Gestión divulgación</a></li>' : ''}
+                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../../admin/users/index.html" data-i18n="header.navbar.userManagement">Gestión usuarios</a></li>' : ''}
+                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../../admin/members/index.html" data-i18n="header.navbar.membersManagement">Gestión miembros</a></li>' : ''}
+                ${ROL === 'ADMIN_GLOBAL' || ROL === 'GESTOR_CATALOGO' ? '<li><a href="../../admin/catalog/index.html" data-i18n="header.navbar.catalogManagement">Gestión catálogo</a></li>' : ''}
+                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../../admin/formation/index.html" data-i18n="header.navbar.formationManagement">Gestión formación</a></li>' : ''}
+                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../../admin/divulgation/index.html" data-i18n="header.navbar.divulgationManagement">Gestión divulgación</a></li>' : ''}
                 ${ROL === 'ADMIN_GLOBAL' || ROL === 'USUARIO_PYP' ? '<li><a href="#" data-i18n="header.navbar.pypManagement">Gestión PyP</a></li>' : ''}
             </ul>
         </li>`;
@@ -53,37 +53,48 @@ setPageLanguage();
 
 const path = window.location.search;
 
-const REGEX_PATH = /\?id=[0-9]+$/;
+const REGEX_PATH = /\?item=[0-9]+$/;
 
 if (!REGEX_PATH.test(path)) {
-    window.location.href = '../../../index.html'
+    window.location.href = '../../index.html'
 }
 
-async function loadUser(){
+async function loadResource(){
     const id = path.split('=')[1];
 
     if(id !== '0'){
-        const user = await getUserById(id)
+        const resource = await getCatalogById(id)
     
         const $errorMessage = $('#error-message-all')
-        if (user.error) {
-            $errorMessage.textContent = user.error;
+        if (resource.error) {
+            $errorMessage.textContent = resource.error;
             $errorMessage.classList.add('active');
             return;
         }
 
-        $('#id').value = user.id;
-        $('#name').value = user.fullName;
-        $('#username').value = user.name;
-        $('#role').value = user.role;
+        $('#resource-name').textContent = `${resource.name} [${resource.acronym}]`;
+        $('#resource-authors').textContent = resource.authors;
+        $('#resource-yearRange').textContent = `[${resource.edadAnhoMin}:${resource.edadMesMin}] - [${resource.edadAnhoMax}:${resource.edadMesMax}]`;
+        $('#resource-duration').textContent = `${resource.time} min.`;
+        $('#resource-area-application').textContent = `${resource.area.join()} / ${resource.application.join()}`
+        $('#resource-type-format').textContent = `${resource.resourceType.join()} / ${resource.format.join()}`
+        $('#resource-tags').textContent = resource.tags.join(", ")
+        $('#resource-description').textContent = resource.description
+        $('#resource-observations').textContent = resource.observations
+        $('#resource-relatedDocuments').innerHTML = resource.relatedDocuments.map(({link, name}) => {
+            return `<li><a href="${link}"><img src="../../images/full-arrow-right.svg" width="20px" />${name}</a></li>`
+        }).join("")
+
+
+        
+        $('#resource-image').src = resource.image;
     }else{
-        $('#password').required = true;
-        $('#confirm-password').required = true;
-        $('#delete-user-button').style.display = 'none';
+        $('#error-message-all').textContent = 'Error'
+        $('#error-message-all').classList.add('active');
     }
 }
 
-loadUser();
+loadResource();
 
 $('#button-menu').addEventListener('click', (e) => {
     $listSections.classList.toggle('active');
@@ -163,68 +174,3 @@ $$buttonsLanguage.forEach((button) => {
         button.classList.add('language-selected');
     }
 });
-
-const $form = $('#user-detail-form');
-
-$form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    $('#error-message-all').classList.remove('active');
-    $('#error-message-name').classList.remove('active');
-    $('#error-message-username').classList.remove('active');
-    $('#error-message-role').classList.remove('active');
-    $('#error-message-password').classList.remove('active');
-    $('#error-message-confirm-password').classList.remove('active');
-
-    const id = $('#id').value;
-    const fullname = $('#name').value;
-    const username = $('#username').value;
-    const role = $('#role').value;
-    const password = $('#password').value;
-    const confirmPassword = $('#confirm-password').value;
-
-    const ERRORS = validateUser({id, fullname, username, role, password, confirmPassword}, id !== '');
-    if (Object.keys(ERRORS).length > 0) {
-        Object.keys(ERRORS).forEach((key) => {
-            const $errorMessage = $(`#error-message-${key}`);
-            $errorMessage.textContent = ERRORS[key];
-            $errorMessage.classList.add('active');
-        });
-        return;
-    }
-    
-    let response;
-    if(id === ''){
-        response = await createUser({fullname, username, role, password});
-    }else{
-        response = await updateUser({id, fullname, username, role, password});
-    }
-
-    if(Object.keys(response).length === 0){
-        location.href = '../index.html';
-        return;
-    }
-
-    Object.keys(response).forEach((key) => {
-        const $errorMessage = $(`#error-message-${key}`);
-        $errorMessage.textContent = response[key];
-        $errorMessage.classList.add('active');
-    });
-});
-
-const $deleteUserButton = $('#delete-user-button');
-$deleteUserButton.onclick = async (e) => {
-    const id = $('#id').value;
-
-    const response = await deleteUser(id);
-    if(Object.keys(response).length === 0){
-        location.href = '../index.html';
-        return;
-    }
-
-    Object.keys(response).forEach((key) => {
-        const $errorMessage = $(`#error-message-${key}`);
-        $errorMessage.textContent = response[key];
-        $errorMessage.classList.add('active');
-    });
-};

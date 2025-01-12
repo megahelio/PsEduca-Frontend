@@ -10,14 +10,14 @@
 <body>
     <header>
         <div class="full-header">
-            <a class="logo-container" href="../../../index.html">
-                <img height="auto" src="../../../images/Logotipo_PsEduca_bw.png" class="logo-uvigo inverted">
+            <a class="logo-container" href="../index.html">
+                <img height="auto" src="../images/Logotipo_PsEduca_bw.png" class="logo-uvigo inverted">
             </a>
             <section class="top-header">
                 <div class="top-header-left">
                     <div class="log-in">
-                        <a href="../../../login/index.html" class="log-in-link" id="log-in-link">
-                            <img src="../../../images/profile_icon.svg" class="inverted"/>
+                        <a href="../login/index.html" class="log-in-link" id="log-in-link">
+                            <img src="../images/profile_icon.svg" class="inverted"/>
                             <span data-i18n="header.logIn" id="log-in-span">Iniciar sesión</span>
                         </a>
                     </div>
@@ -36,7 +36,7 @@
                     <li class="list-item-with-children" id="list-item-with-children">
                         <a href="javascript:void(0)" class="list-item-with-image">
                             <span data-i18n="header.navbar.investigation">Investigación</span>
-                            <img src="../../../images/arrow_right_icon.svg" width="15px" class="rotate-90-deg inverted"/>
+                            <img src="../images/arrow_right_icon.svg" width="15px" class="rotate-90-deg inverted"/>
                         </a>
                         <ul class="sublist" id="sublist">
                             <li><a href="https://portalcientifico.uvigo.gal/grupos/17693/lineas" data-i18n="header.navbar.lines" target="_blank">Líneas de<br>investigación</a></li>
@@ -46,77 +46,113 @@
                             <li><a href="#" data-i18n="header.navbar.tfgAndTfm">TFG / TFM</a></li>
                         </ul>
                     </li>
-                    <li><a href="../../../divulgation/index.html" data-i18n="header.navbar.divulgation">Divulgación</a></li>
-                    <li><a href="../../../formation/index.html" data-i18n="header.navbar.formation">Formación</a></li>
-                    <li><a href="../../../catalog/index.html" data-i18n="header.navbar.catalog">Catálogo</a></li>
-                    <li><a href="../../../contact/index.html" data-i18n="contact">Contacto</a></li>
+                    <li><a href="../divulgation/index.html" data-i18n="header.navbar.divulgation">Divulgación</a></li>
+                    <li><a href="../formation/index.html" data-i18n="header.navbar.formation">Formación</a></li>
+                    <li><a href="#" data-i18n="header.navbar.catalog">Catálogo</a></li>
+                    <li><a href="../contact/index.html" data-i18n="contact">Contacto</a></li>
                 </ul>
                 <button class="menu-button" id="button-menu">
-                    <img src="../../../images/burguer_icon.svg" class="burguer-icon inverted"/>
+                    <img src="../images/burguer_icon.svg" class="burguer-icon inverted"/>
                 </button>
             </section>
         </div>
     </header>
 
     <main>
-        <section class="formation-detail-container">
-            <h1 data-i18n="formation.titleDetail" class="formation-detail-title">Información de miembro</h1>
-            <form class="formation-detail-form" id="formation-detail-form">
-                <p class="error-message" id="error-message-all"></p>
-                <div class="form-group">
-                    <label for="title" data-i18n="formation.name">Nombre</label>
-                    <input type="text" id="title" name="title" required>
-                    <p class="error-message" id="error-message-title"></p>
-                </div>
-                <div class="form-group">
-                    <label for="type" data-i18n="formation.type">Tipo</label>
-                    <select id="type" name="type">
-                        <option value="MASTER">MÁSTER</option>
-                        <option value="DOCTORADO">DOCTORADO</option>
-                        <option value="CURSO">CURSO</option>
-                    </select>
-                    <p class="error-message" id="error-message-type"></p>
-                </div>
-                <div class="form-group">
-                    <div class="year-range-container">
+        <h2 class="title-main-content" data-i18n="catalog.resourcesSearch">Búsqueda de recursos</h2>
+        <p class="error-message" id="error-message">No se han encontrado resultados</p>
+        <section class="filter-container">
+            <form class="form-filter">
+                <div class="row">
+                    <div class="row-filter">
+                        <h4 data-i18n="catalog.filterBy">
+                            Filtrar por
+                        </h4>
                         <div>
-                            <label for="startYear" data-i18n="formation.startYear">Año de inicio</label>
-                            <input type="text" id="startYear" name="startYear" required class="year-input">
-                        </div>
-                        <div>
-                            <label for="endYear" data-i18n="formation.endYear">Año de fin</label>
-                            <input type="text" id="endYear" name="endYear" class="year-input">
+                            <input name="edadAnhoMin" id="edadAnhoMin" type="text" size="20" placeholder="Edad min" class="input-number input-filter">
+                            <span style="width: min-content;"> - </span>
+                            <input name="edadAnhoMax" id="edadAnhoMax" type="text" size="20" placeholder="Edad max" class="input-number input-filter">
                         </div>
                     </div>
-                    <p class="error-message" id="error-message-date"></p>
-                </div>
-                <div class="form-group">
-                    <label for="link" data-i18n="formation.link">Link</label>
-                    <input type="url" id="link" name="link" required>
-                    <p class="error-message" id="error-message-link"></p>
-                </div>
-                <div class="form-group">
-                    <label for="description" data-i18n="formation.description">Descripción</label>
-                    <textarea id="description" class="textarea-formation-description" name="description" required></textarea>
-                    <p class="error-message" id="error-message-description"></p>
-                </div>
-                <div class="form-group">
-                    <img id="image-preview" class="image-preview" src="#" alt="Imagen de perfil">
-                    <div>
-                        <label for="image">
-                            <img src="../../../images/upload-icon.svg"/>
-                            <span data-i18n="formation.image" id="image-input-span">Imagen</span>                        
-                        </label>
-                        <input type="file" id="image" name="image" accept="image/png, image/jpeg">
-                        <p class="error-message" id="error-message-image"></p>
+                    <div class="row-filter">
+                        <h4 data-i18n="catalog.areas">
+                            Áreas
+                        </h4>
+                        <div>
+                            <select name="areas" id="selectArea" class="input-filter">
+                                <option selected="selected" value="">- Todas -</option>
+                                <option value="Aprendizaje">Aprendizaje</option>
+                                <option value="Desarrollo">Desarrollo</option>
+                                <option value="NEAE (Necesidades Específicas de Apoyo Educativo)">NEAE (Necesidades Específicas de Apoyo Educativo)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row-filter">
+                        <h4 data-i18n="catalog.format">
+                            Formato
+                        </h4>
+                        <div>
+                            <select name="formato" id="selectFormat" class="input-filter">
+                                <option selected="selected" value="">- Todos -</option>
+                                <option value="Papel">Papel</option>
+                                <option value="Online">Online</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="save" data-i18n="formation.save">Guardar</button>
-                    <button type="button" class="delete" data-i18n="formation.delete" id="delete-formation-button">Eliminar</button>
+                <div class="row">
+                    <div class="row-filter">
+                        <h4 data-i18n="catalog.tags">
+                            Etiquetas
+                        </h4>
+                        <div>
+                            <select id="selectTags" class="input-filter">
+                                <option selected="selected" value="">- Todas -</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row-filter">
+                        <h4 data-i18n="catalog.typeResource">
+                            Tipo recurso
+                        </h4>
+                        <div>
+                            <select class="input-filter" id="selectTypeResource">
+                                <option selected="selected" value="">- Todos -</option>
+                                <option value="Intervención">Intervención</option>
+                                <option value="Evaluación">Evaluación</option>
+                                <option value="AMBOS">Ambos</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row-filter">
+                        <h4 data-i18n="catalog.application">
+                            Aplicación
+                        </h4>
+                        <div>
+                            <select class="input-filter" id="selectApplication">
+                                <option selected="selected" value="">- Todos -</option>
+                                <option value="Individual">Individual</option>
+                                <option value="Colectiva">Colectiva</option>
+                                <option value="AMBOS">Ambos</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
-                <input type="hidden" id="id" name="id" value=""/>
             </form>
+        </section>
+        <section class="catalog-content">
+            <table class="table-catalog-content" id="table-catalog-content">
+                <thead>
+                    <tr>
+                        <th data-i18n="catalog.acronym">Siglas</th>
+                        <th data-i18n="catalog.name">Nombre</th>
+                        <th data-i18n="catalog.access">Acceso</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
         </section>
     </main>
 
@@ -126,7 +162,7 @@
                 <article class="">
                     <div class="footer-item">
                         <img width="210"
-                            src="../../../images/logo_grupo.png"
+                            src="../images/logo_grupo.png"
                             alt="Departamento de Psicoloxía Evolutiva e Comunicación">
                     </div>
                 </article>
@@ -137,7 +173,7 @@
                                 <a href="https://goo.gl/maps/kaSss5S4GJB2" target="_blank" rel="noopener noreferrer"
                                     style="display: flex; align-items: center; column-gap: 5px;"
                                     class="footer-link">
-                                    <img src="../../../images/location_icon.svg" width="25px" class="footer-icon"/>
+                                    <img src="../images/location_icon.svg" width="25px" class="footer-icon"/>
                                     <span data-i18n="footer.group.faculty">Edificio de Facultades</span>
                                 </a>
                             </p>
@@ -146,7 +182,7 @@
                                 32004 Ourense
                             </p>
                             <p style="margin-bottom: 0; display: flex; align-items: center; column-gap: 5px;"> 
-                                <img src="../../../images/phone_icon.svg" width="25px" class="footer-icon"/>
+                                <img src="../images/phone_icon.svg" width="25px" class="footer-icon"/>
                                 <span data-i18n="footer.group.supportArea">Área de apoyo</span>
                             </p>
                             <p style="margin: 0 0 0 35px;">+34 988 368 902</p>
@@ -156,11 +192,11 @@
                 <article class="">
                     <div class="footer-item">
                         <p style="display: flex; align-content: center; column-gap: 5px;">
-                            <img src="../../../images/arrow_right_icon.svg" width="15px" class="footer-icon"/>
-                            <a href="../../../contact/index.html" class="footer-link" data-i18n="contact">Contacto</a>
+                            <img src="../images/arrow_right_icon.svg" width="15px" class="footer-icon"/>
+                            <a href="../contact/index.html" class="footer-link" data-i18n="contact">Contacto</a>
                         </p>
                         <p style="display: flex; align-content: center; column-gap: 5px;">
-                            <img src="../../../images/arrow_right_icon.svg" width="15px" class="footer-icon"/>
+                            <img src="../images/arrow_right_icon.svg" width="15px" class="footer-icon"/>
                             <a href="https://secretaria.uvigo.gal/uv/web/qsp/" target="_blank"
                                 rel="noopener noreferrer" class="footer-link"
                                 data-i18n="footer.group.box">Caixa de queixas, suxestións e parabéns</a>
@@ -191,13 +227,13 @@
                 <div class="preview-uvigo-footer">
                     <div>
                         <a href="http://uvigo.gal" target="_blank">
-                            <img src="../../../images/logo_uvigo_black.png"
+                            <img src="../images/logo_uvigo_black.png"
                             alt="Universidade de Vigo" class="footer-uvigo-logo inverted">
                         </a>
                     </div>
                     <div>
                         <button id="button-preview-uvigo-footer">
-                            <img src="../../../images/arrow_right_icon.svg" width="15px" class="inverted" id="footer-icon-expanded-info"/>
+                            <img src="../images/arrow_right_icon.svg" width="15px" class="inverted" id="footer-icon-expanded-info"/>
                             <span id="footer-text-button-preview" data-i18n="footer.uvigo.seeMore">Ver más</span>
                         </button>
                     </div>
@@ -207,7 +243,7 @@
                     <div class="footer-uvigo-row first-footer-uvigo-row">
                         <article class="">
                             <p>
-                                <img src="../../../images/phone_icon.svg" width="25px" class="inverted"/>
+                                <img src="../images/phone_icon.svg" width="25px" class="inverted"/>
                                 <strong data-i18n="footer.uvigo.information">Información</strong>
                             </p>
                             <p>+34 986 812 000</p>
@@ -218,7 +254,7 @@
         
                         <article class="">
                             <p>
-                                <img src="../../../images/location_icon.svg" width="25px" class="inverted"/>
+                                <img src="../images/location_icon.svg" width="25px" class="inverted"/>
                                 <a
                                     href="https://www.uvigo.gal/campus/ourense-campus-auga" target="_blank">
                                     <strong data-i18n="footer.uvigo.campusOurense">Campus de Ourense</strong>
@@ -226,7 +262,7 @@
                             </p>
                             <p>+34 988 387 102</p>
                             <p>
-                                <img src="../../../images/arrow_right_icon.svg" width="15px" class="inverted"/>
+                                <img src="../images/arrow_right_icon.svg" width="15px" class="inverted"/>
                                 <a href="https://www.uvigo.gal/campus/ourense-campus-auga" target="_blank"
                                     data-i18n="footer.uvigo.campusAgua">
                                     Campus da Auga
@@ -236,7 +272,7 @@
         
                         <article class="">
                             <p>
-                                <img src="../../../images/location_icon.svg" width="25px" class="inverted"/>
+                                <img src="../images/location_icon.svg" width="25px" class="inverted"/>
                                 <a
                                     href="https://www.uvigo.gal/campus/pontevedra-campus-crea"
                                     target="_blank">
@@ -245,7 +281,7 @@
                             </p>
                             <p>+34 986 802 080</p>
                             <p>
-                                <img src="../../../images/arrow_right_icon.svg" width="15px" class="inverted"/>
+                                <img src="../images/arrow_right_icon.svg" width="15px" class="inverted"/>
                                 <a href="https://www.uvigo.gal/campus/pontevedra-campus-crea" target="_blank"
                                     data-i18n="footer.uvigo.campusCrea">
                                     Campus CREA
@@ -255,7 +291,7 @@
         
                         <article>
                             <p>
-                                <img src="../../../images/location_icon.svg" width="25px" class="inverted"/>
+                                <img src="../images/location_icon.svg" width="25px" class="inverted"/>
                                 <a
                                     href="https://www.uvigo.gal/campus/vigo-campus-vigo-tecnoloxico"
                                     target="_blank">
@@ -264,7 +300,7 @@
                             </p>
                             <p>+34 986 812 000</p>
                             <p>
-                                <img src="../../../images/arrow_right_icon.svg" width="15px" class="inverted"/>
+                                <img src="../images/arrow_right_icon.svg" width="15px" class="inverted"/>
                                 <a href="https://www.uvigo.gal/campus/vigo-campus-vigo-tecnoloxico" target="_blank"
                                     data-i18n="footer.uvigo.vigoTech">
                                     Vigo Tecnolóxico
@@ -276,7 +312,7 @@
                     <div class="footer-uvigo-row">
                         <article>
                                 <p>
-                                    <img src="../../../images/arrow_right_icon.svg" width="15px" class="inverted"/>
+                                    <img src="../images/arrow_right_icon.svg" width="15px" class="inverted"/>
                                     <a
                                         href="https://www.uvigo.gal/contacto" target="_blank">
                                         <strong data-i18n="contact">Contacto</strong>
@@ -286,7 +322,7 @@
         
                         <article>
                                 <p>
-                                    <img src="../../../images/arrow_right_icon.svg" width="15px" class="inverted"/>
+                                    <img src="../images/arrow_right_icon.svg" width="15px" class="inverted"/>
                                     <a
                                         href="https://secretaria.uvigo.gal/uv/web/qsp/" target="_blank">
                                         <strong data-i18n="footer.group.box">Caja de quejas, sugerencias y felicitaciones</strong>
@@ -296,7 +332,7 @@
         
                         <article>
                                 <p>
-                                    <img src="../../../images/arrow_right_icon.svg" width="15px" class="inverted"/>
+                                    <img src="../images/arrow_right_icon.svg" width="15px" class="inverted"/>
                                     <a
                                         href="https://www.uvigo.gal/universidade/informacion-institucional/outras-webs-universidade-vigo"
                                         target="_blank">
@@ -308,19 +344,19 @@
                         <article>
                             <p style="margin-left: 20px; display: flex; column-gap: 20px; ">
                                 <a href="https://www.facebook.com/uvigo" target="_blank">
-                                    <img src="../../../images/facebook_icon.svg" width="25px" class="inverted"/>
+                                    <img src="../images/facebook_icon.svg" width="25px" class="inverted"/>
                                 </a>
     
                                 <a href="https://twitter.com/uvigo" target="_blank">
-                                    <img src="../../../images/twitter_icon.svg" width="25px" class="inverted"/>
+                                    <img src="../images/twitter_icon.svg" width="25px" class="inverted"/>
                                 </a>
     
                                 <a href="https://www.instagram.com/universidadedevigo/" target="_blank">
-                                    <img src="../../../images/instagram_icon.svg" width="25px" class="inverted"/>
+                                    <img src="../images/instagram_icon.svg" width="25px" class="inverted"/>
                                 </a>
     
                                 <a href="https://www.youtube.com/@uvigo7787" target="_blank">
-                                    <img src="../../../images/youtube_icon.svg" width="25px" class="inverted"/>
+                                    <img src="../images/youtube_icon.svg" width="25px" class="inverted"/>
                                 </a>
                             </p>
                         </article>
@@ -338,7 +374,7 @@
         
                         <article>
                             <p>
-                                <img src="../../../images/arrow_right_icon.svg" width="15px" class="inverted"/>
+                                <img src="../images/arrow_right_icon.svg" width="15px" class="inverted"/>
                                 <a
                                     href="https://transparencia.uvigo.es/"
                                     target="_blank">
@@ -349,7 +385,7 @@
         
                         <article>
                                 <p>
-                                    <img src="../../../images/arrow_right_icon.svg" width="15px" class="inverted"/>
+                                    <img src="../images/arrow_right_icon.svg" width="15px" class="inverted"/>
                                     <a
                                         href="https://www.uvigo.gal/campus/vantaxes/emerxencias"
                                         target="_blank">
@@ -360,7 +396,7 @@
         
                         <article>
                             <p>
-                                <img src="../../../images/arrow_right_icon.svg" width="15px" class="inverted"/>
+                                <img src="../images/arrow_right_icon.svg" width="15px" class="inverted"/>
                                 <a
                                     href="https://www.uvigo.gal/universidade/comunicacion/redes-sociais"
                                     target="_blank">

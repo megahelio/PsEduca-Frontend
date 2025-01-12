@@ -1,6 +1,4 @@
 import { getPageLanguage, setPageLanguage } from "../../lang/i18n.js";
-import { createMember, deleteMember, getMemberById, updateMember } from "../../queries/members.js";
-import { validateMember } from "../../validators/member.js";
 import config from "../../config.js";
 import { getDivulgationById } from "../../queries/divulgations.js";
 
@@ -29,7 +27,7 @@ if(sessionStorage.getItem('token') && sessionStorage.getItem('ROL')){
             <ul class="sublist" id="sublist">
                 ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../../admin/users/index.html" data-i18n="header.navbar.userManagement">Gestión usuarios</a></li>' : ''}
                 ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../../admin/members/index.html" data-i18n="header.navbar.membersManagement">Gestión miembros</a></li>' : ''}
-                ${ROL === 'ADMIN_GLOBAL' || ROL === 'GESTOR_CATALOGO' ? '<li><a href="#" data-i18n="header.navbar.catalogManagement">Gestión catálogo</a></li>' : ''}
+                ${ROL === 'ADMIN_GLOBAL' || ROL === 'GESTOR_CATALOGO' ? '<li><a href="../../admin/catalog/index.html" data-i18n="header.navbar.catalogManagement">Gestión catálogo</a></li>' : ''}
                 ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../../admin/formation/index.html" data-i18n="header.navbar.formationManagement">Gestión formación</a></li>' : ''}
                 ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../../admin/divulgation/index.html" data-i18n="header.navbar.divulgationManagement">Gestión divulgación</a></li>' : ''}
                 ${ROL === 'ADMIN_GLOBAL' || ROL === 'USUARIO_PYP' ? '<li><a href="#" data-i18n="header.navbar.pypManagement">Gestión PyP</a></li>' : ''}

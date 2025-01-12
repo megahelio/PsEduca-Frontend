@@ -59,61 +59,165 @@
     </header>
 
     <main>
-        <section class="formation-detail-container">
-            <h1 data-i18n="formation.titleDetail" class="formation-detail-title">Información de miembro</h1>
-            <form class="formation-detail-form" id="formation-detail-form">
+        <section class="catalog-detail-container">
+            <h1 data-i18n="catalog.titleDetail" class="catalog-detail-title">Información del recurso</h1>
+            <form class="catalog-detail-form" id="catalog-detail-form">
                 <p class="error-message" id="error-message-all"></p>
                 <div class="form-group">
-                    <label for="title" data-i18n="formation.name">Nombre</label>
-                    <input type="text" id="title" name="title" required>
-                    <p class="error-message" id="error-message-title"></p>
+                    <label for="name" data-i18n="catalog.name">Nombre</label>
+                    <input type="text" id="name" name="name" required>
+                    <p class="error-message" id="error-message-name"></p>
                 </div>
                 <div class="form-group">
-                    <label for="type" data-i18n="formation.type">Tipo</label>
-                    <select id="type" name="type">
-                        <option value="MASTER">MÁSTER</option>
-                        <option value="DOCTORADO">DOCTORADO</option>
-                        <option value="CURSO">CURSO</option>
-                    </select>
-                    <p class="error-message" id="error-message-type"></p>
+                    <label for="authors" data-i18n="catalog.authors">Autores</label>
+                    <input type="text" id="authors" name="authors" required>
+                    <p class="error-message" id="error-message-authors"></p>
                 </div>
                 <div class="form-group">
                     <div class="year-range-container">
                         <div>
-                            <label for="startYear" data-i18n="formation.startYear">Año de inicio</label>
-                            <input type="text" id="startYear" name="startYear" required class="year-input">
+                            <label for="acronym" data-i18n="catalog.acronym">Siglas</label>
+                            <input type="text" id="acronym" name="acronym" required>
+                            <p class="error-message" id="error-message-acronym"></p>
                         </div>
                         <div>
-                            <label for="endYear" data-i18n="formation.endYear">Año de fin</label>
-                            <input type="text" id="endYear" name="endYear" class="year-input">
+                            <label for="duration" data-i18n="catalog.duration">Duración</label>
+                            <input type="text" id="duration" name="duration" required class="year-input">
+                            <p class="error-message" id="error-message-duration"></p>
                         </div>
                     </div>
-                    <p class="error-message" id="error-message-date"></p>
+                </div>
+                <div class="columns-form">
+                    <div class="form-group">
+                        <label for="area" data-i18n="catalog.areas">Áreas</label>
+                        <select id="area" name="area" multiple required>
+                            <option value="Aprendizaje">Aprendizaje</option>
+                            <option value="Desarrollo">Desarrollo</option>
+                            <option value="NEAE (Necesidades Específicas de Apoyo Educativo)">NEAE (Necesidades Específicas de Apoyo Educativo)</option>
+                        </select>
+                        <p class="error-message" id="error-message-area"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="resourceType" data-i18n="catalog.typeResource">Tipo de recurso</label>
+                        <select id="resourceType" name="resourceType" multiple required>
+                            <option value="Intervención">Intervención</option>
+                            <option value="Evaluación">Evaluación</option>
+                        </select>
+                        <p class="error-message" id="error-message-resourceType"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="format" data-i18n="catalog.format">Formato</label>
+                        <select id="format" name="format" multiple required>
+                            <option value="Papel">Papel</option>
+                            <option value="Online">Online</option>
+                        </select>
+                        <p class="error-message" id="error-message-format"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="application" data-i18n="catalog.application">Aplicación</label>
+                        <select id="application" name="application" multiple required>
+                            <option value="Individual">Individual</option>
+                            <option value="Colectiva">Colectiva</option>
+                        </select>
+                        <p class="error-message" id="error-message-application"></p>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="link" data-i18n="formation.link">Link</label>
-                    <input type="url" id="link" name="link" required>
-                    <p class="error-message" id="error-message-link"></p>
-                </div>
-                <div class="form-group">
-                    <label for="description" data-i18n="formation.description">Descripción</label>
-                    <textarea id="description" class="textarea-formation-description" name="description" required></textarea>
-                    <p class="error-message" id="error-message-description"></p>
+                    <div class="year-range-container">
+                        <div>
+                            <label for="edadAnhoMin" data-i18n="catalog.edadAnhoMin">Años mínimos</label>
+                            <input type="text" id="edadAnhoMin" name="edadAnhoMin" required class="year-input">
+                            <p class="error-message" id="error-message-edadAnhoMin"></p>
+                        </div>
+                        <div>
+                            <label for="edadMesMin" data-i18n="catalog.edadMesMin">Meses mínimos</label>
+                            <input type="text" id="edadMesMin" name="edadMesMin" required class="year-input">
+                            <p class="error-message" id="error-message-edadMesMin"></p>
+                        </div>
+                        <div>
+                            <label for="edadAnhoMax" data-i18n="catalog.edadAnhoMax">Años máximos</label>
+                            <input type="text" id="edadAnhoMax" name="edadAnhoMax" required class="year-input">
+                            <p class="error-message" id="error-message-edadAnhoMax"></p>
+                        </div>
+                        <div>
+                            <label for="edadMesMax" data-i18n="catalog.edadMesMax">Meses máximos</label>
+                            <input type="text" id="edadMesMax" name="edadMesMax" required class="year-input">
+                            <p class="error-message" id="error-message-edadMesMax"></p>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <img id="image-preview" class="image-preview" src="#" alt="Imagen de perfil">
-                    <div>
+                    <div class="input-file">
                         <label for="image">
                             <img src="../../../images/upload-icon.svg"/>
-                            <span data-i18n="formation.image" id="image-input-span">Imagen</span>                        
+                            <span data-i18n="catalog.image" id="image-input-span">Imagen</span>                        
                         </label>
                         <input type="file" id="image" name="image" accept="image/png, image/jpeg">
                         <p class="error-message" id="error-message-image"></p>
                     </div>
                 </div>
+                <div class="form-group-multiple" id="related-documents">
+                    <label data-i18n="catalog.relatedDocuments">Documentos relacionados</label>
+                    <div class="input-list-container" id="related-documents-container">
+                    </div>
+                    <button type="button" class="add-button" id="add-related-document-button">
+                        <img src="../../../images/add-icon.svg" width="15px" class="inverted"/>
+                    </button>
+                </div>
+                <div class="form-group-files" id="files-resource">
+                    <label data-i18n="catalog.files">Archivos</label>
+                    <div class="files-list-container" id="files-container">
+                        <div class="input-file">
+                            <label for="newDocument">
+                                <img src="../../../images/upload-icon.svg"/>
+                                <span data-i18n="catalog.newDocument" id="newDocument-input-span">Nuevo documento</span>                        
+                            </label>
+                            <input type="file" id="newDocument" name="newDocument" accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf">
+                            <input type="text" id="newDocumentName" name="newDocumentName">
+                            <button type="button" class="add-button" id="add-new-document-button">
+                                <img src="../../../images/add-icon.svg" width="15px" class="inverted"/>
+                            </button>
+                            <p class="error-message" id="error-message-newDocument"></p>
+                        </div>
+                        <ul class="list-files" id="list-files">
+                            <!-- <li class="file-item">
+                                <a href="#" class="file-link">Documento 1</a>
+                                <button type="button" class="delete-button">
+                                    <img src="../../../images/delete-icon.svg" width="15px"/>
+                                </button>
+                            </li>
+                            <li class="file-item">
+                                <a href="#" class="file-link">Documento 2</a>
+                                <button type="button" class="delete-button">
+                                    <img src="../../../images/delete-icon.svg" width="15px"/>
+                                </button>
+                            </li> -->
+                        </ul>
+                    </div>
+                </div>  
+                        
+                        
                 <div class="form-group">
-                    <button type="submit" class="save" data-i18n="formation.save">Guardar</button>
-                    <button type="button" class="delete" data-i18n="formation.delete" id="delete-formation-button">Eliminar</button>
+                    <label for="tags" data-i18n="catalog.tags">Etiquetas</label>
+                    <input type="text" id="tags" name="tags" required>
+                    <span data-i18n="catalog.tagsHelp" id="tags-help" class="tags-help">Introduce las etiquetas separadas por comas</span>
+                    <p class="error-message" id="error-message-tags"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="description" data-i18n="catalog.description">Descripción</label>
+                    <textarea id="description" class="textarea-catalog-description" name="description" required></textarea>
+                    <p class="error-message" id="error-message-description"></p>
+                </div>
+                <div class="form-group">
+                    <label for="observations" data-i18n="catalog.observations">Observaciones</label>
+                    <textarea id="observations" class="textarea-catalog-observations" name="observations" required></textarea>
+                    <p class="error-message" id="error-message-observations"></p>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="save" data-i18n="catalog.save">Guardar</button>
+                    <button type="button" class="delete" data-i18n="catalog.delete" id="delete-catalog-button">Eliminar</button>
                 </div>
                 <input type="hidden" id="id" name="id" value=""/>
             </form>
@@ -123,14 +227,14 @@
     <footer>
         <section class="group-footer-container">
             <div class="footer-items">
-                <article class="">
+                <article>
                     <div class="footer-item">
                         <img width="210"
                             src="../../../images/logo_grupo.png"
                             alt="Departamento de Psicoloxía Evolutiva e Comunicación">
                     </div>
                 </article>
-                <article class="">
+                <article>
                     <div class="footer-item">
                         <div class="footer-column">
                             <p style="margin: 0;">
@@ -153,7 +257,7 @@
                         </div>
                     </div>
                 </article>
-                <article class="">
+                <article>
                     <div class="footer-item">
                         <p style="display: flex; align-content: center; column-gap: 5px;">
                             <img src="../../../images/arrow_right_icon.svg" width="15px" class="footer-icon"/>
@@ -205,7 +309,7 @@
         
                 <div class="expanded-footer mt-5" id="footer-expanded-uvigo-info">
                     <div class="footer-uvigo-row first-footer-uvigo-row">
-                        <article class="">
+                        <article>
                             <p>
                                 <img src="../../../images/phone_icon.svg" width="25px" class="inverted"/>
                                 <strong data-i18n="footer.uvigo.information">Información</strong>
@@ -216,7 +320,7 @@
                             </p>
                         </article>
         
-                        <article class="">
+                        <article>
                             <p>
                                 <img src="../../../images/location_icon.svg" width="25px" class="inverted"/>
                                 <a
@@ -234,7 +338,7 @@
                             </p>
                         </article>
         
-                        <article class="">
+                        <article>
                             <p>
                                 <img src="../../../images/location_icon.svg" width="25px" class="inverted"/>
                                 <a
