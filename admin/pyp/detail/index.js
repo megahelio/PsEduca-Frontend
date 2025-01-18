@@ -2,6 +2,7 @@ import { getPageLanguage, setPageLanguage } from "../../../lang/i18n.js";
 import { createFormation, deleteFormation, getFormationById, updateFormation } from "../../../queries/formations.js";
 import { validateFormation } from "../../../validators/formation.js";
 import config from "../../../config.js";
+import { createPyp, deletePyp, getPypById, updatePyp } from "../../../queries/pyp.js";
 
 if(!sessionStorage.getItem('token') || sessionStorage.getItem('ROL') !== 'ADMIN_GLOBAL'){
     location.href = '../../../login/index.html';
@@ -33,9 +34,9 @@ if(sessionStorage.getItem('token') && sessionStorage.getItem('ROL')){
                 ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../../users/index.html" data-i18n="header.navbar.userManagement">Gestión usuarios</a></li>' : ''}
                 ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../../members/index.html" data-i18n="header.navbar.membersManagement">Gestión miembros</a></li>' : ''}
                 ${ROL === 'ADMIN_GLOBAL' || ROL === 'GESTOR_CATALOGO' ? '<li><a href="../../catalog/index.html" data-i18n="header.navbar.catalogManagement">Gestión catálogo</a></li>' : ''}
-                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../index.html" data-i18n="header.navbar.formationManagement">Gestión formación</a></li>' : ''}
+                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../../formation/index.html" data-i18n="header.navbar.formationManagement">Gestión formación</a></li>' : ''}
                 ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../../divulgation/index.html" data-i18n="header.navbar.divulgationManagement">Gestión divulgación</a></li>' : ''}
-                ${ROL === 'ADMIN_GLOBAL' || ROL === 'USUARIO_PYP' ? '<li><a href="../../pyp/index.html" data-i18n="header.navbar.pypManagement">Gestión PyP</a></li>' : ''}
+                ${ROL === 'ADMIN_GLOBAL' || ROL === 'USUARIO_PYP' ? '<li><a href="../index.html" data-i18n="header.navbar.pypManagement">Gestión PyP</a></li>' : ''}
             </ul>
         </li>`;
     $listSections.innerHTML += intranet_section;
@@ -65,7 +66,7 @@ async function loadFormation(){
     const id = path.split('=')[1];
 
     if(id !== '0'){
-        const formation = await getFormationById(id)
+        const formation = await getPypById(id)
     
         const $errorMessage = $('#error-message-all')
         if (formation.error) {
@@ -75,16 +76,13 @@ async function loadFormation(){
         }
 
         $('#id').value = formation.id;
-        $('#title').value = formation.title;
-        $('#type').value = formation.type;
+        $('#name').value = formation.name;
         $('#link').value = formation.link;
-        $('#image-preview').src = SERVER_URL+formation.image;
+        $('#image-preview').src = formation.image;
         $('#description').value = formation.description;
-        $('#startYear').value = formation.startYear;
-        $('#endYear').value = formation.endYear;
     }else{
         $('#image-preview').style.display = 'none';
-        $('#delete-formation-button').style.display = 'none';
+        $('#delete-pyp-button').style.display = 'none';
     }
 }
 
@@ -175,32 +173,27 @@ $$('.year-input').forEach(input => {
     });
 });
 
-const $form = $('#formation-detail-form');
+const $form = $('#pyp-detail-form');
 
 $form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     $('#error-message-all').classList.remove('active');
-    $('#error-message-title').classList.remove('active');
-    $('#error-message-type').classList.remove('active');
-    $('#error-message-date').classList.remove('active');
+    $('#error-message-name').classList.remove('active');
     $('#error-message-link').classList.remove('active');
     $('#error-message-image').classList.remove('active');
     $('#error-message-description').classList.remove('active');
 
     const id = $('#id').value;
-    const title = $('#title').value;
-    const type = $('#type').value;
+    const name = $('#name').value;
     const link = $('#link').value;
     const description = $('#description').value;
-    const startYear = $('#startYear').value;
-    const endYear = $('#endYear').value;
     const image = {
         name: $('#image').value,
         file: $('#image').files[0] || null
     };
     
-    const ERRORS = validateFormation({id, title, type, link, description, image, startYear, endYear}, id !== '');
+    /* const ERRORS = validateFormation({id, title, type, link, description, image, startYear, endYear}, id !== '');
     if (Object.keys(ERRORS).length > 0) {
         Object.keys(ERRORS).forEach((key) => {
             const $errorMessage = $(`#error-message-${key}`);
@@ -208,13 +201,13 @@ $form.addEventListener('submit', async (e) => {
             $errorMessage.classList.add('active');
         });
         return;
-    }
+    } */
     
     let response;
     if(id === ''){
-        response = await createFormation({title, type, link, description, image, startYear, endYear});
+        response = await createPyp({name, description, link, image});
     }else{
-        response = await updateFormation({id, title, type, link, description, image, startYear, endYear});
+        response = await updatePyp({id, name, description, link, image});
     }
 
     if(Object.keys(response).length === 0){
@@ -229,11 +222,11 @@ $form.addEventListener('submit', async (e) => {
     });
 });
 
-const $deleteUserButton = $('#delete-formation-button');
+const $deleteUserButton = $('#delete-pyp-button');
 $deleteUserButton.onclick = async (e) => {
     const id = $('#id').value;
 
-    const response = await deleteFormation(id);
+    const response = await deletePyp(id);
     if(Object.keys(response).length === 0){
         location.href = '../index.html';
         return;

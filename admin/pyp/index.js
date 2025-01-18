@@ -1,15 +1,20 @@
 import { getPageLanguage, setPageLanguage } from "../../lang/i18n.js";
+import { getFormations } from "../../queries/formations.js";
 import config from "../../config.js";
-import { getDivulgationById } from "../../queries/divulgations.js";
+import { getDivulgations } from "../../queries/divulgations.js";
+import { getPyp } from "../../queries/pyp.js";
+
+if(!sessionStorage.getItem('token') || sessionStorage.getItem('ROL') !== 'ADMIN_GLOBAL'){
+    location.href = '../../login/index.html';
+}
 
 const $ = (elem) => document.querySelector(elem);
 const $$ = (elem) => document.querySelectorAll(elem);
 
 const $listSections = $('.list-sections');
 const $logInLink = $('#log-in-link');
-
-const ROLS = ['ADMIN_GLOBAL','GESTOR_CATALOGO','USUARIO_PYP'];
 const SERVER_URL = config.SERVER_URL;
+const ROLS = ['ADMIN_GLOBAL','GESTOR_CATALOGO','USUARIO_PYP'];
 if(sessionStorage.getItem('token') && sessionStorage.getItem('ROL')){
     const ROL = sessionStorage.getItem('ROL');
     if(!ROLS.includes(ROL)){
@@ -22,15 +27,15 @@ if(sessionStorage.getItem('token') && sessionStorage.getItem('ROL')){
         <li class="list-item-with-children" id="list-item-with-children">
             <a href="javascript:void(0)" class="list-item-with-image">
                 <span data-i18n="header.navbar.intranet">Intranet</span>
-                <img src="../../images/arrow_right_icon.svg" width="15px" class="rotate-90-deg inverted"/>
+                <img src="/images/arrow_right_icon.svg" width="15px" class="rotate-90-deg inverted"/>
             </a>
             <ul class="sublist" id="sublist">
-                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../../admin/users/index.html" data-i18n="header.navbar.userManagement">Gestión usuarios</a></li>' : ''}
-                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../../admin/members/index.html" data-i18n="header.navbar.membersManagement">Gestión miembros</a></li>' : ''}
-                ${ROL === 'ADMIN_GLOBAL' || ROL === 'GESTOR_CATALOGO' ? '<li><a href="../../admin/catalog/index.html" data-i18n="header.navbar.catalogManagement">Gestión catálogo</a></li>' : ''}
-                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../../admin/formation/index.html" data-i18n="header.navbar.formationManagement">Gestión formación</a></li>' : ''}
-                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../../admin/divulgation/index.html" data-i18n="header.navbar.divulgationManagement">Gestión divulgación</a></li>' : ''}
-                ${ROL === 'ADMIN_GLOBAL' || ROL === 'USUARIO_PYP' ? '<li><a href="../../admin/pyp/index.html" data-i18n="header.navbar.pypManagement">Gestión PyP</a></li>' : ''}
+                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../users/index.html" data-i18n="header.navbar.userManagement">Gestión usuarios</a></li>' : ''}
+                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../members/index.html" data-i18n="header.navbar.membersManagement">Gestión miembros</a></li>' : ''}
+                ${ROL === 'ADMIN_GLOBAL' || ROL === 'GESTOR_CATALOGO' ? '<li><a href="../catalog/index.html" data-i18n="header.navbar.catalogManagement">Gestión catálogo</a></li>' : ''}
+                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../formation/index.html" data-i18n="header.navbar.formationManagement">Gestión formación</a></li>' : ''}
+                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../divulgation/index.html" data-i18n="header.navbar.divulgationManagement">Gestión divulgación</a></li>' : ''}
+                ${ROL === 'ADMIN_GLOBAL' || ROL === 'USUARIO_PYP' ? '<li><a href="javascript:void(0);" data-i18n="header.navbar.pypManagement">Gestión PyP</a></li>' : ''}
             </ul>
         </li>`;
     $listSections.innerHTML += intranet_section;
@@ -48,37 +53,42 @@ if(sessionStorage.getItem('token') && sessionStorage.getItem('ROL')){
 
 setPageLanguage();
 
-const path = window.location.search;
+async function loadPyp(){
+    const pyps = await getPyp();
+    const $pypTable = $('#pyp-management-table > tbody');
 
-const REGEX_PATH = /\?id=[0-9]+$/;
-
-if (!REGEX_PATH.test(path)) {
-    window.location.href = '../../index.html'
-}
-
-async function loadDivulgation(){
-    const id = path.split('=')[1];
-
-    if(id !== '0'){
-        const divulgation = await getDivulgationById(id)
-    
-        const $errorMessage = $('#error-message-all')
-        if (divulgation.error) {
-            $errorMessage.textContent = divulgation.error;
-            $errorMessage.classList.add('active');
-            return;
-        }
-
-        $('#divulgation-detail-title').textContent = divulgation.title;
-        //$('#divulgation-detail-image').src = divulgation.image;
-        $('#divulgation-detail-content').innerHTML = divulgation.content;
+    if(!pyps.error){
+        pyps.forEach(pyp => {
+            $pypTable.innerHTML += `
+                <tr data-pyp-id="${pyp.id}">
+                    <td>${pyp.name}</td>
+                    <td style="text-overflow: ellipsis;">${pyp.description?.substring(0, 50) || ''}...</td>
+                    <td>
+                        ${pyp.link ? `<a href="${pyp.link}" target="_blank">Enlace</a>` : 'Sin enlace'}
+                    </td>
+                    <td style="text-align:center;">
+                        <a href="${pyp.image}" target="_blank">
+                            <img src="${pyp.image}" width="50px"/>
+                        </a>
+                    </td>
+                    <td class="actions-cell-table">
+                        <a class="access-pyp-link" href="./detail/index.html?id=${pyp.id}">
+                            <img src="../../images/edit-icon.svg" width="20px" class="inverted"/>
+                        </a>
+                    </td>
+                </tr>
+            `;
+        });
     }else{
-        $('#error-message-all').textContent = 'Error'
-        $('#error-message-all').classList.add('active');
+        $pypTable.innerHTML = `
+            <tr>
+                <td colspan="4" class="error-message">${members.error}</td>
+            </tr>
+        `;
     }
 }
 
-loadDivulgation();
+loadPyp();
 
 $('#button-menu').addEventListener('click', (e) => {
     $listSections.classList.toggle('active');
@@ -121,6 +131,7 @@ $$listItemWithSubmenu.forEach(el => {
         }
     });
 })
+    
 
 window.addEventListener('resize', () => {
     if (window.matchMedia('(min-width: 1050px)').matches) {

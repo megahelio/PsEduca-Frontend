@@ -182,6 +182,19 @@ const locales = {
       image: "Imagen",
       tagsHelp: "* Introduce las etiquetas separadas por comas",
       newDocument: "Nuevo documento",
+    },
+    pyp: {
+      title: "Pruebas y programas",
+      createPyp: "Crear prueba o programa",
+      name: "Nombre",
+      description: "Descripción",
+      link: "Link",
+      image: "Imagen",
+      access: "Acceso",
+      save: "Guardar",
+      delete: "Eliminar",
+      titleDetail: "Información de la prueba o programa",
+      manageAccess: "Gestión de acceso",
     }
 
   },
@@ -368,6 +381,19 @@ const locales = {
       image: "Image",
       tagsHelp: "* Enter the tags separated by commas",
       newDocument: "New document",
+    },
+    pyp: {
+      title: "Tests and programs",
+      createPyp: "Create test or program",
+      name: "Name",
+      description: "Description",
+      link: "Link",
+      image: "Image",
+      access: "Access",
+      save: "Save",
+      delete: "Delete",
+      titleDetail: "Test or program detail",
+      manageAccess: "Access management",
     }
   },
 
@@ -553,6 +579,19 @@ const locales = {
       image: "Imaxe",
       tagsHelp: "* Introduce as etiquetas separadas por comas",
       newDocument: "Novo documento",
+    },
+    pyp: {
+      title: "Probas e programas",
+      createPyp: "Crear proba ou programa",
+      name: "Nome",
+      description: "Descrición",
+      link: "Link",
+      image: "Imaxe",
+      access: "Acceso",
+      save: "Gardar",
+      delete: "Eliminar",
+      titleDetail: "Información da proba ou programa",
+      manageAccess: "Xestión de acceso",
     }
   },
 };

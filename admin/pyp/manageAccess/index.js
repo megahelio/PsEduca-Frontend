@@ -2,6 +2,7 @@ import { getPageLanguage, setPageLanguage } from "../../../lang/i18n.js";
 import { createFormation, deleteFormation, getFormationById, updateFormation } from "../../../queries/formations.js";
 import { validateFormation } from "../../../validators/formation.js";
 import config from "../../../config.js";
+import { addPypAuth, createPyp, deletePyp, deletePypAuth, getPypAuth, getPypById, updatePyp } from "../../../queries/pyp.js";
 
 if(!sessionStorage.getItem('token') || sessionStorage.getItem('ROL') !== 'ADMIN_GLOBAL'){
     location.href = '../../../login/index.html';
@@ -33,9 +34,9 @@ if(sessionStorage.getItem('token') && sessionStorage.getItem('ROL')){
                 ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../../users/index.html" data-i18n="header.navbar.userManagement">Gestión usuarios</a></li>' : ''}
                 ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../../members/index.html" data-i18n="header.navbar.membersManagement">Gestión miembros</a></li>' : ''}
                 ${ROL === 'ADMIN_GLOBAL' || ROL === 'GESTOR_CATALOGO' ? '<li><a href="../../catalog/index.html" data-i18n="header.navbar.catalogManagement">Gestión catálogo</a></li>' : ''}
-                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../index.html" data-i18n="header.navbar.formationManagement">Gestión formación</a></li>' : ''}
+                ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../../formation/index.html" data-i18n="header.navbar.formationManagement">Gestión formación</a></li>' : ''}
                 ${ROL === 'ADMIN_GLOBAL' ? '<li><a href="../../divulgation/index.html" data-i18n="header.navbar.divulgationManagement">Gestión divulgación</a></li>' : ''}
-                ${ROL === 'ADMIN_GLOBAL' || ROL === 'USUARIO_PYP' ? '<li><a href="../../pyp/index.html" data-i18n="header.navbar.pypManagement">Gestión PyP</a></li>' : ''}
+                ${ROL === 'ADMIN_GLOBAL' || ROL === 'USUARIO_PYP' ? '<li><a href="../index.html" data-i18n="header.navbar.pypManagement">Gestión PyP</a></li>' : ''}
             </ul>
         </li>`;
     $listSections.innerHTML += intranet_section;
@@ -53,42 +54,99 @@ if(sessionStorage.getItem('token') && sessionStorage.getItem('ROL')){
 
 setPageLanguage();
 
-const path = window.location.search;
+function checkboxOnChange(e){
+    const {userId, pypId} = e.target.dataset;
+    const checked = e.target.checked;
 
-const REGEX_PATH = /\?id=[0-9]+$/;
-
-if (!REGEX_PATH.test(path)) {
-    window.location.href = '../../../index.html'
-}
-
-async function loadFormation(){
-    const id = path.split('=')[1];
-
-    if(id !== '0'){
-        const formation = await getFormationById(id)
-    
-        const $errorMessage = $('#error-message-all')
-        if (formation.error) {
-            $errorMessage.textContent = formation.error;
-            $errorMessage.classList.add('active');
-            return;
-        }
-
-        $('#id').value = formation.id;
-        $('#title').value = formation.title;
-        $('#type').value = formation.type;
-        $('#link').value = formation.link;
-        $('#image-preview').src = SERVER_URL+formation.image;
-        $('#description').value = formation.description;
-        $('#startYear').value = formation.startYear;
-        $('#endYear').value = formation.endYear;
+    if(checked){
+        addPypAuth({
+            idUser: userId,
+            idPyPItem: pypId
+        });
     }else{
-        $('#image-preview').style.display = 'none';
-        $('#delete-formation-button').style.display = 'none';
+        deletePypAuth({
+            idUser: userId,
+            idPyPItem: pypId
+        });
     }
+
+    console.log(userId, pypId, checked);
 }
 
-loadFormation();
+function createTablePyp({ALL_PYP, ALL_USERS, currentPyPAuthorizations}){
+    const $table = document.createElement('table');
+    $table.classList.add('pyp-management-table');
+
+    // Thead
+    const $thead = document.createElement('thead');
+    const $trHead = document.createElement('tr');
+    const $thUsername = document.createElement('th');
+    $thUsername.textContent = 'Nombre de usuario';
+    $trHead.appendChild($thUsername);
+
+    ALL_PYP.forEach(pyp => {
+        const $thPyp = document.createElement('th');
+        $thPyp.textContent = pyp.titlePyPItem;
+        $trHead.appendChild($thPyp);
+    });
+
+    $thead.appendChild($trHead);
+
+    // Tbody
+    const $tbody = document.createElement('tbody');
+
+    ALL_USERS.forEach(user => {
+        const $tr = document.createElement('tr');
+        $tr.dataset.userId = user.idUser;
+
+        const $tdUsername = document.createElement('td');
+        $tdUsername.textContent = user.userName;
+        $tr.appendChild($tdUsername);
+
+        ALL_PYP.forEach(pyp => {
+            const $tdPyp = document.createElement('td');
+            const $input = document.createElement('input');
+            $input.type = 'checkbox';
+            $input.classList.add('checkbox-input-auth');
+            $input.dataset.userId = user.idUser;
+            $input.dataset.pypId = pyp.idPyPItem;
+            $input.addEventListener('change', checkboxOnChange);
+
+            if(currentPyPAuthorizations.some(auth => auth.idPyPItem === pyp.idPyPItem && auth.idUser === user.idUser)){
+                $input.checked = true;
+            }
+
+            $tdPyp.appendChild($input);
+            $tr.appendChild($tdPyp);
+        });
+
+        $tbody.appendChild($tr);
+    });
+
+    $table.appendChild($thead);
+    $table.appendChild($tbody);
+
+    return $table;
+}
+
+
+async function loadAuth(){
+    const response = await getPypAuth()
+
+    const $errorMessage = $('#error-message-all')
+    if (response.error) {
+        $errorMessage.textContent = response.error;
+        $errorMessage.classList.add('active');
+        return;
+    }
+
+    const $table = createTablePyp(response);
+    $('#pyp-table-access-container').appendChild($table);
+
+    console.log(response);
+}
+
+loadAuth();
 
 $('#button-menu').addEventListener('click', (e) => {
     $listSections.classList.toggle('active');
@@ -173,93 +231,4 @@ $$('.year-input').forEach(input => {
     input.addEventListener('input', (e) => {
         e.target.value = e.target.value.replace(/[^0-9]/g, '').slice(0, 4);
     });
-});
-
-const $form = $('#formation-detail-form');
-
-$form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    $('#error-message-all').classList.remove('active');
-    $('#error-message-title').classList.remove('active');
-    $('#error-message-type').classList.remove('active');
-    $('#error-message-date').classList.remove('active');
-    $('#error-message-link').classList.remove('active');
-    $('#error-message-image').classList.remove('active');
-    $('#error-message-description').classList.remove('active');
-
-    const id = $('#id').value;
-    const title = $('#title').value;
-    const type = $('#type').value;
-    const link = $('#link').value;
-    const description = $('#description').value;
-    const startYear = $('#startYear').value;
-    const endYear = $('#endYear').value;
-    const image = {
-        name: $('#image').value,
-        file: $('#image').files[0] || null
-    };
-    
-    const ERRORS = validateFormation({id, title, type, link, description, image, startYear, endYear}, id !== '');
-    if (Object.keys(ERRORS).length > 0) {
-        Object.keys(ERRORS).forEach((key) => {
-            const $errorMessage = $(`#error-message-${key}`);
-            $errorMessage.textContent = ERRORS[key];
-            $errorMessage.classList.add('active');
-        });
-        return;
-    }
-    
-    let response;
-    if(id === ''){
-        response = await createFormation({title, type, link, description, image, startYear, endYear});
-    }else{
-        response = await updateFormation({id, title, type, link, description, image, startYear, endYear});
-    }
-
-    if(Object.keys(response).length === 0){
-        location.href = '../index.html';
-        return;
-    }
-
-    Object.keys(response).forEach((key) => {
-        const $errorMessage = $(`#error-message-${key}`);
-        $errorMessage.textContent = response[key];
-        $errorMessage.classList.add('active');
-    });
-});
-
-const $deleteUserButton = $('#delete-formation-button');
-$deleteUserButton.onclick = async (e) => {
-    const id = $('#id').value;
-
-    const response = await deleteFormation(id);
-    if(Object.keys(response).length === 0){
-        location.href = '../index.html';
-        return;
-    }
-
-    Object.keys(response).forEach((key) => {
-        const $errorMessage = $(`#error-message-${key}`);
-        $errorMessage.textContent = response[key];
-        $errorMessage.classList.add('active');
-    });
-};
-
-$('#image').addEventListener('change', (e) => {
-    const file = e.target.files[0] || null;
-
-    if(!file){
-        return;
-    }
-
-    $('#image-input-span').textContent = file.name;
-    const reader = new FileReader();
-
-    reader.onload = function (e) {
-        $('#image-preview').src = e.target.result;
-        $('#image-preview').style.display = 'block';
-    }
-
-    reader.readAsDataURL(file);
 });
