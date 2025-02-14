@@ -5,14 +5,19 @@ const pageLanguage = sessionStorage.getItem('language') || 'es';
 const SERVER_URL = config.SERVER_URL;
 
 export async function getPyp() {
-    const response = await fetch(`${SERVER_URL}?controller=pypItem&action=list`, {
+    const formData = new FormData();
+    formData.append('controller', 'pypItem');
+    formData.append('action', 'list');
+
+    const response = await fetch(SERVER_URL, {
         method: 'POST',
+        body: formData,
         headers: {
             Authorization: `Bearer ${sessionStorage.getItem('token')}`
         }
     });
 
-    if(!response.ok){
+    if (!response.ok) {
         return {
             error: ERROR_MESSAGES[pageLanguage]['SERVER_ERROR'] || 'Error'
         }
@@ -20,7 +25,7 @@ export async function getPyp() {
 
     const { ok, code, resource } = await response.json();
 
-    if(!ok){
+    if (!ok) {
         return {
             error: ERROR_MESSAGES[pageLanguage][code[0]] || 'Error'
         }
@@ -37,10 +42,12 @@ export async function getPyp() {
 
 export async function getPypById(id) {
     const formData = new FormData();
+    formData.append('controller', 'pypItem');
+    formData.append('action', 'get');
     formData.append('id', id);
 
-    try{
-        const response = await fetch(`${SERVER_URL}?controller=pypItem&action=get`, {
+    try {
+        const response = await fetch(SERVER_URL, {
             method: 'POST',
             body: formData,
             headers: {
@@ -48,7 +55,7 @@ export async function getPypById(id) {
             }
         });
 
-        if(!response.ok){
+        if (!response.ok) {
             return {
                 error: ERROR_MESSAGES[pageLanguage]['SERVER_ERROR'] || 'Error'
             }
@@ -56,7 +63,7 @@ export async function getPypById(id) {
 
         const { ok, code, resource } = await response.json();
 
-        if(!ok){
+        if (!ok) {
             return {
                 error: ERROR_MESSAGES[pageLanguage][code[0]] || 'Error'
             }
@@ -69,7 +76,7 @@ export async function getPypById(id) {
             link: resource.externalURL,
             image: SERVER_URL + resource.imageURL
         }
-    }catch(error){
+    } catch (error) {
         return {
             error: ERROR_MESSAGES[pageLanguage]['SERVER_ERROR'] || 'Error'
         }
@@ -77,14 +84,19 @@ export async function getPypById(id) {
 }
 
 export async function getPypAuth() {
-    const response = await fetch(`${SERVER_URL}?controller=pypAuth&action=list`, {
+    const formData = new FormData();
+    formData.append('controller', 'pypAuth');
+    formData.append('action', 'list');
+
+    const response = await fetch(SERVER_URL, {
         method: 'POST',
+        body: formData,
         headers: {
             Authorization: `Bearer ${sessionStorage.getItem('token')}`
         }
     });
 
-    if(!response.ok){
+    if (!response.ok) {
         return {
             error: ERROR_MESSAGES[pageLanguage]['SERVER_ERROR'] || 'Error'
         }
@@ -92,7 +104,7 @@ export async function getPypAuth() {
 
     const { ok, code, resource } = await response.json();
 
-    if(!ok){
+    if (!ok) {
         return {
             error: ERROR_MESSAGES[pageLanguage][code[0]] || 'Error'
         }
@@ -124,13 +136,15 @@ export async function getPypAuth() {
     };
 }
 
-export async function addPypAuth({idUser, idPyPItem}) {
+export async function addPypAuth({ idUser, idPyPItem }) {
     const formData = new FormData();
+    formData.append('controller', 'pypAuth');
+    formData.append('action', 'add');
     formData.append('idUser', idUser);
     formData.append('idPyPItem', idPyPItem);
 
-    try{
-        const response = await fetch(`${SERVER_URL}?controller=pypAuth&action=add`, {
+    try {
+        const response = await fetch(SERVER_URL, {
             method: 'POST',
             body: formData,
             headers: {
@@ -146,27 +160,29 @@ export async function addPypAuth({idUser, idPyPItem}) {
 
         const { ok, code } = await response.json();
 
-        if(!ok){
+        if (!ok) {
             return {
                 error: ERROR_MESSAGES[pageLanguage][code[0]] || 'Error'
             }
         }
 
         return {}
-    }catch(error){
+    } catch (error) {
         return {
             error: ERROR_MESSAGES[pageLanguage]['SERVER_ERROR'] || 'Error'
         }
     }
 }
 
-export async function deletePypAuth({idUser, idPyPItem}) {
+export async function deletePypAuth({ idUser, idPyPItem }) {
     const formData = new FormData();
+    formData.append('controller', 'pypAuth');
+    formData.append('action', 'delete');
     formData.append('idUser', idUser);
     formData.append('idPyPItem', idPyPItem);
 
-    try{
-        const response = await fetch(`${SERVER_URL}?controller=pypAuth&action=delete`, {
+    try {
+        const response = await fetch(SERVER_URL, {
             method: 'POST',
             body: formData,
             headers: {
@@ -182,29 +198,31 @@ export async function deletePypAuth({idUser, idPyPItem}) {
 
         const { ok, code } = await response.json();
 
-        if(!ok){
+        if (!ok) {
             return {
                 error: ERROR_MESSAGES[pageLanguage][code[0]] || 'Error'
             }
         }
 
         return {}
-    }catch(error){
+    } catch (error) {
         return {
             error: ERROR_MESSAGES[pageLanguage]['SERVER_ERROR'] || 'Error'
         }
     }
 }
 
-export async function createPyp({name, description, link, image}) {
+export async function createPyp({ name, description, link, image }) {
     const formData = new FormData();
+    formData.append('controller', 'pypItem');
+    formData.append('action', 'add');
     formData.append('title', name);
     formData.append('description', description);
     formData.append('externalURL', link);
     formData.append('image', image.file);
 
-    try{
-        const response = await fetch(`${SERVER_URL}?controller=pypItem&action=add`, {
+    try {
+        const response = await fetch(SERVER_URL, {
             method: 'POST',
             body: formData,
             headers: {
@@ -220,30 +238,32 @@ export async function createPyp({name, description, link, image}) {
 
         const { ok, code } = await response.json();
 
-        if(!ok){
+        if (!ok) {
             return {
                 error: ERROR_MESSAGES[pageLanguage][code[0]] || 'Error'
             }
         }
 
         return {}
-    }catch(error){
+    } catch (error) {
         return {
-            error: ERROR_MESSAGES[pageLanguage]['SERVER_ERROR'] || 'Error'
+            error: ERROR_MESSAGES[pageLanguage]['ERROR_CREATING_PYP'] || 'Error'
         }
     }
 }
 
-export async function updatePyp({id, name, description, link, image}) {
+export async function updatePyp({ id, name, description, link, image }) {
     const formData = new FormData();
+    formData.append('controller', 'pypItem');
+    formData.append('action', 'edit');
     formData.append('id', id);
     formData.append('title', name);
     formData.append('description', description);
     formData.append('externalURL', link);
     formData.append('image', image.file);
 
-    try{
-        const response = await fetch(`${SERVER_URL}?controller=pypItem&action=edit`, {
+    try {
+        const response = await fetch(SERVER_URL, {
             method: 'POST',
             body: formData,
             headers: {
@@ -259,14 +279,14 @@ export async function updatePyp({id, name, description, link, image}) {
 
         const { ok, code } = await response.json();
 
-        if(!ok){
+        if (!ok) {
             return {
                 error: ERROR_MESSAGES[pageLanguage][code[0]] || 'Error'
             }
         }
 
         return {}
-    }catch(error){
+    } catch (error) {
         return {
             error: ERROR_MESSAGES[pageLanguage]['SERVER_ERROR'] || 'Error'
         }
@@ -275,10 +295,12 @@ export async function updatePyp({id, name, description, link, image}) {
 
 export async function deletePyp(id) {
     const formData = new FormData();
+    formData.append('controller', 'pypItem');
+    formData.append('action', 'delete');
     formData.append('id', id);
 
-    try{
-        const response = await fetch(`${SERVER_URL}?controller=pypItem&action=delete`, {
+    try {
+        const response = await fetch(SERVER_URL, {
             method: 'POST',
             body: formData,
             headers: {
@@ -294,14 +316,14 @@ export async function deletePyp(id) {
 
         const { ok, code } = await response.json();
 
-        if(!ok){
+        if (!ok) {
             return {
                 error: ERROR_MESSAGES[pageLanguage][code[0]] || 'Error'
             }
         }
 
         return {}
-    }catch(error){
+    } catch (error) {
         return {
             error: ERROR_MESSAGES[pageLanguage]['SERVER_ERROR'] || 'Error'
         }

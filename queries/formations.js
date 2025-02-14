@@ -8,12 +8,6 @@ const SERVER_URL = config.SERVER_URL;
 export async function getMappedFormations() {
     const formations = await getFormations();
 
-    const ERROR_FLAG = false;
-    if(ERROR_FLAG){
-        return {
-            error: ERROR_MESSAGES[pageLanguage].SERVER_ERROR || 'Error'
-        };
-    }
     const CURRENT_YEAR = new Date().getFullYear();
 
     const mappedFormations = Object.groupBy(formations, (formation) => (formation.endYear === null || parseInt(formation.endYear) >= CURRENT_YEAR) ? 'actual' : 'past');
@@ -23,14 +17,19 @@ export async function getMappedFormations() {
 }
 
 export async function getFormations() {
-    const response = await fetch(`${SERVER_URL}?controller=education&action=list`, {
+    const formData = new FormData();
+    formData.append('controller', 'education');
+    formData.append('action', 'list');
+
+    const response = await fetch(SERVER_URL, {
         method: 'POST',
+        body: formData,
         headers: {
             Authorization: `Bearer ${sessionStorage.getItem('token')}`
         }
     });
 
-    if(!response.ok){
+    if (!response.ok) {
         return {
             error: ERROR_MESSAGES[pageLanguage]['SERVER_ERROR'] || 'Error'
         }
@@ -38,7 +37,7 @@ export async function getFormations() {
 
     const { ok, code, resource } = await response.json();
 
-    if(!ok){
+    if (!ok) {
         return {
             error: ERROR_MESSAGES[pageLanguage][code[0]] || 'Error'
         }
@@ -53,15 +52,17 @@ export async function getFormations() {
         image: formation.imageURL,
         startYear: formation.initYear,
         endYear: formation.endYear
-    })).sort((a,b) => a.type.localeCompare(b.type));
+    })).sort((a, b) => a.type.localeCompare(b.type));
 }
 
 export async function getFormationById(id) {
     const formData = new FormData();
+    formData.append('controller', 'education');
+    formData.append('action', 'get');
     formData.append('id', id);
 
-    try{
-        const response = await fetch(`${SERVER_URL}?controller=education&action=get`, {
+    try {
+        const response = await fetch(SERVER_URL, {
             method: 'POST',
             body: formData,
             headers: {
@@ -69,7 +70,7 @@ export async function getFormationById(id) {
             }
         });
 
-        if(!response.ok){
+        if (!response.ok) {
             return {
                 error: ERROR_MESSAGES[pageLanguage]['SERVER_ERROR'] || 'Error'
             }
@@ -77,7 +78,7 @@ export async function getFormationById(id) {
 
         const { ok, code, resource } = await response.json();
 
-        if(!ok){
+        if (!ok) {
             return {
                 error: ERROR_MESSAGES[pageLanguage][code[0]] || 'Error'
             }
@@ -93,7 +94,7 @@ export async function getFormationById(id) {
             startYear: resource.initYear,
             endYear: resource.endYear
         }
-    }catch(error){
+    } catch (error) {
         return {
             error: ERROR_MESSAGES[pageLanguage]['SERVER_ERROR'] || 'Error'
         }
@@ -102,6 +103,8 @@ export async function getFormationById(id) {
 
 export async function createFormation({ title, description, type, link, image, startYear, endYear }) {
     const formData = new FormData();
+    formData.append('controller', 'education');
+    formData.append('action', 'add');
     formData.append('title', title);
     formData.append('description', description);
     formData.append('type', type);
@@ -110,8 +113,8 @@ export async function createFormation({ title, description, type, link, image, s
     formData.append('initYear', startYear);
     formData.append('endYear', endYear);
 
-    try{
-        const response = await fetch(`${SERVER_URL}?controller=education&action=add`, {
+    try {
+        const response = await fetch(SERVER_URL, {
             method: 'POST',
             body: formData,
             headers: {
@@ -135,6 +138,8 @@ export async function createFormation({ title, description, type, link, image, s
 
 export async function updateFormation({ id, title, description, type, link, image, startYear, endYear }) {
     const formData = new FormData();
+    formData.append('controller', 'education');
+    formData.append('action', 'edit');
     formData.append('id', id);
     formData.append('title', title);
     formData.append('description', description);
@@ -144,8 +149,8 @@ export async function updateFormation({ id, title, description, type, link, imag
     formData.append('initYear', startYear);
     formData.append('endYear', endYear);
 
-    try{
-        const response = await fetch(`${SERVER_URL}?controller=education&action=edit`, {
+    try {
+        const response = await fetch(SERVER_URL, {
             method: 'POST',
             body: formData,
             headers: {
@@ -160,7 +165,7 @@ export async function updateFormation({ id, title, description, type, link, imag
         }
 
         return {}
-    }catch(error){
+    } catch (error) {
         return {
             error: ERROR_MESSAGES[pageLanguage]['ERROR_UPDATING_FORMATION'] || 'Error'
         }
@@ -169,10 +174,12 @@ export async function updateFormation({ id, title, description, type, link, imag
 
 export async function deleteFormation(id) {
     const formData = new FormData();
+    formData.append('controller', 'education');
+    formData.append('action', 'delete');
     formData.append('id', id);
 
-    try{
-        const response = await fetch(`${SERVER_URL}?controller=education&action=delete`, {
+    try {
+        const response = await fetch(SERVER_URL, {
             method: 'POST',
             body: formData,
             headers: {
