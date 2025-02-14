@@ -5,13 +5,16 @@ const pageLanguage = sessionStorage.getItem('language') || 'es';
 const SERVER_URL = config.SERVER_URL;
 
 export async function getCatalog() {
-    const FRONTEND_URL = 'http://localhost:5500';
+    const formData = new FormData();
+    formData.append('controller', 'catalogue');
+    formData.append('action', 'list');
 
-    const response = await fetch(`${SERVER_URL}?controller=catalogue&action=list`, {
-        method: 'POST'
+    const response = await fetch(SERVER_URL, {
+        method: 'POST',
+        body: formData
     });
 
-    if(!response.ok){
+    if (!response.ok) {
         return {
             error: ERROR_MESSAGES[pageLanguage]['SERVER_ERROR'] || 'Error'
         }
@@ -19,7 +22,7 @@ export async function getCatalog() {
 
     const { ok, code, resource } = await response.json();
 
-    if(!ok){
+    if (!ok) {
         return {
             error: ERROR_MESSAGES[pageLanguage][code[0]] || 'Error'
         }
@@ -58,10 +61,12 @@ export async function getCatalog() {
 
 export async function getCatalogById(id) {
     const formData = new FormData();
+    formData.append('controller', 'catalogue');
+    formData.append('action', 'get');
     formData.append('id', id);
 
-    try{
-        const response = await fetch(`${SERVER_URL}?controller=catalogue&action=get`, {
+    try {
+        const response = await fetch(SERVER_URL, {
             method: 'POST',
             body: formData,
             headers: {
@@ -69,7 +74,7 @@ export async function getCatalogById(id) {
             }
         });
 
-        if(!response.ok){
+        if (!response.ok) {
             return {
                 error: ERROR_MESSAGES[pageLanguage]['SERVER_ERROR'] || 'Error'
             }
@@ -77,7 +82,7 @@ export async function getCatalogById(id) {
 
         const { ok, code, resource } = await response.json();
 
-        if(!ok){
+        if (!ok) {
             return {
                 error: ERROR_MESSAGES[pageLanguage][code[0]] || 'Error'
             }
@@ -112,15 +117,17 @@ export async function getCatalogById(id) {
             format: resource.formats,
             application: resource.applicationModes,
         }
-    }catch(error){
+    } catch (error) {
         return {
             error: ERROR_MESSAGES[pageLanguage]['SERVER_ERROR'] || 'Error'
         }
     }
 }
 
-export async function addCatalog({acronym, name, edadAnhoMin, edadMesMin, edadAnhoMax, edadMesMax, image, authors, time, description, observations, area, tags, resourceType, format, application}) {
+export async function addCatalog({ acronym, name, edadAnhoMin, edadMesMin, edadAnhoMax, edadMesMax, image, authors, time, description, observations, area, tags, resourceType, format, application }) {
     const formData = new FormData();
+    formData.append('controller', 'catalogue');
+    formData.append('action', 'add');
     formData.append('acronym', acronym);
     formData.append('name', name);
     formData.append('yearMinAge', edadAnhoMin);
@@ -138,8 +145,8 @@ export async function addCatalog({acronym, name, edadAnhoMin, edadMesMin, edadAn
     formData.append('formats', format);
     formData.append('applicationModes', application);
 
-    try{
-        const response = await fetch(`${SERVER_URL}?controller=catalogue&action=add`, {
+    try {
+        const response = await fetch(SERVER_URL, {
             method: 'POST',
             body: formData,
             headers: {
@@ -147,7 +154,7 @@ export async function addCatalog({acronym, name, edadAnhoMin, edadMesMin, edadAn
             }
         });
 
-        if(!response.ok){
+        if (!response.ok) {
             return {
                 error: ERROR_MESSAGES[pageLanguage]['SERVER_ERROR'] || 'Error'
             }
@@ -155,22 +162,24 @@ export async function addCatalog({acronym, name, edadAnhoMin, edadMesMin, edadAn
 
         const { ok, code } = await response.json();
 
-        if(!ok){
+        if (!ok) {
             return {
                 error: ERROR_MESSAGES[pageLanguage][code[0]] || 'Error'
             }
         }
 
         return {}
-    } catch(error){
+    } catch (error) {
         return {
             error: ERROR_MESSAGES[pageLanguage]['SERVER_ERROR'] || 'Error'
         }
     }
 }
 
-export async function editCatalog({id, acronym, name, edadAnhoMin, edadMesMin, edadAnhoMax, edadMesMax, image, authors, time, description, observations, area, tags, resourceType, format, application, links}) {
+export async function editCatalog({ id, acronym, name, edadAnhoMin, edadMesMin, edadAnhoMax, edadMesMax, image, authors, time, description, observations, area, tags, resourceType, format, application, links }) {
     const formData = new FormData();
+    formData.append('controller', 'catalogue');
+    formData.append('action', 'edit');
     formData.append('id', id);
     formData.append('acronym', acronym);
     formData.append('name', name);
@@ -189,23 +198,25 @@ export async function editCatalog({id, acronym, name, edadAnhoMin, edadMesMin, e
     formData.append('formats', format);
     formData.append('applicationModes', application);
 
-    try{
+    try {
         links.forEach(link => {
             const formDataLink = new FormData();
+            formDataLink.append('controller', 'catalogue');
+            formDataLink.append('action', 'addLink');
             formDataLink.append('catalogueItemId', id);
             formDataLink.append('name', link.name);
             formDataLink.append('link', link.link);
 
-            fetch(`${SERVER_URL}?controller=catalogue&action=addLink`, {
+            fetch(SERVER_URL, {
                 method: 'POST',
                 body: formDataLink,
                 headers: {
                     Authorization: `Bearer ${sessionStorage.getItem('token')}`
                 }
-            });            
+            });
         });
 
-        const response = await fetch(`${SERVER_URL}?controller=catalogue&action=edit`, {
+        const response = await fetch(SERVER_URL, {
             method: 'POST',
             body: formData,
             headers: {
@@ -213,7 +224,7 @@ export async function editCatalog({id, acronym, name, edadAnhoMin, edadMesMin, e
             }
         });
 
-        if(!response.ok){
+        if (!response.ok) {
             return {
                 error: ERROR_MESSAGES[pageLanguage]['SERVER_ERROR'] || 'Error'
             }
@@ -221,28 +232,30 @@ export async function editCatalog({id, acronym, name, edadAnhoMin, edadMesMin, e
 
         const { ok, code } = await response.json();
 
-        if(!ok){
+        if (!ok) {
             return {
                 error: ERROR_MESSAGES[pageLanguage][code[0]] || 'Error'
             }
         }
 
         return {}
-    } catch(error){
+    } catch (error) {
         return {
             error: ERROR_MESSAGES[pageLanguage]['SERVER_ERROR'] || 'Error'
         }
     }
 }
 
-export async function uploadFile({name, file, idResource}){
+export async function uploadFile({ name, file, idResource }) {
     const formData = new FormData();
+    formData.append('controller', 'catalogue');
+    formData.append('action', 'addFile');
     formData.append('file', file);
     formData.append('name', name);
     formData.append('catalogueItemId', idResource);
 
-    try{
-        const response = await fetch(`${SERVER_URL}?controller=catalogue&action=addFile`, {
+    try {
+        const response = await fetch(SERVER_URL, {
             method: 'POST',
             body: formData,
             headers: {
@@ -250,7 +263,7 @@ export async function uploadFile({name, file, idResource}){
             }
         });
 
-        if(!response.ok){
+        if (!response.ok) {
             return {
                 error: ERROR_MESSAGES[pageLanguage]['SERVER_ERROR'] || 'Error'
             }
@@ -258,27 +271,29 @@ export async function uploadFile({name, file, idResource}){
 
         const { ok, code } = await response.json();
 
-        if(!ok){
+        if (!ok) {
             return {
                 error: ERROR_MESSAGES[pageLanguage][code[0]] || 'Error'
             }
         }
 
         return {}
-    }catch(error){
+    } catch (error) {
         return {
             error: ERROR_MESSAGES[pageLanguage]['SERVER_ERROR'] || 'Error'
         }
     }
 }
 
-export async function deleteFile({fileId, idResource}){
+export async function deleteFile({ fileId, idResource }) {
     const formData = new FormData();
+    formData.append('controller', 'catalogue');
+    formData.append('action', 'deleteFile');
     formData.append('fileId', fileId);
     formData.append('catalogueItemId', idResource);
 
-    try{
-        const response = await fetch(`${SERVER_URL}?controller=catalogue&action=deleteFile`, {
+    try {
+        const response = await fetch(SERVER_URL, {
             method: 'POST',
             body: formData,
             headers: {
@@ -286,7 +301,7 @@ export async function deleteFile({fileId, idResource}){
             }
         });
 
-        if(!response.ok){
+        if (!response.ok) {
             return {
                 error: ERROR_MESSAGES[pageLanguage]['SERVER_ERROR'] || 'Error'
             }
@@ -294,28 +309,30 @@ export async function deleteFile({fileId, idResource}){
 
         const { ok, code } = await response.json();
 
-        if(!ok){
+        if (!ok) {
             return {
                 error: ERROR_MESSAGES[pageLanguage][code[0]] || 'Error'
             }
         }
 
         return {}
-    }catch(error){
+    } catch (error) {
         return {
             error: ERROR_MESSAGES[pageLanguage]['SERVER_ERROR'] || 'Error'
         }
     }
 }
 
-export async function addLink({name, link, idResource}) {
+export async function addLink({ name, link, idResource }) {
     const formData = new FormData();
+    formData.append('controller', 'catalogue');
+    formData.append('action', 'addLink');
     formData.append('name', name);
     formData.append('link', link);
     formData.append('catalogueItemId', idResource);
 
-    try{
-        const response = await fetch(`${SERVER_URL}?controller=catalogue&action=addLink`, {
+    try {
+        const response = await fetch(SERVER_URL, {
             method: 'POST',
             body: formData,
             headers: {
@@ -323,7 +340,7 @@ export async function addLink({name, link, idResource}) {
             }
         });
 
-        if(!response.ok){
+        if (!response.ok) {
             return {
                 error: ERROR_MESSAGES[pageLanguage]['SERVER_ERROR'] || 'Error'
             }
@@ -331,27 +348,29 @@ export async function addLink({name, link, idResource}) {
 
         const { ok, code } = await response.json();
 
-        if(!ok){
+        if (!ok) {
             return {
                 error: ERROR_MESSAGES[pageLanguage][code[0]] || 'Error'
             }
         }
 
         return {}
-    }catch(error){
+    } catch (error) {
         return {
             error: ERROR_MESSAGES[pageLanguage]['SERVER_ERROR'] || 'Error'
         }
     }
 }
 
-export async function deleteLink({linkId, idResource}) {
+export async function deleteLink({ linkId, idResource }) {
     const formData = new FormData();
+    formData.append('controller', 'catalogue');
+    formData.append('action', 'deleteLink');
     formData.append('linkId', linkId);
     formData.append('catalogueItemId', idResource);
 
-    try{
-        const response = await fetch(`${SERVER_URL}?controller=catalogue&action=deleteLink`, {
+    try {
+        const response = await fetch(SERVER_URL, {
             method: 'POST',
             body: formData,
             headers: {
@@ -359,7 +378,7 @@ export async function deleteLink({linkId, idResource}) {
             }
         });
 
-        if(!response.ok){
+        if (!response.ok) {
             return {
                 error: ERROR_MESSAGES[pageLanguage]['SERVER_ERROR'] || 'Error'
             }
@@ -367,14 +386,14 @@ export async function deleteLink({linkId, idResource}) {
 
         const { ok, code } = await response.json();
 
-        if(!ok){
+        if (!ok) {
             return {
                 error: ERROR_MESSAGES[pageLanguage][code[0]] || 'Error'
             }
         }
 
         return {}
-    }catch(error){
+    } catch (error) {
         return {
             error: ERROR_MESSAGES[pageLanguage]['SERVER_ERROR'] || 'Error'
         }

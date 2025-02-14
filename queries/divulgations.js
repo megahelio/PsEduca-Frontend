@@ -6,14 +6,19 @@ const pageLanguage = sessionStorage.getItem('language') || 'es';
 const SERVER_URL = config.SERVER_URL;
 
 export async function getDivulgations() {
-    const response = await fetch(`${SERVER_URL}?controller=outreach&action=list`, {
+    const formData = new FormData();
+    formData.append('controller', 'outreach');
+    formData.append('action', 'list');
+
+    const response = await fetch(SERVER_URL, {
         method: 'POST',
+        body: formData,
         headers: {
             Authorization: `Bearer ${sessionStorage.getItem('token')}`
         }
     });
 
-    if(!response.ok){
+    if (!response.ok) {
         return {
             error: ERROR_MESSAGES[pageLanguage]['SERVER_ERROR'] || 'Error'
         }
@@ -21,7 +26,7 @@ export async function getDivulgations() {
 
     const { ok, code, resource } = await response.json();
 
-    if(!ok){
+    if (!ok) {
         return {
             error: ERROR_MESSAGES[pageLanguage][code[0]] || 'Error'
         }
@@ -32,7 +37,7 @@ export async function getDivulgations() {
         title: divulgation.title,
         description: divulgation.description,
         type: divulgation.type,
-        link: divulgation.externalURL || (divulgation.fileURL? SERVER_URL + divulgation.fileURL.substring(1): null) || null,
+        link: divulgation.externalURL || (divulgation.fileURL ? SERVER_URL + divulgation.fileURL.substring(1) : null) || null,
         image: SERVER_URL + divulgation.imageURL,
         lastModified: divulgation.lastModified,
         content: divulgation.pageContent
@@ -41,10 +46,12 @@ export async function getDivulgations() {
 
 export async function getDivulgationById(id) {
     const formData = new FormData();
+    formData.append('controller', 'outreach');
+    formData.append('action', 'get');
     formData.append('id', id);
 
-    try{
-        const response = await fetch(`${SERVER_URL}?controller=outreach&action=get`, {
+    try {
+        const response = await fetch(SERVER_URL, {
             method: 'POST',
             body: formData,
             headers: {
@@ -52,7 +59,7 @@ export async function getDivulgationById(id) {
             }
         });
 
-        if(!response.ok){
+        if (!response.ok) {
             return {
                 error: ERROR_MESSAGES[pageLanguage]['SERVER_ERROR'] || 'Error'
             }
@@ -60,7 +67,7 @@ export async function getDivulgationById(id) {
 
         const { ok, code, resource } = await response.json();
 
-        if(!ok){
+        if (!ok) {
             return {
                 error: ERROR_MESSAGES[pageLanguage][code[0]] || 'Error'
             }
@@ -71,12 +78,12 @@ export async function getDivulgationById(id) {
             title: resource.title,
             description: resource.description,
             type: resource.type,
-            link: resource.externalURL || (resource.file? SERVER_URL + divulgation.fileURL.substring(1): null) || null,
+            link: resource.externalURL || (resource.file ? SERVER_URL + resource.fileURL.substring(1) : null) || null,
             image: SERVER_URL + resource.imageURL,
             lastModified: resource.lastModified,
             content: resource.pageContent
         }
-    }catch(error){
+    } catch (error) {
         return {
             error: ERROR_MESSAGES[pageLanguage]['SERVER_ERROR'] || 'Error'
         }
@@ -84,9 +91,9 @@ export async function getDivulgationById(id) {
 }
 
 export async function createDivulgation({ title, description, type, content, link, image, file }) {
-    console.log('createDivulgation', { title, description, type, content, link, image, file });
-
     const formData = new FormData();
+    formData.append('controller', 'outreach');
+    formData.append('action', 'add');
     formData.append('title', title);
     formData.append('description', description);
     formData.append('type', type);
@@ -95,7 +102,7 @@ export async function createDivulgation({ title, description, type, content, lin
     formData.append('image', image.file);
     formData.append('file', file.file);
 
-    if(type === 'LINK_EXTERNO'){
+    if (type === 'LINK_EXTERNO') {
         formData.delete('file');
         formData.delete('pageContent');
     } else if(type === 'PAGINA_INTERNA'){
@@ -106,8 +113,8 @@ export async function createDivulgation({ title, description, type, content, lin
         formData.delete('externalURL');
     }
 
-    try{
-        const response = await fetch(`${SERVER_URL}?controller=outreach&action=add`, {
+    try {
+        const response = await fetch(SERVER_URL, {
             method: 'POST',
             body: formData,
             headers: {
@@ -131,6 +138,8 @@ export async function createDivulgation({ title, description, type, content, lin
 
 export async function updateDivulgation({ id, title, description, type, content, link, image, file }) {
     const formData = new FormData();
+    formData.append('controller', 'outreach');
+    formData.append('action', 'edit');
     formData.append('id', id);
     formData.append('title', title);
     formData.append('description', description);
@@ -140,7 +149,7 @@ export async function updateDivulgation({ id, title, description, type, content,
     formData.append('image', image.file);
     formData.append('file', file.file);
 
-    if(type === 'LINK_EXTERNO'){
+    if (type === 'LINK_EXTERNO') {
         formData.delete('file');
         formData.delete('pageContent');
     } else if(type === 'PAGINA_INTERNA'){
@@ -151,8 +160,8 @@ export async function updateDivulgation({ id, title, description, type, content,
         formData.delete('externalURL');
     }
 
-    try{
-        const response = await fetch(`${SERVER_URL}?controller=outreach&action=edit`, {
+    try {
+        const response = await fetch(SERVER_URL, {
             method: 'POST',
             body: formData,
             headers: {
@@ -167,7 +176,7 @@ export async function updateDivulgation({ id, title, description, type, content,
         }
 
         return {}
-    }catch(error){
+    } catch (error) {
         return {
             error: ERROR_MESSAGES[pageLanguage]['ERROR_UPDATING_DIVULGATION'] || 'Error'
         }
@@ -176,10 +185,12 @@ export async function updateDivulgation({ id, title, description, type, content,
 
 export async function deleteDivulgation(id) {
     const formData = new FormData();
+    formData.append('controller', 'outreach');
+    formData.append('action', 'delete');
     formData.append('id', id);
 
-    try{
-        const response = await fetch(`${SERVER_URL}?controller=outreach&action=delete`, {
+    try {
+        const response = await fetch(SERVER_URL, {
             method: 'POST',
             body: formData,
             headers: {
