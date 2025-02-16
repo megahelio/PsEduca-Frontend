@@ -1,4 +1,4 @@
-import { getPageLanguage, setPageLanguage } from "../../lang/i18n.js";
+import { getPageLanguage, setPageLanguage } from "../lang/i18n.js";
 import { sendEmail } from "../queries/contact.js";
 
 const $ = (elem) => document.querySelector(elem);
@@ -7,10 +7,10 @@ const $$ = (elem) => document.querySelectorAll(elem);
 const $listSections = $('.list-sections');
 const $logInLink = $('#log-in-link');
 
-const ROLS = ['ADMIN_GLOBAL','GESTOR_CATALOGO','USUARIO_PYP'];
-if(sessionStorage.getItem('token') && sessionStorage.getItem('ROL')){
+const ROLS = ['ADMIN_GLOBAL', 'GESTOR_CATALOGO', 'USUARIO_PYP'];
+if (sessionStorage.getItem('token') && sessionStorage.getItem('ROL')) {
     const ROL = sessionStorage.getItem('ROL');
-    if(!ROLS.includes(ROL)){
+    if (!ROLS.includes(ROL)) {
         sessionStorage.removeItem('token');
         sessionStorage.removeItem('ROL');
         location.reload();
@@ -68,7 +68,7 @@ $buttonPreview.addEventListener('click', () => {
     if ($expandedInfoUvigo.classList.contains('active')) {
         $textButtonPreview.textContent = 'Ver menos';
         $iconButtonPreview.style.transform = 'rotate(90deg)';
-    }else{
+    } else {
         $textButtonPreview.textContent = 'Ver más';
         $iconButtonPreview.style.transform = 'rotate(0deg)';
     }
@@ -80,14 +80,14 @@ const $$imgArrow = $$('.list-item-with-children img');
 
 $$listItemWithSubmenu.forEach(el => {
     el.addEventListener('click', () => {
-        if(window.matchMedia('(max-width: 1050px)').matches){
+        if (window.matchMedia('(max-width: 1050px)').matches) {
             el.querySelector('.sublist').classList.toggle('active');
             const $imgEl = el.querySelector('img')
             $imgEl.style.transform = $imgEl.style.transform === 'rotate(-90deg)' ? '' : 'rotate(-90deg)';
         }
     });
 })
-    
+
 
 window.addEventListener('resize', () => {
     if (window.matchMedia('(min-width: 1050px)').matches) {
@@ -101,7 +101,7 @@ document.addEventListener('click', (e) => {
     if (window.matchMedia('(max-width: 1050px)').matches) {
         if (e.target !== $listSections && !$listSections.contains(e.target) && $listSections.classList.contains('active')) {
             $listSections.classList.toggle('active');
-        }  
+        }
     }
 });
 
@@ -135,7 +135,7 @@ $contactForm.addEventListener('submit', async (e) => {
     const email = $('#email').value;
     const subject = $('#subject').value;
     const message = $('#message').value;
-    
+
     const $submit = $('#submit-contact-button');
     $submit.disabled = true;
 
@@ -151,12 +151,18 @@ $contactForm.addEventListener('submit', async (e) => {
         Object.keys(response).forEach((field) => {
             setErrorMessage(field, response[field]);
         });
+    } else {
+        alert('Mensaje enviado correctamente');
+        $('#name').value = "";
+        $('#email').value = "";
+        $('#subject').value = "";
+        $('#message').value = "";
     }
 
     $submit.disabled = false;
 });
 
-function setErrorMessage(field, message){
+function setErrorMessage(field, message) {
     const $errorMessage = $(`#error-message-${field}`);
     $errorMessage.textContent = message;
 }
